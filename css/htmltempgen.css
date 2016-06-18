@@ -1,0 +1,13 @@
+html, body { 
+  color: #fff;
+  height: 96%;
+  width: 96%;
+}
+#output{
+	height: 75%;
+	width: 75%;
+	position: absolute;
+}
+h1{
+	color: black;
+}
