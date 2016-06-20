@@ -2,15 +2,33 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title>HTML Template Generator v0.1</title>
+		<title>HTML5 Template Generator v0.2</title>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript" src="js/htmltempgen.js"></script>
+		<script src="https://use.fontawesome.com/7bf44d9287.js"></script>
 		<link rel="stylesheet" href="css/htmltempgen.css"/>
 	</head>
 	<body>   
-		<div class="wrapper"> 
-			<h1>Blank HTML5 Template</h1>   
-	        <textarea id="output" readonly></textarea>
+		<div id="input-wrapper"> 
+			<h3>HTML5 Template Generator v0.2</h3>
+			<p id="question">Hello, this is the HTML5 template page generator. Choose from the basic page options below to get started on your template:</p>
+			<div id="startgroup">
+				<br>
+				<ul>
+					<li class="startgroup-option" id="std">Standard template page without any content »</li>
+					<li class="startgroup-option" id="std-c">Standard template page with sample content »</li>
+					<li class="startgroup-option" id="std-cs">Standard template page with full content showcase »</li>
+					<li class="startgroup-option" id="comp">Something more complex »</li>
+				</ul>
+			</div>
         </div>
+        <div id="output-wrapper" class="hidden">
+        	<div id="output-copy"><i class="fa fa-clipboard fa-lg" aria-hidden="true" title="Copy to clipboard"></i></div>
+        	<div id="output-exit"><i class="fa fa-times fa-lg" aria-hidden="true" title="Close and reset"></i></div>  	
+        	<textarea id="output" readonly>THIS IS JUST A TEST</textarea>
+        </div>
+        <div class ="planetary-text" id="footer">
+    		<i class="fa fa-github fa-lg" aria-hidden="true"></i>&nbsp;chalarangelo/htmltemplategenerator
+    	</div>
 	</body>
 </html>

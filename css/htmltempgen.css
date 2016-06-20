@@ -1,13 +1,108 @@
 html, body { 
-  color: #fff;
-  height: 96%;
-  width: 96%;
+  	height: 98%;
+  	width: 98%;
+  	background-color: #fff;
+  	font-family: sans-serif;
+}
+#input-wrapper{
+	height: 80%;
+	width: 80%;
+	position: absolute;
+	top: 9%;
+	left: 9%;
+	border-radius: 6px;
+	background-color: #f1f1f1;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	padding: 0.01em 16px;
+}
+#output-wrapper{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 100;
+	background-color: rgba(0,0,0,0.5);
 }
 #output{
-	height: 75%;
-	width: 75%;
+	font-family: monospace;
+	height: 80%;
+	width: 80%;
 	position: absolute;
+	top: 9%;
+	left: 9%;
+	border-radius: 6px;
+	background-color: #f1f1f1;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	padding: 16px 16px;
+	resize: none;
 }
-h1{
-	color: black;
+.hidden{
+	display: none;
+}
+h3{
+	font-weight: 400;
+	margin: 10px 0;
+	font-size: 24px;
+}
+.startgroup-option{
+	text-align: center;
+	padding: 8px 16px;
+	background-color: #4CAF50;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 4px;
+	margin: 0 0 6px 0;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.20);
+	-webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+	transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+}
+.startgroup-option:hover{
+	color: #4CAF50;
+	background-color: #fff;
+}
+ul{
+	list-style-type:none;
+	padding: 0px;
+}
+.fa-clipboard, .fa-times{
+	background-color: #4CAF50;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 4px;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.20);
+	z-index: 200;
+	-webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+	transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+}
+.fa-clipboard:hover, .fa-times:hover{
+	color: #4CAF50;
+	background-color: #fff;
+}
+.fa-clipboard{
+	position: absolute;
+	right: 30px;
+	top: 9%;
+	right: 11.75%;
+	padding: 10px 8px;
+}
+.fa-times{
+	position: absolute;
+	right: 8.5%;
+	top: 9%;
+	padding: 10px;
+}
+#footer{
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    font-size: 0.8em;
+    font-style: italic;
+    cursor: pointer;
+    color: #000;
+    -webkit-transition: color .15s;
+	transition: color .15s;
+}
+#footer:hover{
+	color: #4CAF50;
 }
