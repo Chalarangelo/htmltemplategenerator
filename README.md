@@ -7,8 +7,12 @@
 =======
 v0.2
 
+<<<<<<< HEAD
 ![HTML5 template page code](https://github.com/Chalarangelo/htmltemplategenerator/blob/master/sampleimage.png "Sample HTML5 template page code")
 >>>>>>> Added README and LICENSE.
+=======
+![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
+>>>>>>> Updated README
 
 ## Generate a new HTML5 template page to use in your project in a matter of seconds.
 
