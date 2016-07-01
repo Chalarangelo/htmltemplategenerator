@@ -1,11 +1,15 @@
 # HTML5 Template Page Generator
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 **v0.2.5**
 
 ![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
 =======
 v0.2
+=======
+**v0.2.3**
+>>>>>>> added loading for some popular hosted libraries
 
 <<<<<<< HEAD
 ![HTML5 template page code](https://github.com/Chalarangelo/htmltemplategenerator/blob/master/sampleimage.png "Sample HTML5 template page code")
