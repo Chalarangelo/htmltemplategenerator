@@ -1,6 +1,6 @@
 # HTML5 Template Page Generator
 
-v0.2
+**v0.2.3**
 
 ![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
 

@@ -92,6 +92,52 @@ ul{
 	top: 9%;
 	padding: 10px;
 }
+.checkbox-custom, .radio-custom {
+    opacity: 0;
+    position: absolute;   
+}
+.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+.checkbox-custom-label, .radio-custom-label {
+    position: relative;
+}
+.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin-right: 10px;
+    text-align: center;
+}
+.checkbox-custom:checked + .checkbox-custom-label:before {
+    content: "\f00c";
+    font-family: 'FontAwesome';
+    background: #4CAF50;
+    color: #fff;
+}
+.checkbox-custom-label:hover::before, .radio-custom-label:hover::before{
+	border: 2px solid #4CAF50;
+}
+.radio-custom + .radio-custom-label:before {
+    border-radius: 50%;
+}
+.radio-custom:checked + .radio-custom-label:before {
+    background: #4CAF50;
+    box-shadow: inset 0px 0px 0px 4px #fff;
+}
+.startgroup-checkbox-list li{
+	display:inline-block;
+    width:25%;
+}
 #footer{
     position: fixed;
     bottom: 1em;
