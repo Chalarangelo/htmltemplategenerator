@@ -22,7 +22,7 @@ $(document).ready(function(){
 =======
 			var templateText = '<!DOCTYPE HTML>\n<html>\n'
 							 + ' <head>\n'
-							 + '  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>\n'
+							 + '  <meta charset="utf-8">\n'
 							 + ($('#jquery-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>\n':'')
 							 + ($('#angularjs-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>\n':'')
 							 + ($('#dojo-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>\n':'')
@@ -75,7 +75,7 @@ $(document).ready(function(){
 =======
 			var templateText = '<!DOCTYPE HTML>\n<html>\n'
 							 + ' <head>\n'
-							 + '  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>\n'
+							 + '  <meta charset="utf-8">\n'
 							 + ($('#jquery-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>\n':'')
 							 + ($('#angularjs-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>\n':'')
 							 + ($('#dojo-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>\n':'')
@@ -110,7 +110,7 @@ $(document).ready(function(){
 		else if(id=='std-cs'){	// Generate Standard template page with full content showcase.
 			var templateText = '<!DOCTYPE HTML>\n<html>\n'
 							 + ' <head>\n'
-							 + '  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>\n'
+							 + '  <meta charset="utf-8">\n'
 							 + ($('#jquery-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>\n':'')
 							 + ($('#angularjs-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>\n':'')
 							 + ($('#dojo-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>\n':'')

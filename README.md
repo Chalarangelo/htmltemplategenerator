@@ -2,6 +2,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 **v0.2.5**
 
 ![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
@@ -10,6 +11,9 @@ v0.2
 =======
 **v0.2.3**
 >>>>>>> added loading for some popular hosted libraries
+=======
+**v0.2.4**
+>>>>>>> Bug fix: updated a deprecated meta tag
 
 <<<<<<< HEAD
 ![HTML5 template page code](https://github.com/Chalarangelo/htmltemplategenerator/blob/master/sampleimage.png "Sample HTML5 template page code")
