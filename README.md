@@ -1,38 +1,8 @@
 # HTML5 Template Page Generator
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 **v0.2.5**
-=======
-**v0.2.3**
->>>>>>> Housekeeping
-=======
-**v0.2.5**
->>>>>>> Housekeeping
 
 ![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
-=======
-v0.2
-=======
-**v0.2.3**
->>>>>>> added loading for some popular hosted libraries
-=======
-**v0.2.4**
->>>>>>> Bug fix: updated a deprecated meta tag
-=======
-**v0.2.5**
->>>>>>> Housekeeping, template code is now stored in variables.
-
-<<<<<<< HEAD
-![HTML5 template page code](https://github.com/Chalarangelo/htmltemplategenerator/blob/master/sampleimage.png "Sample HTML5 template page code")
->>>>>>> Added README and LICENSE.
-=======
-![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
->>>>>>> Updated README
 
 ## Generate a new HTML5 template page to use in your project in a matter of seconds.
 
