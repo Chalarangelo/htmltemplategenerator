@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 **v0.2.5**
 
 ![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
@@ -14,6 +15,9 @@ v0.2
 =======
 **v0.2.4**
 >>>>>>> Bug fix: updated a deprecated meta tag
+=======
+**v0.2.5**
+>>>>>>> Housekeeping, template code is now stored in variables.
 
 <<<<<<< HEAD
 ![HTML5 template page code](https://github.com/Chalarangelo/htmltemplategenerator/blob/master/sampleimage.png "Sample HTML5 template page code")

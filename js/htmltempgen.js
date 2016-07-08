@@ -7,6 +7,9 @@ $(document).ready(function(){
 		var templateText;
 		if(id=='std'){			// Generate Standard template page without any content.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Housekeeping, template code is now stored in variables.
 			templateText 	= htmlBegin
 							+ ($('#jquery-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>\n':'')
 							+ ($('#angularjs-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>\n':'')
@@ -19,6 +22,7 @@ $(document).ready(function(){
 							+ genSignature
 							+ headToBody
 							+ htmlEnd;
+<<<<<<< HEAD
 =======
 			var templateText = '<!DOCTYPE HTML>\n<html>\n'
 							 + ' <head>\n'
@@ -44,6 +48,10 @@ $(document).ready(function(){
 		}
 		else if(id=='std-c'){	// Generate Standard template page with sample content.
 <<<<<<< HEAD
+=======
+		}
+		else if(id=='std-c'){	// Generate Standard template page with sample content.
+>>>>>>> Housekeeping, template code is now stored in variables.
 			templateText 	= htmlBegin
 							+ ($('#jquery-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>\n':'')
 							+ ($('#angularjs-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>\n':'')
@@ -57,6 +65,7 @@ $(document).ready(function(){
 							+ headToBody
 							+ body_std_c
 							+ htmlEnd;
+<<<<<<< HEAD
 		}
 		else if(id=='std-cs'){	// Generate Standard template page with full content showcase.
 			templateText 	= htmlBegin
@@ -177,6 +186,23 @@ $(document).ready(function(){
 			$output.text(templateText);
 			$('#output-wrapper').toggleClass('hidden');
 >>>>>>> Bug fix: libraries should now be loaded on all templates
+=======
+		}
+		else if(id=='std-cs'){	// Generate Standard template page with full content showcase.
+			templateText 	= htmlBegin
+							+ ($('#jquery-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>\n':'')
+							+ ($('#angularjs-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>\n':'')
+							+ ($('#dojo-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>\n':'')
+							+ ($('#prototype-startgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js"></script>\n':'')
+							+ (($('#bootstrap-startgroup').is(":checked") && $('#jquery-startgroup').is(":checked")) ?'  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">\n  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>\n':'')
+							+ (($('#bootstrap-startgroup').is(":checked") && !($('#jquery-startgroup').is(":checked"))) ?'  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">\n  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>\n  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>\n':'')
+							+ ($('#font-awesome-startgroup').is(":checked")?'  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">\n':'')
+							+ headStartgroup
+							+ genSignature
+							+ headToBody
+							+ body_std_cs
+							+ htmlEnd;
+>>>>>>> Housekeeping, template code is now stored in variables.
 		}
 		else{					// Show next menu...
 			templateText 	= htmlBegin
