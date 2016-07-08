@@ -4,7 +4,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 **v0.2.5**
+=======
+**v0.2.3**
+>>>>>>> Housekeeping
 
 ![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
 =======
