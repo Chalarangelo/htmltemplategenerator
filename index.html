@@ -11,10 +11,10 @@
 	<body>   
 		<h3 align="center">HTML5 Template Generator v0.2.6</h3>
 		<div id="input-wrapper"> 
-			<p id="question"> Choose your preferred libraries and one of the first three option below to get a standard template page. Alternatively, you can choose a custom pre-built template or create your own custom template page using one of the other two options below:</p>
+			<p id="question">Choose your preferred libraries and one of the first three option below to get a standard template page. Alternatively, you can choose a custom pre-built template or create your own custom template page using one of the other two options below:</p>
 			<div id="startgroup">
 			<h4>Load hosted libraries:</h4>
-				<ul class="startgroup-checkbox-list">
+				<ul id="startgroup-checkbox-list">
 					<li>
 		            	<input id="jquery-startgroup" class="checkbox-custom" name="jquery-startgroup" type="checkbox" checked>
 		            	<label for="jquery-startgroup" class="checkbox-custom-label">jQuery (2.2.4)</label>
@@ -45,9 +45,51 @@
 					<li class="startgroup-option" id="std">Use an empty template page »</li>
 					<li class="startgroup-option" id="std-c">Use a template page with sample content »</li>
 					<li class="startgroup-option" id="std-cs">Use a template page with full content showcase »</li>
-					<li class="startgroup-option" id="comp">Use a custom pre-built template page »</li>
-					<li class="startgroup-option" id="comp">Create your own custom template page »</li>
+					<li class="startgroup-option" id="pre-built">Use a custom pre-built template page »</li>
+					<li class="startgroup-option" id="custom">Create your own custom template page »</li>
 				</ul>
+			</div>
+			<div id="customgroup" class="hidden">
+			<h4>Load hosted libraries:</h4>
+				<ul id="customgroup-checkbox-list">
+					<li>
+		            	<input id="angularjs-customgroup" class="checkbox-custom" name="angularjs-customgroup" type="checkbox">
+		            	<label for="angularjs-customgroup" class="checkbox-custom-label">AngularJS (1.5.7)</label>
+					</li>
+					<li>
+		            	<input id="bootstrap-customgroup" class="checkbox-custom" name="bootstrap-customgroup" type="checkbox">
+		            	<label for="bootstrap-customgroup" class="checkbox-custom-label">Bootstrap (3.3.6)</label>
+					</li>
+					<li>
+		            	<input id="dojo-customgroup" class="checkbox-custom" name="dojo-customgroup" type="checkbox">
+		            	<label for="dojo-customgroup" class="checkbox-custom-label">Dojo (1.10.4)</label>
+					</li>
+					<li>
+		            	<input id="font-awesome-customgroup" class="checkbox-custom" name="font-awesome-customgroup" type="checkbox">
+		            	<label for="font-awesome-customgroup" class="checkbox-custom-label">Font Awesome (4.6.3)</label>
+					</li>
+					<li>
+		            	<input id="jquery-224-customgroup" class="checkbox-custom" name="jquery-224-customgroup" type="checkbox" checked>
+		            	<label for="jquery-224-customgroup" class="checkbox-custom-label">jQuery (2.2.4)</label>
+					</li>
+					<li>
+		            	<input id="jquery-300-customgroup" class="checkbox-custom" name="jquery-300-customgroup" type="checkbox">
+		            	<label for="jquery-300-customgroup" class="checkbox-custom-label">jQuery (3.0.0)</label>
+					</li>
+					<li>
+		            	<input id="mootools-customgroup" class="checkbox-custom" name="mootools-customgroup" type="checkbox">
+		            	<label for="mootools-customgroup" class="checkbox-custom-label">MooTools (1.6.0)</label>
+					</li>					
+					<li>
+		            	<input id="prototype-customgroup" class="checkbox-custom" name="prototype-customgroup" type="checkbox">
+		            	<label for="prototype-customgroup" class="checkbox-custom-label">Prototype (1.7.3.0)</label>
+					</li>
+					<li>
+		            	<input id="threejs-customgroup" class="checkbox-custom" name="threejs-customgroup" type="checkbox">
+		            	<label for="threejs-customgroup" class="checkbox-custom-label">three.js (r76)</label>
+					</li>
+				</ul>     
+				<br>
 			</div>
         </div>
         <div id="output-wrapper" class="hidden">

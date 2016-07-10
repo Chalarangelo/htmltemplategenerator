@@ -4,6 +4,9 @@ html, body {
   	background-color: #fff;
   	font-family: sans-serif;
 }
+h3{
+	cursor: pointer;
+}
 #input-wrapper{
 	height: 80%;
 	width: 80%;
@@ -15,6 +18,9 @@ html, body {
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 	padding: 0.01em 16px;
 	overflow: auto;
+}
+.hidden{
+	display: none;
 }
 #output-wrapper{
 	height: 100%;
@@ -59,6 +65,22 @@ h3{
 	transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
 }
 .startgroup-option:hover{
+	color: #4CAF50;
+	background-color: #fff;
+}
+.button-span{
+	text-align: center;
+	padding: 8px 16px;
+	background-color: #4CAF50;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 4px;
+	margin: 0 0 6px 0;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.20);
+	-webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+	transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
+}
+.button-span:hover{
 	color: #4CAF50;
 	background-color: #fff;
 }
@@ -135,7 +157,7 @@ ul{
     background: #4CAF50;
     box-shadow: inset 0px 0px 0px 4px #fff;
 }
-.startgroup-checkbox-list li{
+#startgroup-checkbox-list li, #customgroup-checkbox-list li{
 	display:inline-block;
     width:25%;
 }

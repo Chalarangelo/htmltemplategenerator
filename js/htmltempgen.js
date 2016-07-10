@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$('h3').click(function(){location.reload();});	// Reload page when title is clicked.
 	// Look at the end of this function for the html template variables.
 	var $output = $('#output');
 	// Original menu click event.
@@ -18,6 +19,8 @@ $(document).ready(function(){
 							+ genSignature
 							+ headToBody
 							+ htmlEnd;
+			$output.text(templateText);
+			$('#output-wrapper').toggleClass('hidden');
 		}
 		else if(id=='std-c'){	// Generate Standard template page with sample content.
 			templateText 	= htmlBegin
@@ -33,6 +36,8 @@ $(document).ready(function(){
 							+ headToBody
 							+ body_std_c
 							+ htmlEnd;
+			$output.text(templateText);
+			$('#output-wrapper').toggleClass('hidden');
 		}
 		else if(id=='std-cs'){	// Generate Standard template page with full content showcase.
 			templateText 	= htmlBegin
@@ -48,17 +53,41 @@ $(document).ready(function(){
 							+ headToBody
 							+ body_std_cs
 							+ htmlEnd;
+			$output.text(templateText);
+			$('#output-wrapper').toggleClass('hidden');
 		}
-		else{					// Show next menu...
+		else if(id=='pre-built'){	// Show next menu for pre-built templates.
 			templateText 	= htmlBegin
 							+ headStartgroup
 							+ genSignature
 							+ headToBody
 							+ body_temporary
-							+ htmlEnd;			
+							+ htmlEnd;	
+			$output.text(templateText);
+			$('#output-wrapper').toggleClass('hidden');		
 		}
+		else {	// Show next menu for template customization.
+			$('#question').fadeOut('slow',function(){
+				$('#question').html('Choose from the given options to customize your HTML5 template page to your desire. When you are ready to generate your template page, click the button below:<br><br><span class="button-span" id="custom-gen">Generate custom template</span>');
+				$('#question').fadeIn('slow');
+			});
+			$('#startgroup').fadeOut('slow',function(){
+				$('#startgroup').toggleClass('hidden');
+				$('#customgroup').toggleClass('hidden');
+				$('#customgroup').fadeIn('slow');
+
+			});
+		}	
+	});
+	$(document).on('click', '#custom-gen', function() {
+		templateText 	= htmlBegin
+						+ headStartgroup
+						+ genSignature
+						+ headToBody
+						+ body_temporary
+						+ htmlEnd;	
 		$output.text(templateText);
-			$('#output-wrapper').toggleClass('hidden');
+		$('#output-wrapper').toggleClass('hidden');	
 	});
 	// Close the output wrapper, reload the page.
 	$('.fa-times').click(function(){
