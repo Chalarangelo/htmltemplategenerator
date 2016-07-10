@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	var appName = 'HTML5 Template Generator v0.2.6';	// Application name and version number.
+	document.title = appName;		// Set title.
+	$('h3').text(appName);			// Set page header.
 	$('h3').click(function(){location.reload();});	// Reload page when title is clicked.
 	// Look at the end of this function for the html template variables.
 	var $output = $('#output');
@@ -79,8 +82,19 @@ $(document).ready(function(){
 			});
 		}	
 	});
+	// Custom template generation click event.
 	$(document).on('click', '#custom-gen', function() {
 		templateText 	= htmlBegin
+						+ ($('#angularjs-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>\n':'')
+						+ (($('#bootstrap-customgroup').is(":checked") && ($('#jquery-224-customgroup').is(":checked") || $('#jquery-300-customgroup').is(":checked"))) ?'  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">\n  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>\n':'')
+						+ (($('#bootstrap-customgroup').is(":checked") && !($('#jquery-224-customgroup').is(":checked")) && !($('#jquery-300-customgroup').is(":checked"))) ?'  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">\n  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>\n  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>\n':'')
+						+ ($('#dojo-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>\n':'')
+						+ ($('#font-awesome-customgroup').is(":checked")?'  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">\n':'')
+						+ ($('#jquery-224-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>\n':'')
+						+ ($('#jquery-300-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>\n':'')
+						+ ($('#mootools-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js"></script>\n':'')
+						+ ($('#prototype-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js"></script>\n':'')
+						+ ($('#threejs-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js"></script>\n':'')
 						+ headStartgroup
 						+ genSignature
 						+ headToBody
@@ -89,9 +103,21 @@ $(document).ready(function(){
 		$output.text(templateText);
 		$('#output-wrapper').toggleClass('hidden');	
 	});
+	// Mutually exclusive jQuery versions.
+	$('#jquery-224-customgroup').click(function(){
+		if($(this).is(':checked'))	$('#jquery-300-customgroup').prop('checked', false);
+	});
+	// Mutually exclusive jQuery versions.
+	$('#jquery-300-customgroup').click(function(){
+		if($(this).is(':checked'))	$('#jquery-224-customgroup').prop('checked', false);
+	});
 	// Close the output wrapper, reload the page.
 	$('.fa-times').click(function(){
 		location.reload();
+	});
+	// Generate JSFiddle with the specific template. - TODO!
+	$('.fa-jsfiddle').click(function(){
+		// TODO!
 	});
 	// Copy the text from the output area to the clipboard.
 	$('.fa-clipboard').click(function(){
@@ -99,6 +125,7 @@ $(document).ready(function(){
   		copyTextarea.select();
 		document.execCommand('copy');
 	});
+
 	// Open new tab/window with the project's github on footer click.
 	$('#footer').click(function(){
 		window.open('https://github.com/chalarangelo/htmltemplategenerator', '_blank');

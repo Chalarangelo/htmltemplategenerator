@@ -4,9 +4,6 @@ html, body {
   	background-color: #fff;
   	font-family: sans-serif;
 }
-h3{
-	cursor: pointer;
-}
 #input-wrapper{
 	height: 80%;
 	width: 80%;
@@ -44,13 +41,11 @@ h3{
 	padding: 16px 16px;
 	resize: none;
 }
-.hidden{
-	display: none;
-}
 h3{
 	font-weight: 400;
 	margin: 10px 0;
 	font-size: 24px;
+	cursor: pointer;
 }
 .startgroup-option{
 	text-align: center;
@@ -88,7 +83,7 @@ ul{
 	list-style-type:none;
 	padding: 0px;
 }
-.fa-clipboard, .fa-times{
+.fa-clipboard, .fa-times, .fa-jsfiddle{
 	background-color: #4CAF50;
 	color: #fff;
 	cursor: pointer;
@@ -98,11 +93,18 @@ ul{
 	-webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
 	transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;
 }
-.fa-clipboard:hover, .fa-times:hover{
+.fa-clipboard:hover, .fa-times:hover, .fa-jsfiddle:hover{
 	color: #4CAF50;
 	background-color: #fff;
 }
 .fa-clipboard{
+	position: absolute;
+	right: 30px;
+	top: 9%;
+	right: 15.25%;
+	padding: 10px 8px;
+}
+.fa-jsfiddle{
 	position: absolute;
 	right: 30px;
 	top: 9%;
