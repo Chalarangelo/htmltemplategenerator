@@ -149,5 +149,5 @@ $(document).ready(function(){
 						+ '  <div>Etiam maximus, ante vitae porttitor tincidunt, sem erat pharetra turpis, a ornare tortor purus <a href="https://www.google.com">ut justo</a>.</div><br>\n'				 
 						+ '  <button type="button">Click Me!</button>\n'
 						+ '  <blockquote cite="https://www.google.com">Nam non diam ante. Curabitur non enim vitae eros luctus porta.</blockquote><br><br>\n';
-	var body_temporary 	= '<!-- COMING SOON -->';
+	var body_temporary 	= '  <!-- COMING SOON -->\n';
 });
