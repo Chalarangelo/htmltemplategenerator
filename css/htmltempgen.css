@@ -117,6 +117,20 @@ ul{
 	top: 9%;
 	padding: 10px;
 }
+@media screen and (max-width: 1000px){
+	.fa-clipboard{
+		position: absolute;
+		right: 8.5%;
+		top: 25%;
+		padding: 10px 8px;
+	}
+	.fa-jsfiddle{
+		position: absolute;
+		right: 8.5%;
+		top: 17%;
+		padding: 10px 8px;
+	}
+}
 .checkbox-custom, .radio-custom {
     opacity: 0;
     position: absolute;   
