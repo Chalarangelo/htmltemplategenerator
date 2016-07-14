@@ -173,6 +173,11 @@ ul{
     background: #4CAF50;
     box-shadow: inset 0px 0px 0px 4px #fff;
 }
+#custom-meta label{
+	line-height: 30px;
+    vertical-align: middle;
+    margin: 5px;
+}
 #startgroup-checkbox-list li, #customgroup-checkbox-list li{
 	display:inline-block;
     width:25%;

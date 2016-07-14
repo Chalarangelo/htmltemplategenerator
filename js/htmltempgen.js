@@ -180,6 +180,27 @@ $(document).ready(function(){
 		function(){
 			$('.fa-arrow-circle-down').removeClass('fa-arrow-circle-down').addClass('fa-github');
 		});
+	// Prototype function for the HTML5 meta tags. 
+	function Meta(charset,author,description,keywords){
+		if(charset.length != 0)
+			this.charset = '<meta charset="'+charset+'">';
+		else
+			this.charset = null;
+		if(author.length != 0)
+			this.author = '<meta name="author" content="'+author+'">';
+		else
+			this.author = null;
+		if(description.length != 0)
+			this.description = '<meta name="description" content="'+description+'">';
+		else
+			this.description = null;
+		this.generator = '<meta name="generator" content="http://chalarangelo.github.io/htmltemplategenerator/">';
+		if(keywords.length != 0)
+			this.keywords = '<meta name="keywords" content="'+keywords+'">';
+		else
+			this.keywords = null;		
+	}
+
 	// Template variables
 	var htmlBegin 		= '<!DOCTYPE HTML>\n<html>\n <head>\n  <meta charset="utf-8"/>\n';
 	var htmlEnd   		= ' </body>\n</html>\n';
