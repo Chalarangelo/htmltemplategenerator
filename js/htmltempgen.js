@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var appName = 'HTML5 Template Generator v0.2.8';	// Application name and version number.
+	var appName = 'HTML5 Template Generator v0.3.0';	// Application name and version number.
 	document.title = appName;		// Set title.
 	$('h3').text(appName);			// Set page header.
 	$('h3').click(function(){location.reload();});	// Reload page when title is clicked.
@@ -37,7 +37,60 @@ $(document).ready(function(){
 		}
 		return stdLibRes;
 	}
-
+	function checkCustomLib(scripts,styles){
+		var empty = true;
+		var stdLibRes = '';
+		if($('#jquery-224-customgroup').is(":checked")){
+			stdLibRes+='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js';
+			empty = false;
+		}
+		if($('#jquery-300-customgroup').is(":checked")){
+			stdLibRes+='https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js';
+			empty = false;
+		}
+		if($('#angularjs-customgroup').is(":checked")){
+			stdLibRes+=((!empty)?',':'')+'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js';
+			empty = false;
+		}
+		if($('#dojo-customgroup').is(":checked")){
+			stdLibRes+=((!empty)?',':'')+'https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js';
+			empty = false;
+		}
+		if($('#prototype-customgroup').is(":checked")){
+			stdLibRes+=((!empty)?',':'')+'https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js';
+			empty = false;
+		}
+		if($('#bootstrap-customgroup').is(":checked") && ($('#jquery-224-customgroup').is(":checked") || $('#jquery-300-customgroup').is(":checked"))){
+			stdLibRes+=((!empty)?',':'')+'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css,http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
+			empty = false;
+		}
+		if($('#bootstrap-customgroup').is(":checked") && !($('#jquery-224-customgroup').is(":checked")) && !($('#jquery-300-customgroup').is(":checked"))){
+			stdLibRes+=((!empty)?',':'')+'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css,https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js,http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
+			empty = false;
+		}
+		if($('#font-awesome-customgroup').is(":checked")){
+			stdLibRes+=((!empty)?',':'')+'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css';
+			empty = false;
+		}
+		if($('#mootools-customgroup').is(":checked")){
+			stdLibRes+=((!empty)?',':'')+'https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js';
+			empty = false;
+		}  
+		if($('#threejs-customgroup').is(":checked")){
+			stdLibRes+=((!empty)?',':'')+'https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js';
+			empty = false;
+		}	
+		for(var i = 0; i < scripts.external.length; i++){
+			stdLibRes+=((!empty)?',':'')+scripts.external[i];
+			empty = false;
+		}
+		for(var i = 0; i < styles.external.length; i++){
+			stdLibRes+=((!empty)?',':'')+styles.external[i];
+			empty = false;
+		}
+		console.log(stdLibRes);
+		return stdLibRes;
+	}
 	// Look at the end of this function for the html template variables.
 	var $output = $('#output');
 	// Original menu click event.
@@ -123,7 +176,16 @@ $(document).ready(function(){
 	});
 	// Custom template generation click event.
 	$(document).on('click', '#custom-gen', function() {
-		templateText 	= stdTemplate.begin
+		var meta = new Meta($('#meta_charset').find(":selected").val(),$('#meta_author').val(),$('#meta_description').val(),$('#meta_keywords').val());
+		var scripts = new Scripts($('#page_js_files').val());
+		var styles = new Styles($('#page_css_files').val());
+		templateText 	= doctype + htmlTags.begin + headTags.begin
+						+ ((meta.charset!=null)?meta.charset:'')
+						+ ((meta.author!=null)?meta.author:'')
+						+ ((meta.description!=null)?meta.description:'')
+						+ ((meta.keywords!=null)?meta.keywords:'')
+						+ meta.generator
+						+ titleTags.begin + $('#page_title').val() + titleTags.end
 						+ ($('#angularjs-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>\n':'')
 						+ (($('#bootstrap-customgroup').is(":checked") && ($('#jquery-224-customgroup').is(":checked") || $('#jquery-300-customgroup').is(":checked"))) ?'  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">\n  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>\n':'')
 						+ (($('#bootstrap-customgroup').is(":checked") && !($('#jquery-224-customgroup').is(":checked")) && !($('#jquery-300-customgroup').is(":checked"))) ?'  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">\n  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>\n  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>\n':'')
@@ -134,14 +196,17 @@ $(document).ready(function(){
 						+ ($('#mootools-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js"></script>\n':'')
 						+ ($('#prototype-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js"></script>\n':'')
 						+ ($('#threejs-customgroup').is(":checked")?'  <script src="https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js"></script>\n':'')
-						+ stdTemplate.head
-						+ body_temporary
-						+ stdTemplate.end;
+						+ scripts.getLocal() + scripts.getExternal()
+						+ styles.getLocal() + styles.getExternal()
+						+ headTags.end + bodyTags.begin
+						+ $('#page_body').val()
+						+ '\n'+ bodyTags.end + htmlTags.end;
 		$output.text(templateText);
 		$('#output-wrapper').toggleClass('hidden');
-		fiddleDoc = new FiddleDoc('HTML5 Sample page', 
-				'Generated by http://chalarangelo.github.io/htmltemplategenerator/',
-				body_temporary,'','',checkStdLib(),'html 5');	
+		fiddleDoc = new FiddleDoc($('#page_title').val(), 
+				(($('#meta_description').val()!=null)?$('#meta_description').val()+'\n':'')
+				+'Generated by http://chalarangelo.github.io/htmltemplategenerator/',
+				$('#page_body').val(),'','',checkCustomLib(scripts,styles),'html 5');	
 	});
 	// Mutually exclusive jQuery versions.
 	$('#jquery-224-customgroup').click(function(){
@@ -155,10 +220,10 @@ $(document).ready(function(){
 	$('.fa-times').click(function(){
 		location.reload();
 	});
-	// Generate JSFiddle with the specific template. - TODO!
+	// Generate JSFiddle with the specific template.
 	$('.fa-jsfiddle').click(function(){
 		// Create a temporary form that will serve as the POST request submitter.
-		var fiddleForm = $('<form></form>');
+		var fiddleForm = $('<form class="hidden"></form>');
     	fiddleForm.attr('method', 'post');
     	fiddleForm.attr('action', 'http://jsfiddle.net/api/post/library/pure/');
 	    // HTML code for the JSFiddle html panel.
@@ -230,8 +295,8 @@ $(document).ready(function(){
 	var titleTags = {begin:'  <title>', end:'</title>\n'};	// Title open and close.
 	// Prototype function for the HTML5 meta tags. 
 	function Meta(charset,author,description,keywords){
-		if(charset.length != 0)	this.charset = '  <meta charset="'+charset+'">\n';
-		else	this.charset = null;
+		if(charset != null)	this.charset = '  <meta charset="'+charset+'">\n';
+		else	this.charset = '  <meta charset="utf-8">\n';
 		if(author.length != 0)	this.author = '  <meta name="author" content="'+author+'">\n';
 		else	this.author = null;
 		if(description.length != 0)	this.description = '  <meta name="description" content="'+description+'">\n';
@@ -239,6 +304,77 @@ $(document).ready(function(){
 		this.generator = '  <meta name="generator" content="http://chalarangelo.github.io/htmltemplategenerator/">\n';
 		if(keywords.length != 0)	this.keywords = '  <meta name="keywords" content="'+keywords+'">\n';
 		else	this.keywords = null;		
+	}
+	// Prototype function for the Javascript resources.
+	function Scripts(scriptsList){
+		if(scriptsList.trim() == ''){
+			this.local = null;
+			this.external = null; 			
+			this.getExternal = function(){return '';}
+			this.getLocal = function(){return '';}
+			return;
+		}
+		var scriptsArray = scriptsList.split(',');
+		this.local = [];	this.external = [];
+		for(var i = 0; i < scriptsArray.length; i++)
+		{
+			scriptsArray[i] = scriptsArray[i].trim();
+			if(scriptsArray[i].startsWith('http://') || scriptsArray[i].startsWith('https://'))
+				this.external.push(scriptsArray[i]);
+			else
+				this.local.push(scriptsArray[i]);
+		}
+		this.getExternal = function(){
+			var externalString = '';
+			for(var i = 0; i< this.external.length; i++)
+			{
+				externalString+='  <script type="text/javascript" src="'+this.external[i]+'"></script>\n';
+			}
+			return externalString;
+		}
+		this.getLocal = function(){
+			var localString = '';
+			for(var i = 0; i< this.local.length; i++)
+			{
+				localString+='  <script type="text/javascript" src="'+this.local[i]+'"></script>\n';
+			}
+			return localString;
+		}
+	}
+	function Styles(stylesList){
+		if(stylesList.trim() == ''){
+			this.local = null;
+			this.external = null; 			
+			this.getExternal = function(){return '';}
+			this.getLocal = function(){return '';}
+			return;
+		}
+		var styleArray = stylesList.split(',');
+		this.local = [];	this.external = [];
+		for(var i = 0; i < styleArray.length; i++)
+		{
+			styleArray[i] = styleArray[i].trim();
+			if(styleArray[i].startsWith('http://') || styleArray[i].startsWith('https://'))
+				this.external.push(styleArray[i]);
+			else
+				this.local.push(styleArray[i]);
+		}
+		this.getExternal = function(){
+			var externalString = '';
+			for(var i = 0; i< this.external.length; i++)
+			{
+				externalString+='  <link rel="stylesheet" href="'+this.external[i]+'"/>\n';
+			}
+			return externalString;
+		}
+		this.getLocal = function(){
+			var localString = '';
+			for(var i = 0; i< this.local.length; i++)
+			{
+				localString+='  <link rel="stylesheet" href="'+this.local[i]+'"/>\n';
+			}
+			return localString;
+		}
 	}
 	// Prototype function for the object used in the generation of the JSFiddle.
 	function FiddleDoc(title,desc,html,js,css,resources,dtd){
