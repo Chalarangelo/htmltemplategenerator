@@ -2,7 +2,8 @@
 
 **v0.3.0**
 
-![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/sampleimage.PNG "Sample HTML5 template page code")
+![HTML5 template page code](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif1.gif "Sample HTML5 template page code")
+<img src="https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif1.gif" width="400">
 
 ## Generate a new HTML5 template page to use in your project in a matter of seconds.
 
