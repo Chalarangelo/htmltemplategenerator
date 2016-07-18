@@ -24,13 +24,13 @@ I found the lack of proper HTML5 templates disturbing, thus I set up this simple
 
 **Pre-built templates for testing and quick deployment, fully customizable templates to suit your needs.**
 
-![Custom page generator](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif2.gif "Custom HTML5 template page code generation")
+![Custom page generator](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif3.gif "Custom HTML5 template page code generation")
 
 With this HTML5 Template Generator you can quickly and easily create a custom page to fully suit your needs or a basic template to start from. Some pre-built templates will be available soon, such as common forms, some common page layouts etc. The less HTML you get to write, the better this generator works.
 
 **Export to JSFiddle** (and soon Codepen) or **copy to clipboard**. 
 
-![Export to JSFiddle, Copy to clipboard](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif3.gif "Export to JSFiddle, Copy to clipboard")
+![Export to JSFiddle, Copy to clipboard](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif2.gif "Export to JSFiddle, Copy to clipboard")
 
 The aim of the HTML5 Template Generator is to simplify things, help you write less boilerplate code and speed up your development workflow. Bearing that in mind, the ability to automatically copy the generated pages to clipboard or export them to a site like JSFiddle or Codepen helps speed up the process of creating, testing and debugging your projects.
 
