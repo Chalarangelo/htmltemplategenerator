@@ -1,12 +1,10 @@
 # HTML5 Template Page Generator
 
-**v0.3.0**
+**v0.3.0**   -   **Check the live version [here](https://chalarangelo.github.io/htmltemplategenerator/).**
 
 ![HTML5 Template Generator](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif1.gif "Empty HTML5 template page code generation")
 
 ## Generate a new HTML5 template page to use in your project in just a few seconds.
-
-**Check the live version [here](https://chalarangelo.github.io/htmltemplategenerator/).**
 
 I found the lack of proper HTML5 templates disturbing, thus I set up this simple generator to save myself (and hopefully others) some time when starting a new project or page or even when testing some styles or scripts. The list of features is not very long yet, but it will expand eventually to include some more useful things (i.e. jQuery inclusion and sample code generation).
 
@@ -26,7 +24,7 @@ I found the lack of proper HTML5 templates disturbing, thus I set up this simple
 
 **Pre-built templates for testing and quick deployment, fully customizable templates to suit your needs.**
 
-![Custom page generator](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif3.gif "Custom HTML5 template page code generation")
+![Custom page generator](https://raw.githubusercontent.com/Chalarangelo/htmltemplategenerator/master/gif2.gif "Custom HTML5 template page code generation")
 
 With this HTML5 Template Generator you can quickly and easily create a custom page to fully suit your needs or a basic template to start from. Some pre-built templates will be available soon, such as common forms, some common page layouts etc. The less HTML you get to write, the better this generator works.
 
