@@ -19,14 +19,14 @@
  	<div class="container-fluid">
  		<div class="row">
  			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
- 				<h1>HTML<i class="fa fa-html5 fa-lg" aria-hidden="true"></i> Template Generator <small id="versionNumbering"></small></h1>
+ 				<h1>HTML<i class="fa fa-html5 fa-lg" aria-hidden="true"></i> Template Generator <small id="versionNumbering"></small></h1><br>
  			</div>
  		</div>
   		<div class="row">
 	  		<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 	  			<ul class="nav nav-tabs">
 	  				<li role="presentation" class="active" id="content-tab"><a href="#content" title="Content"><h5><i class="fa fa-code fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Content</span></h5></a></li>
-	  				<li role="presentation" id="libraries-tab"><a href="#libraries" title="Libraries"><h5><i class="fa fa-archive fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Libraries&nbsp;<span class="badge" id="libraries-badge">0</span></span></h5></a></li>
+	  				<li role="presentation" id="libraries-tab"><a href="#libraries" title="Libraries"><h5><i class="fa fa-archive fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Libraries&nbsp;<span class="badge" id="libraries-badge">1</span></span></h5></a></li>
 	  				<li role="presentation" id="metadata-tab"><a href="#metadata" title="Metadata"><h5><i class="fa fa-tags fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Metadata</span></h5></a></li>
 	  				<li role="presentation" id="resources-tab"><a href="#resources" title="Resources"><h5><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Resources</span></h5></a></li>
 	  				<li role="presentation" id="result-tab"><a href="#result" title="Content"><h5><i class="fa fa-download fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Result</span></h5></a></li>
@@ -42,8 +42,7 @@
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Load hosted libraries</h2>
   				<p>Choose as many libraries you want to include in your template. We strongly recommend including <a href="http://jquery.com/">jQuery</a> to enhance your Javascript.</p><br>
-  				<input type="checkbox" class="chkbox chkbox-primary" id="jQuery-3-1-0" checked><label for="jQuery-3-1-0">jQuery (3.1.0)</label>
-  				<input type="checkbox" class="chkbox chkbox-primary" id="jQuery-2-2-4"><label for="jQuery-2-2-4">jQuery (2.2.4)</label>
+  				<span id="lib-loader"></span>
   			</div>
   		</div>
   		<div class="row hidden" id="metadata">
