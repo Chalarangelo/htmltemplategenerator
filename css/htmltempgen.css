@@ -3,7 +3,6 @@
 }
 .nav-tabs a .badge {
   margin-top: -3px;
-  background-color: #337ab7;
 }
 .nav-tabs .active a .badge {
   background-color: #5cb85c;
@@ -22,6 +21,10 @@
 }
 h1 {
   cursor: pointer;
+}
+
+.fa-html5 {
+  color: #f36518;
 }
 
 .fa-clipboard, .fa-times, .fa-jsfiddle {

@@ -7,6 +7,7 @@ $shadeCyan:       #5bc0de;  $shadeDarkCyan:   #46b8da;
 $shadeOrange:     #f0ad4e;  $shadeDarkOrange: #eea236;
 $shadeRed:        #d9534f;  $shadeDarkRed:    #d43f3a;
 $shadePurple:     #9783b9;  $shadeDarkPurple: #6f5499;
+$shadeHTML5Orange:                            #f36518;
 // Navigation
 .nav-tabs{
   & li{
@@ -14,7 +15,6 @@ $shadePurple:     #9783b9;  $shadeDarkPurple: #6f5499;
   }
   & a .badge{
     margin-top: -3px;
-    background-color: $shadeBlue;
   }
   .active{
     & a .badge{
@@ -35,6 +35,9 @@ $shadePurple:     #9783b9;  $shadeDarkPurple: #6f5499;
 // Hand cursor when over the main header
 h1{
   cursor: pointer;
+}
+.fa-html5{
+  color: $shadeHTML5Orange;
 }
 // TODO: Cleanup and see what is still required
 

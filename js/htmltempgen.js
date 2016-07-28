@@ -1,6 +1,6 @@
 $(function(){
 	// Version name and setup, always use this and update accordingly
-	var versionName = 'v0.4.0_pre02 (cuttlefish_pre_alpha)';
+	var versionName = 'v0.4.0_pre03 (cuttlefish_pre_alpha)';
 	$('#versionNumbering').text(versionName);
 	// Title click (for now it will change tab to content, maybe make it reload page later?)
 	$(document).on('click','h1', function(){$('#content-tab').click();});
@@ -11,7 +11,7 @@ $(function(){
 		$('.activeRow').removeClass('activeRow').addClass('hidden');
 		$('#'+$(this).attr('id').substr(0, $(this).attr('id').indexOf('-'))).removeClass('hidden').addClass('activeRow');
 	});
-	// TODO: Add a variable that will update when choosing libraries and change the number in the badge accordingly
+	// Library package object constructor
 	var libraryPackage = function libraryPackage (name, version, type, url, requirements){
 		this.name = name;
 		this.version = version;
@@ -100,6 +100,7 @@ $(function(){
 	   console.log('Locally fetching file res/lib.xml...');
 	}
     xmlhttp.send();
+    // TODO: Add a variable that will update when choosing libraries and change the number in the badge accordingly
 });
 
 /*
