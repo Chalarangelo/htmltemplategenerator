@@ -1,28 +1,43 @@
-.nav-tabs li {
-  margin-bottom: -2px !important;
-}
-.nav-tabs a .badge {
-  margin-top: -3px;
-  background-color: #337ab7;
-}
-.nav-tabs .active a .badge {
-  background-color: #5cb85c;
-}
-
-@media (max-width: 992px) {
-  #tab-title {
-    display: none;
+// Variables
+$shadeWhite:      #fff;     $shadeLightGray:  #eee;   
+$shadeDarkGray:   #ccc;     $shadeBlackGray:  #555;
+$shadeBlue:       #337ab7;  $shadeDarkBlue:   #2e6da4;
+$shadeGreen:      #5cb85c;  $shadeDarkGreen:  #4cae4c;
+$shadeCyan:       #5bc0de;  $shadeDarkCyan:   #46b8da;
+$shadeOrange:     #f0ad4e;  $shadeDarkOrange: #eea236;
+$shadeRed:        #d9534f;  $shadeDarkRed:    #d43f3a;
+$shadePurple:     #9783b9;  $shadeDarkPurple: #6f5499;
+// Navigation
+.nav-tabs{
+  & li{
+    margin-bottom: -2px !important;
   }
-
-  .nav-tabs a .fa-fw {
+  & a .badge{
+    margin-top: -3px;
+    background-color: $shadeBlue;
+  }
+  .active{
+    & a .badge{
+      background-color: $shadeGreen;
+    }
+  }
+}
+@media (max-width: 992px) {
+  #tab-title{
+    display:none;
+  }
+  .nav-tabs a .fa-fw{
     font-size: 1.33333333em;
     line-height: .75em;
     vertical-align: -15%;
   }
 }
-h1 {
+// Hand cursor when over the main header
+h1{
   cursor: pointer;
 }
+
+// TODO: Cleanup and see what is still required
 
 .fa-clipboard, .fa-times, .fa-jsfiddle {
   background-color: #4CAF50;
@@ -70,7 +85,6 @@ h1 {
     top: 25%;
     padding: 10px 8px;
   }
-
   .fa-jsfiddle {
     position: absolute;
     right: 8.5%;
@@ -78,6 +92,9 @@ h1 {
     padding: 10px 8px;
   }
 }
+
+// TODO: Probably useless, integrate github.buttons instead
+
 #footer {
   position: fixed;
   bottom: 1em;
@@ -88,7 +105,7 @@ h1 {
   color: #000;
   -webkit-transition: color .15s;
   transition: color .15s;
-}
-#footer:hover {
-  color: #4CAF50;
+  &:hover {
+    color: #4CAF50;
+  }
 }

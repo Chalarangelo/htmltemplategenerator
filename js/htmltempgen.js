@@ -1,8 +1,21 @@
+$(function(){
+	// Version name and setup, always use this and update accordingly
+	var versionName = 'v0.4.0_alpha.1 (Cuttlefish_alpha)';
+	$('#versionNumbering').text(versionName);
+	// Title click (for now it will change tab to content, maybe make it reload page later?)
+	$(document).on('click','h1', function(){$('#content-tab').click();});
+	// Navigation and tabs handling
+	$(document).on('click','.nav-tabs li', function(){
+		$('.nav-tabs li').removeClass('active');
+		$(this).addClass('active');
+		$('.activeRow').removeClass('activeRow').addClass('hidden');
+		$('#'+$(this).attr('id').substr(0, $(this).attr('id').indexOf('-'))).removeClass('hidden').addClass('activeRow');
+	});
+	// TODO: Add a variable that will update when choosing libraries and change the number in the badge accordingly
+});
+
+/*
 $(document).ready(function(){
-	var appName = 'HTML5 Template Generator v0.3.0';	// Application name and version number.
-	document.title = appName;		// Set title.
-	$('h3').text(appName);			// Set page header.
-	$('h3').click(function(){location.reload();});	// Reload page when title is clicked.
 	// Checks which libraries are loaded for the standard templates and creates a resource string from them.
 	function checkStdLib(){
 		var empty = true;
@@ -458,4 +471,4 @@ $(document).ready(function(){
 						+ '  <button type="button">Click Me!</button>\n'
 						+ '  <blockquote cite="https://www.google.com">Nam non diam ante. Curabitur non enim vitae eros luctus porta.</blockquote><br><br>\n';
 	var body_temporary 	= '  <!-- COMING SOON -->\n';
-});
+});	*/
