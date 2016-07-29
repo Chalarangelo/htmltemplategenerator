@@ -20,7 +20,7 @@
  	<div class="container-fluid">
  		<div class="row">
  			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
- 				<h1>HTML<i class="fa fa-html5 fa-lg" aria-hidden="true"></i> Template Generator <small id="versionNumbering"></small></h1><br>
+ 				<h1>HTML<i class="fa fa-html5 fa-lg" aria-hidden="true"></i> Template Generator <small class="versionNumbering"></small></h1><br>
  			</div>
  		</div>
   		<div class="row">
@@ -31,6 +31,7 @@
 	  				<li role="presentation" id="metadata-tab"><a href="#metadata" title="Metadata"><h5><i class="fa fa-tags fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Metadata</span></h5></a></li>
 	  				<li role="presentation" id="resources-tab"><a href="#resources" title="Resources"><h5><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Resources</span></h5></a></li>
 	  				<li role="presentation" id="result-tab"><a href="#result" title="Content"><h5><i class="fa fa-download fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Result</span></h5></a></li>
+            <li role="presentation" id="help-tab"><a href="#help" title="Content"><h5><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Help</span></h5></a></li>
 				</ul>
 			</div>
   		</div>
@@ -116,6 +117,17 @@
   				<h2>Result</h2>
   			</div>
   		</div>
+      <div class="row hidden" id="help">
+        <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+          <h2>How to use this generator</h2>
+          <p>Specify your HTML page's content, libraries, metadata and resources using the corrresponding tabs. When you are ready to get your template, click on the <em>Result</em> tab to preview your generated template page. You can copy your template to the clipboard or export it into a JSFiddle or Codepen.</p>
+          <hr>
+          <h3>About</h3>
+          <p><strong>Current version: </strong><span class="versionNumbering"></span>&nbsp;-&nbsp;
+          <strong>Last updated: </strong>August, 15, 2016</p>
+          <p><strong>Disclaimer: </strong>Designed and built by <a href="https://github.com/Chalarangelo">@chalarangelo</a>, licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+        </div>
+      </div>
 	</div>
  </body>
 </html>
