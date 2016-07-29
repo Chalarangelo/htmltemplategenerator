@@ -11,9 +11,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-	<script type="text/javascript" src="https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/stable/js/bootstrap-extend.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/stable/css/bootstrap-extend.min.css"/>
-	<title>HTML5 Template Generator</title>
+	<script type="text/javascript" src="https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/css/bootstrap-extend.min.css"/>
+  <title>HTML5 Template Generator</title>
+  <link rel="icon" type="image/png" href="favicon.png">
  </head>
  <body>
  	<div class="container-fluid">
@@ -47,7 +48,62 @@
   		</div>
   		<div class="row hidden" id="metadata">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-  				<h2>Metadata</h2>
+  				<h2>Define metadata tags</h2>
+          <p>Choose metadata tags for your HTML document. Leave a field blank if you don't want to include that specific tag. We strongly recommend setting a <em>description</em> for your page, so that search engines can pick it up when indexing your page and show it along with the results of searches.</p><br>
+
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="meta-charset" class="col-sm-offset-0 col-sm-2 control-label">Character encoding</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <select name="meta-charset" class="slct">
+                  <option value="UTF-8">UTF-8</option>
+                  <option value="ISO-8859-1">ISO-8859-1</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="meta-author" class="col-sm-offset-0 col-sm-2 control-label">Author</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <input type="text" class="form-control" id="meta-author" placeholder="Author">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="meta-desc" class="col-sm-offset-0 col-sm-2 control-label">Description</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <textarea class="form-control" rows="3" id="meta-desc" placeholder="Description"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="meta-keys" class="col-sm-offset-0 col-sm-2 control-label">Keywords</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input type="text" class="form-control" rows="3" id="meta-keys" placeholder="Keywords (comma-separated)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="meta-gen" class="col-sm-offset-0 col-sm-2 control-label">Include generator tag</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input id="meta-gen" class="switch switch-rect-success switch-yes-no" type="checkbox" checked> <label for="meta-gen"></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="meta-vp" class="col-sm-offset-0 col-sm-2 control-label">Include viewport tag</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input id="meta-vp" class="switch switch-rect-info switch-yes-no" type="checkbox" checked> <label for="meta-vp"></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="meta-fav" class="col-sm-offset-0 col-sm-2 control-label">Favicon</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input id="meta-fav" class="switch switch-rect-primary switch-yes-no" type="checkbox"> <label for="meta-fav"></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="meta-old" class="col-sm-offset-0 col-sm-2 control-label">Old browser warning</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input id="meta-old" class="switch switch-rect-warning switch-yes-no" type="checkbox"> <label for="meta-old"></label>
+              </div>
+            </div>
+          </form>
   			</div>
   		</div>
   		<div class="row hidden" id="resources">
