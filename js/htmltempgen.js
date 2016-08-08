@@ -1,6 +1,7 @@
 $(function(){
+	var debug = true;
 	// Version name and setup, always use this and update accordingly
-	var versionName = 'v0.4.0_pre03 (cuttlefish_pre_alpha)';
+	var versionName = 'v0.4.0_pre04 (cuttlefish_pre_alpha)';
 	$('.versionNumbering').text(versionName);
 	// Title click (for now it will change tab to content, maybe make it reload page later?)
 	$(document).on('click','h1', function(){$('#content-tab').click();});
@@ -11,95 +12,7 @@ $(function(){
 		$('.activeRow').removeClass('activeRow').addClass('hidden');
 		$('#'+$(this).attr('id').substr(0, $(this).attr('id').indexOf('-'))).removeClass('hidden').addClass('activeRow');
 	});
-	// Library package object constructor
-	var libraryPackage = function libraryPackage (name, version, type, url, requirements){
-		this.name = name;
-		this.version = version;
-		if(type!='mixed'){
-			this.html = '  <'+(type=='script'?'script src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>':'">');
-			this.raw = url;
-		}
-		if(requirements != null){
-			this.requirements = requirements;
-		}
-		var scripts = 0;
-		var csses = 0;
-		this.addScript = function addScript(url){
-			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
-			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'  <script src="'+url+'"></script>';
-			scripts+=1;
-		};
-		this.addCSS = function(url){
-			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
-			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'  <link rel="stylesheet" href="'+url+'"/>';
-			csses+=1;
-		};
-	}
-	// Get libraries from XML file
-	var xmlhttp = new XMLHttpRequest(), libList = [];
-	xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {	// state is request finished and response ready (4), status is OK (200)
-            var xmlDoc = xmlhttp.responseXML; 
-			var libraries = xmlDoc.getElementsByTagName('library');
-			for(var lC = 0; lC < libraries.length; lC++){
-				var type = libraries[lC].getElementsByTagName('type')[0].childNodes[0].nodeValue;
-				var packages = libraries[lC].getElementsByTagName('package');
-				for(var pC = 0; pC < packages.length; pC++){
-					var name = libraries[lC].getElementsByTagName('name')[0].childNodes[0].nodeValue;
-					var version = packages[pC].getElementsByTagName('version')[0].childNodes[0].nodeValue;
-					var requires = packages[pC].getElementsByTagName('requires');
-					var requiresVersion = packages[pC].getElementsByTagName('requiresVersion');
-					var requirements;
-					if(typeof requires[0] != 'undefined')
-						requirements = requires[0].childNodes[0].nodeValue + requiresVersion[0].childNodes[0].nodeValue;
-					else
-						requirements = null;
-					if(type!='mixed'){	
-						var url = packages[pC].getElementsByTagName('url')[0].childNodes[0].nodeValue;
-						libList.push(new libraryPackage(name,version,type,url,requirements));
-					}
-					else{
-						var newLib = new libraryPackage(name,version,type,'',requirements);
-						var urls = packages[pC].getElementsByTagName('url');
-						for(var uC = 0; uC < urls.length; uC++){
-							if(urls[uC].childNodes[0].nodeValue.endsWith('.js'))
-								newLib.addScript(urls[uC].childNodes[0].nodeValue);
-							else
-								newLib.addCSS(urls[uC].childNodes[0].nodeValue);
-						}
-						libList.push(newLib);
-					}
-				}
-			}
-			var html='<div class="table-responsive"><table class="table table-bordered">';
-			for(var llC = 0; llC < libList.length; llC++){
-				var id = (libList[llC].name+libList[llC].version).replace(/\./g,'-');
-				if(llC%3==0) html+='</tr>';
-				html+='<td>';
-				html+='<input type="checkbox" class="chkbox chkbox-primary" id="'+id+'"'+(id=='jQuery3-1-0'?'checked':'')+'><label for="'+id+'">'+libList[llC].name+' ('+libList[llC].version+')</label>';
-				html+='</td>';
-				if((llC+1)%3==0) html+='</tr>';
-			}
-			if(!html.endsWith('</tr>'))html+='</tr>';
-			html+='</table></div>';
-			$('#lib-loader').html(html);
-        }
-    };
-    // Check for Chrome and handle requesting libraries accordingly, see Issue #17: https://github.com/Chalarangelo/htmltemplategenerator/issues/17
-    var isChromium = window.chrome, winNav = window.navigator, vendorName = winNav.vendor, isOpera = winNav.userAgent.indexOf("OPR") > -1, isIEedge = winNav.userAgent.indexOf("Edge") > -1, isIOSChrome = winNav.userAgent.match("CriOS");
-	if(isIOSChrome){
-	   xmlhttp.open("GET", "https://cdn.rawgit.com/Chalarangelo/htmltemplategenerator/master/res/lib.xml",true);
-	   console.log('Remotely fetching file res/lib.xml...');
-	} else if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
-	   xmlhttp.open("GET", "https://cdn.rawgit.com/Chalarangelo/htmltemplategenerator/master/res/lib.xml",true);
-	   console.log('Remotely fetching file res/lib.xml...');
-	} else { 
-	   xmlhttp.open("GET", "res/lib.xml", true);
-	   console.log('Locally fetching file res/lib.xml...');
-	}
-    xmlhttp.send();
+	
     // TODO: Add a variable that will update when choosing libraries and change the number in the badge accordingly
 });
 
