@@ -38,8 +38,83 @@
   		</div>
   		<div class="row activeRow" id="content">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-  				<h2>Content</h2>
-  			</div>
+  				<h2>Define base content for your page</h2>
+          <p>Specify the basic information for your template page, such as title, body classes and/or body content. You can use the <em>Simple pages</em> template base and write your own HTML to customize it, pick a pre-define template and alter its variables to suit your specific needs or, if you so desire, do both. <strong>The custom HTML body you input will always be part of the resulting page</strong>, you can change its position (before or after the template's generated content) by flipping the corresponding switch below.</p><br>		
+          <form class="form-horizontal">
+              <div class="form-group">
+                <label for="content-title" class="col-sm-offset-0 col-sm-2 control-label">Title</label>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                  <input type="text" class="form-control" id="content-title" placeholder="Title">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="content-classes" class="col-sm-offset-0 col-sm-2 control-label">Body classes</label>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                  <input type="text" class="form-control" id="content-classes" placeholder="Body classes (space separated)">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="content-body" class="col-sm-offset-0 col-sm-2 control-label">Body</label>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                  <textarea class="form-control" rows="3" id="content-body" placeholder="Body (HTML)"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="content-templates" class="col-sm-offset-0 col-sm-2 control-label">Choose a template base (customize below)</label>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                  <select name="content-templates" class="slct">
+                    <option value="page-template" selected>Simple pages</option>
+                    <option value="form-template">Simple forms</option>
+                    <option value="error-template">Error pages</option>
+                  </select>     
+                </div>
+              </div>
+          </form>
+          <hr>
+          <h3>Template customization</h3>
+          <p>Customize variables specific to your chosen template base below. <strong>If you change your template base, some of the below changes might be lost.</strong></p><br> 
+          <form class="form-horizontal" id="content-pt-customize">
+            <div class="form-group">
+              <label for="content-pt-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <input type="radio" class="rdbtn rdbtn-primary" id="pt-empty" name="content-pt-selector" checked><label for="pt-empty">Empty page</label><br>
+                <input type="radio" class="rdbtn rdbtn-primary" id="pt-sample" name="content-pt-selector"><label for="pt-sample">Page with sample content</label><br>
+                <input type="radio" class="rdbtn rdbtn-primary" id="pt-showcase" name="content-pt-selector"><label for="pt-showcase">Content showcase page</label><br>
+                <input type="radio" class="rdbtn rdbtn-primary" id="pt-twocol" name="content-pt-selector"><label for="pt-twocol">Empty page with two-column layout</label>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal hidden" id="content-ft-customize">
+            <div class="form-group">
+              <label for="content-ft-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <input type="radio" class="rdbtn rdbtn-success" id="ft-empty" name="content-ft-selector"><label for="ft-empty">Empty form</label><br>
+                <input type="radio" class="rdbtn rdbtn-success" id="ft-login" name="content-ft-selector" checked><label for="ft-login">Login form</label><br>
+                <input type="radio" class="rdbtn rdbtn-success" id="ft-register" name="content-ft-selector"><label for="ft-register">Registration form</label><br>
+                <input type="radio" class="rdbtn rdbtn-success" id="ft-payment" name="content-ft-selector"><label for="ft-payment">Payment form</label>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal hidden" id="content-et-customize">
+            <div class="form-group">
+              <label for="content-et-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-400" name="content-et-selector"><label for="et-400">400: Bad Request</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-401" name="content-et-selector"><label for="et-401">401: Authorization Required</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-403" name="content-et-selector"><label for="et-403">403: Forbidden</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-404" name="content-et-selector" checked><label for="et-404">404: Not Found</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-408" name="content-et-selector"><label for="et-408">408: Request Time-Out</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-410" name="content-et-selector"><label for="et-410">410: Gone</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-500" name="content-et-selector"><label for="et-500">500: Internal Server Error</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-502" name="content-et-selector"><label for="et-502">502: Bad Gateway</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-503" name="content-et-selector"><label for="et-503">503: Service Temporarily Unavailable</label><br>
+                <input type="radio" class="rdbtn rdbtn-danger" id="et-504" name="content-et-selector"><label for="et-504">504: Gateway Time-Out</label>
+              </div>
+            </div>
+          </form>
+        </div>
   		</div>
   		<div class="row hidden" id="libraries">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
@@ -58,7 +133,7 @@
               <label for="meta-charset" class="col-sm-offset-0 col-sm-2 control-label">Character encoding</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <select name="meta-charset" class="slct">
-                  <option value="UTF-8">UTF-8</option>
+                  <option value="UTF-8" selected>UTF-8</option>
                   <option value="ISO-8859-1">ISO-8859-1</option>
                 </select>
               </div>
@@ -128,6 +203,9 @@
           <strong>Last updated: </strong>August, 15, 2016</p>
           <p><strong>Disclaimer: </strong>Designed and built by <a href="https://github.com/Chalarangelo">@chalarangelo</a>, licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
         </div>
+      </div>
+      <div class="row">
+        <br><br><br>
       </div>
 	</div>
  </body>
