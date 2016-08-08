@@ -27,12 +27,12 @@
   		<div class="row">
 	  		<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 	  			<ul class="nav nav-tabs">
-	  				<li role="presentation" class="active" id="content-tab"><a href="#content" title="Content"><h5><i class="fa fa-code fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Content</span></h5></a></li>
-	  				<li role="presentation" id="libraries-tab"><a href="#libraries" title="Libraries"><h5><i class="fa fa-archive fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Libraries&nbsp;<span class="badge" id="libraries-badge">1</span></span></h5></a></li>
-	  				<li role="presentation" id="metadata-tab"><a href="#metadata" title="Metadata"><h5><i class="fa fa-tags fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Metadata</span></h5></a></li>
-	  				<li role="presentation" id="resources-tab"><a href="#resources" title="Resources"><h5><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Resources</span></h5></a></li>
-	  				<li role="presentation" id="result-tab"><a href="#result" title="Content"><h5><i class="fa fa-download fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Result</span></h5></a></li>
-            <li role="presentation" id="help-tab"><a href="#help" title="Content"><h5><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span id="tab-title">&nbsp;Help</span></h5></a></li>
+	  				<li role="presentation" class="active" id="content-tab"><a href="#content" title="Content"><h5><i class="fa fa-code fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Content</span></h5></a></li>
+	  				<li role="presentation" id="libraries-tab"><a href="#libraries" title="Libraries"><h5><i class="fa fa-archive fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Libraries&nbsp;<span class="badge" id="libraries-badge">1</span></span></h5></a></li>
+	  				<li role="presentation" id="metadata-tab"><a href="#metadata" title="Metadata"><h5><i class="fa fa-tags fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Metadata</span></h5></a></li>
+	  				<li role="presentation" id="resources-tab"><a href="#resources" title="Resources"><h5><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Resources</span></h5></a></li>
+	  				<li role="presentation" id="result-tab"><a href="#result" title="Content"><h5><i class="fa fa-download fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Result</span></h5></a></li>
+            <li role="presentation" id="help-tab"><a href="#help" title="Content"><h5><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Help</span></h5></a></li>
 				</ul>
 			</div>
   		</div>
@@ -60,6 +60,13 @@
                 </div>
               </div>
               <div class="form-group">
+              <label for="content-pos-selector" class="col-sm-offset-0 col-sm-2 control-label">Add custom body before or after generated body</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input type="radio" class="rdbtn rdbtn-info" id="con-before" name="content-pos-selector" checked><label for="con-before">Before</label>&nbsp;&nbsp;
+                <input type="radio" class="rdbtn rdbtn-info" id="con-after" name="content-pos-selector"><label for="con-after">After</label>
+              </div>
+            </div>
+              <div class="form-group">
                 <label for="content-templates" class="col-sm-offset-0 col-sm-2 control-label">Choose a template base (customize below)</label>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                   <select name="content-templates" class="slct">
@@ -71,7 +78,7 @@
               </div>
           </form>
           <hr>
-          <h3>Template customization</h3>
+          <h3>Customize your template base</h3>
           <p>Customize variables specific to your chosen template base below. <strong>If you change your template base, some of the below changes might be lost.</strong></p><br> 
           <form class="form-horizontal" id="content-pt-customize">
             <div class="form-group">
@@ -185,12 +192,47 @@
   		</div>
   		<div class="row hidden" id="resources">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-  				<h2>Resources</h2>
+  				<h2>Add external resource links</h2>
+          <p>Add relative links to local resources or absolute links to external, online resources. <strong>Please only write one link per line of the corresponding input areas</strong>, otherwise there might be errors with the generated template page.</p><br>
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="res-js" class="col-sm-offset-0 col-sm-2 control-label">Javascript resources</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <textarea class="form-control" rows="5" id="res-js" placeholder="Javascript resources (one per line)"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="res-css" class="col-sm-offset-0 col-sm-2 control-label">CSS resources</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <textarea class="form-control" rows="5" id="res-css" placeholder="CSS resources (one per line)"></textarea>
+              </div>
+            </div>
+          </form>
   			</div>
   		</div>
   		<div class="row hidden" id="result">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-  				<h2>Result</h2>
+  				<h2>Get your generated template</h2>
+          <p>The following is the template page generated based on your choices in the other tabs; use the buttons below to export it wherever you want. If you are not satisfied with the results, you can always tweak the specified settings in the other tabs to better suit your needs.</p><br>
+          <div class="btn-group btn-group-justified" role="group" aria-label="result-button-group">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-success" id="clipboard"><i class="fa fa-clipboard fa-fw" aria-hidden="true"></i><span class="res-button">
+              &nbsp;Copy to clipboard</span></button>
+            </div><div class="btn-group" role="group">
+              <button type="button" class="btn btn-success" id="minify"><i class="fa fa-compress fa-fw" aria-hidden="true"></i><span class="res-button">
+              &nbsp;Copy to clipboard (minified)</span></button>
+            </div><div class="btn-group" role="group">
+              <button type="button" class="btn btn-success" id="fiddle"><i class="fa fa-jsfiddle fa-fw" aria-hidden="true"></i><span class="res-button">
+              &nbsp;Open in JSFiddle</span></button>
+            </div><div class="btn-group" role="group">
+              <button type="button" class="btn btn-success" id="codepen"><i class="fa fa-codepen fa-fw" aria-hidden="true"></i><span class="res-button">
+              &nbsp;Open in Codepen</span></button>
+            </div>
+          </div><br>
+            <textarea rows="25" class="form-control" id="result-box" placeholder="<DOCTYPE html!><html></html>" readonly>&lt;DOCTYPE html!&gt;
+&lt;html&gt;
+&lt;/html&gt;
+</textarea>
   			</div>
   		</div>
       <div class="row hidden" id="help">

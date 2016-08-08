@@ -1,7 +1,7 @@
 $(function(){
 	var debug = true;
 	// Version name and setup, always use this and update accordingly
-	var versionName = 'v0.4.0_pre05 (cuttlefish_pre_alpha'+((debug)?'::debug_true':'')+')';
+	var versionName = 'v0.4.0_pre06 (cuttlefish_pre_alpha'+((debug)?'::debug_true':'')+')';
 	$('.versionNumbering').text(versionName);
 	// Title click (for now it will change tab to content, maybe make it reload page later?)
 	$(document).on('click','h1', function(){$('#content-tab').click();});
