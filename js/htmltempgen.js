@@ -16,29 +16,33 @@ $(function(){
 		if($(this).attr('id')=='result-tab'){ $('#result-copier').val(result.toText()); editor.setValue(result.toText(), -1); }
 			
 	});
-	// Changes in the meta tab
+	// Content tab events
+	$('#commenter').change(function(){result.comments = $('#commenter:checked').length>0;});
+	// Libraries tab events
+	$('#lib-loader input:checkbox').change(function(){$('#libraries-badge').text($('#lib-loader input:checkbox:checked').length);});
+	// Metadata tab events
 	$('select[name="meta-charset"]').change(function(){
 		if($('select[name="meta-charset"] option:selected' ).val()=='UTF-8') result.head.meta.charset = 0; else result.head.meta.charset = 1;
 	});
 	$('#meta-author').change(function(){	result.head.meta.author = $('#meta-author').val();	});
 	$('#meta-desc').change(function(){	result.head.meta.description = $('#meta-desc').val().replace(/\r?\n/g,' ');	});
 	$('#meta-keys').change(function(){	result.head.meta.keywords = $('#meta-keys').val();	});
+	$('#meta-gen').change(function(){	result.head.meta.gentag = $('#meta-gen:checked').length>0;	});
+	$('#meta-vp').change(function(){	result.head.meta.viewport = $('#meta-vp:checked').length>0;	});
+	$('#meta-fav').change(function(){	result.head.meta.favicon = $('#meta-fav:checked').length>0;	});
+	$('#meta-old').change(function(){	result.head.meta.oldwarn = $('#meta-old:checked').length>0;	});
+	// Resources tab events
+
+	// Results tab events
 	$('#clipboard').on('click',function(){
-		var $temp = $("<textarea>");
-	    $("body").append($temp);
-	    $temp.val(editor.getValue()).select();
-	    document.execCommand("copy");
+		var $temp = $("<textarea>");			$("body").append($temp);
+	    $temp.val(editor.getValue()).select();	document.execCommand("copy");
 	    $temp.remove();
 	});
-
-
-
-
-    // TODO: Add a variable that will update when choosing libraries and change the number in the badge accordingly
 });
 // Prototype for the templates
 var templateProto = function(){
-	this.comments = true;
+	this.comments = false;
 	this.doctype = '<!DOCTYPE html>';
 	this.html = {
 		start:'<html>', 
@@ -48,7 +52,7 @@ var templateProto = function(){
 			end:'  </head>'
 		}, 
 		body: {
-			start:'  <body>', 
+			start:'  <body>', // TODO: this might cause problems with body classes, change the tagging accordingly to something like start p1, start p2 for classes or overhaul using classes, just work it!
 			end:'  </body>'
 		}
 	};
@@ -76,7 +80,7 @@ var templateProto = function(){
 	};
 	this.toText = function(){
 		var textRes = this.doctype + '\n' + this.html.start +'\n' + this.html.head.start + '\n'
-		+ this.metaToText() + '\n'
+		+ this.metaToText()
 		+ '    <!-- TODO: ADD HEAD HERE -->' + '\n'
 		+ this.html.head.end + '\n' + this.html.body.start + '\n'
 		+ '    <!-- TODO: ADD BODY HERE -->' + '\n'
@@ -87,8 +91,13 @@ var templateProto = function(){
 		var metaText = '';
 		metaText += (this.comments?'    <!-- Start of Metadata -->\n':'');
 		metaText += ((this.head.meta.charset == 0)?'    <meta charset="utf-8">':'    <meta charset="iso-8859-1">')+'\n';
-		metaText += (($.trim(this.head.meta.author).length === 0)?'':'    <meta author="'+$.trim(this.head.meta.author)+'">\n');
-		metaText += (($.trim(this.head.meta.description).length === 0)?'':'    <meta description="'+$.trim(this.head.meta.description)+'">\n');
+		metaText += ((this.head.meta.viewport)?'    <meta name="viewport" content="width=device-width, initial-scale=1">\n':'');
+		metaText += (($.trim(this.head.meta.description).length === 0)?'':'    <meta name="description" content="'+$.trim(this.head.meta.description)+'">\n');
+		metaText += (($.trim(this.head.meta.keywords).length === 0)?'':'    <meta name="keywords" content="'+$.trim(this.head.meta.keywords)+'">\n');
+		metaText += (($.trim(this.head.meta.author).length === 0)?'':'    <meta name="author" content="'+$.trim(this.head.meta.author)+'">\n');
+		metaText += ((this.head.meta.gentag)?'    <meta name="generator" content="http://chalarangelo.github.io/htmltemplategenerator/">\n':'');
+		metaText += ((this.head.meta.favicon)?'    <link rel="icon" type="image/x-icon" href="./favicon.ico">\n':'');
+		metaText += ((this.head.meta.oldwarn)?'    <!--[if lt IE 8]>\n      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>\n    <![endif]-->\n':'');
 		metaText += (this.comments?'    <!-- End of Metadata -->\n':'');
 		return metaText;
 	}

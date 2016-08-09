@@ -2,9 +2,10 @@
 <html>
  <head>
  	<meta charset="utf-8">
- 	<meta description="A free online HTML5 template page generator with multiple options and export functionality.">
- 	<meta author="Angelos Chalaris">
- 	<meta keyword="html5, template page generator, html, template, generator">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<meta name ="description" content="A free online HTML5 template page generator with multiple options and export functionality.">
+ 	<meta name="author" content="Angelos Chalaris">
+ 	<meta name="keywords" content="html5, template page generator, html, template, generator">
  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script type="text/javascript" src="js/libloader.js"></script>
 	<script type="text/javascript" src="js/htmltempgen.js"></script>
@@ -182,7 +183,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="meta-fav" class="col-sm-offset-0 col-sm-2 control-label">Favicon</label>
+              <label for="meta-fav" class="col-sm-offset-0 col-sm-2 control-label">Decare favicon</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                  <input id="meta-fav" class="switch switch-rect-primary switch-yes-no" type="checkbox"> <label for="meta-fav"></label>
               </div>
@@ -235,18 +236,19 @@
               &nbsp;Open in Codepen</span></button>
             </div>
           </div><br>
-            <div id="result-box" style="height: 500px; width: 100%; border-radius: 4px; border: 1px solid #DDD;">&lt;!DOCTYPE html&gt;
+            <div id="result-box">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;/html&gt;</div>
             <script src="https://cdn.rawgit.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
             <script>
-                var path = "js/modules/ace/build/src-min";
+                var path = "js/modules/ace/build/src";
                 ace.config.set("workerPath", path);
                 var editor = ace.edit("result-box");
                 editor.getSession().setMode("ace/mode/html");
                 editor.setReadOnly(true); 
                 editor.setShowPrintMargin(false);
                 editor.getSession().setUseWrapMode(true);
+                editor.$blockScrolling = Infinity;
             </script>
   			</div>
   		</div>
