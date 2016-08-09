@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
- 	<meta charset="utf-8"/>
+ 	<meta charset="utf-8">
  	<meta description="A free online HTML5 template page generator with multiple options and export functionality.">
  	<meta author="Angelos Chalaris">
  	<meta keyword="html5, template page generator, html, template, generator">
@@ -27,12 +27,12 @@
   		<div class="row">
 	  		<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 	  			<ul class="nav nav-tabs">
-	  				<li role="presentation" class="active" id="content-tab"><a href="#content" title="Content"><h5><i class="fa fa-code fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Content</span></h5></a></li>
-	  				<li role="presentation" id="libraries-tab"><a href="#libraries" title="Libraries"><h5><i class="fa fa-archive fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Libraries&nbsp;<span class="badge" id="libraries-badge">1</span></span></h5></a></li>
-	  				<li role="presentation" id="metadata-tab"><a href="#metadata" title="Metadata"><h5><i class="fa fa-tags fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Metadata</span></h5></a></li>
-	  				<li role="presentation" id="resources-tab"><a href="#resources" title="Resources"><h5><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Resources</span></h5></a></li>
-	  				<li role="presentation" id="result-tab"><a href="#result" title="Content"><h5><i class="fa fa-download fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Result</span></h5></a></li>
-            <li role="presentation" id="help-tab"><a href="#help" title="Content"><h5><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Help</span></h5></a></li>
+	  				<li role="presentation" class="active" id="content-tab"><a href="javascript:void(0);" title="Content"><h5><i class="fa fa-code fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Content</span></h5></a></li>
+	  				<li role="presentation" id="libraries-tab"><a href="javascript:void(0);" title="Libraries"><h5><i class="fa fa-archive fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Libraries&nbsp;<span class="badge" id="libraries-badge">1</span></span></h5></a></li>
+	  				<li role="presentation" id="metadata-tab"><a href="javascript:void(0);" title="Metadata"><h5><i class="fa fa-tags fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Metadata</span></h5></a></li>
+	  				<li role="presentation" id="resources-tab"><a href="javascript:void(0);" title="Resources"><h5><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Resources</span></h5></a></li>
+	  				<li role="presentation" id="result-tab"><a href="javascript:void(0);" title="Content"><h5><i class="fa fa-download fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Result</span></h5></a></li>
+            <li role="presentation" id="help-tab"><a href="javascript:void(0);" title="Content"><h5><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Help</span></h5></a></li>
 				</ul>
 			</div>
   		</div>
@@ -40,7 +40,7 @@
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Define base content for your page</h2>
           <p>Specify the basic information for your template page, such as title, body classes and/or body content. You can use the <em>Simple pages</em> template base and write your own HTML to customize it, pick a pre-define template and alter its variables to suit your specific needs or, if you so desire, do both. <strong>The custom HTML body you input will always be part of the resulting page</strong>, you can change its position (before or after the template's generated content) by flipping the corresponding switch below.</p><br>		
-          <form class="form-horizontal">
+          <form class="form-horizontal" autocomplete="off">
               <div class="form-group">
                 <label for="content-title" class="col-sm-offset-0 col-sm-2 control-label">Title</label>
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -76,11 +76,17 @@
                   </select>     
                 </div>
               </div>
+              <div class="form-group">
+              <label for="commenter" class="col-sm-offset-0 col-sm-2 control-label">Add comments to generated code</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input id="commenter" class="switch switch-rect-info switch-on-off" type="checkbox"> <label for="commenter"></label>
+              </div>
+            </div>
           </form>
           <hr>
           <h3>Customize your template base</h3>
           <p>Customize variables specific to your chosen template base below. <strong>If you change your template base, some of the below changes might be lost.</strong></p><br> 
-          <form class="form-horizontal" id="content-pt-customize">
+          <form class="form-horizontal" id="content-pt-customize" autocomplete="off">
             <div class="form-group">
               <label for="content-pt-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
@@ -92,7 +98,7 @@
             </div>
           </form>
 
-          <form class="form-horizontal hidden" id="content-ft-customize">
+          <form class="form-horizontal hidden" id="content-ft-customize" autocomplete="off">
             <div class="form-group">
               <label for="content-ft-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
@@ -104,7 +110,7 @@
             </div>
           </form>
 
-          <form class="form-horizontal hidden" id="content-et-customize">
+          <form class="form-horizontal hidden" id="content-et-customize" autocomplete="off">
             <div class="form-group">
               <label for="content-et-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
@@ -135,7 +141,7 @@
   				<h2>Define metadata tags</h2>
           <p>Choose metadata tags for your HTML document. Leave a field blank if you don't want to include that specific tag. We strongly recommend setting a <em>description</em> for your page, so that search engines can pick it up when indexing your page and show it along with the results of searches.</p><br>
 
-          <form class="form-horizontal">
+          <form class="form-horizontal" autocomplete="off">
             <div class="form-group">
               <label for="meta-charset" class="col-sm-offset-0 col-sm-2 control-label">Character encoding</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
@@ -194,7 +200,7 @@
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Add external resource links</h2>
           <p>Add relative links to local resources or absolute links to external, online resources. <strong>Please only write one link per line of the corresponding input areas</strong>, otherwise there might be errors with the generated template page.</p><br>
-          <form class="form-horizontal">
+          <form class="form-horizontal" autocomplete="off">
             <div class="form-group">
               <label for="res-js" class="col-sm-offset-0 col-sm-2 control-label">Javascript resources</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
@@ -229,10 +235,19 @@
               &nbsp;Open in Codepen</span></button>
             </div>
           </div><br>
-            <textarea rows="25" class="form-control" id="result-box" placeholder="<DOCTYPE html!><html></html>" readonly>&lt;DOCTYPE html!&gt;
+            <div id="result-box" style="height: 500px; width: 100%; border-radius: 4px; border: 1px solid #DDD;">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-&lt;/html&gt;
-</textarea>
+&lt;/html&gt;</div>
+            <script src="https://cdn.rawgit.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+            <script>
+                var path = "js/modules/ace/build/src-min";
+                ace.config.set("workerPath", path);
+                var editor = ace.edit("result-box");
+                editor.getSession().setMode("ace/mode/html");
+                editor.setReadOnly(true); 
+                editor.setShowPrintMargin(false);
+                editor.getSession().setUseWrapMode(true);
+            </script>
   			</div>
   		</div>
       <div class="row hidden" id="help">

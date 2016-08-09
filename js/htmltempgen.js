@@ -1,7 +1,9 @@
 $(function(){
 	var debug = true;
 	// Version name and setup, always use this and update accordingly
-	var versionName = 'v0.4.0_pre06 (cuttlefish_pre_alpha'+((debug)?'::debug_true':'')+')';
+	var versionName = 'v1.0.0_pre09 (cuttlefish_production'+((debug)?'::debug_true':'')+')';
+	// Create the templateGen for use in the rest of the application
+	var result = new templateProto();
 	$('.versionNumbering').text(versionName);
 	// Title click (for now it will change tab to content, maybe make it reload page later?)
 	$(document).on('click','h1', function(){$('#content-tab').click();});
@@ -11,10 +13,86 @@ $(function(){
 		$(this).addClass('active');
 		$('.activeRow').removeClass('activeRow').addClass('hidden');
 		$('#'+$(this).attr('id').substr(0, $(this).attr('id').indexOf('-'))).removeClass('hidden').addClass('activeRow');
+		if($(this).attr('id')=='result-tab'){ $('#result-copier').val(result.toText()); editor.setValue(result.toText(), -1); }
+			
 	});
-	
+	// Changes in the meta tab
+	$('select[name="meta-charset"]').change(function(){
+		if($('select[name="meta-charset"] option:selected' ).val()=='UTF-8') result.head.meta.charset = 0; else result.head.meta.charset = 1;
+	});
+	$('#meta-author').change(function(){	result.head.meta.author = $('#meta-author').val();	});
+	$('#meta-desc').change(function(){	result.head.meta.description = $('#meta-desc').val().replace(/\r?\n/g,' ');	});
+	$('#meta-keys').change(function(){	result.head.meta.keywords = $('#meta-keys').val();	});
+	$('#clipboard').on('click',function(){
+		var $temp = $("<textarea>");
+	    $("body").append($temp);
+	    $temp.val(editor.getValue()).select();
+	    document.execCommand("copy");
+	    $temp.remove();
+	});
+
+
+
+
     // TODO: Add a variable that will update when choosing libraries and change the number in the badge accordingly
 });
+// Prototype for the templates
+var templateProto = function(){
+	this.comments = true;
+	this.doctype = '<!DOCTYPE html>';
+	this.html = {
+		start:'<html>', 
+		end:'</html>', 
+		head: {
+			start:'  <head>', 
+			end:'  </head>'
+		}, 
+		body: {
+			start:'  <body>', 
+			end:'  </body>'
+		}
+	};
+	this.head = {
+		meta: {
+			charset:0, 
+			author: '', 
+			description: '', 
+			keywords: '', 
+			gentag: true, 
+			viewport: true, 
+			favicon: false, 
+			oldwarn: false
+		}, 
+		lib: [], 
+		scripts: [], 
+		styles: [] 
+	};
+	this.body = {
+		classes: '', 
+		before: true, 
+		base: 0, 
+		userBody: '', 
+		templateBody: ''
+	};
+	this.toText = function(){
+		var textRes = this.doctype + '\n' + this.html.start +'\n' + this.html.head.start + '\n'
+		+ this.metaToText() + '\n'
+		+ '    <!-- TODO: ADD HEAD HERE -->' + '\n'
+		+ this.html.head.end + '\n' + this.html.body.start + '\n'
+		+ '    <!-- TODO: ADD BODY HERE -->' + '\n'
+		+ this.html.body.end + '\n' + this.html.end;
+		return textRes;
+	};
+	this.metaToText = function(){
+		var metaText = '';
+		metaText += (this.comments?'    <!-- Start of Metadata -->\n':'');
+		metaText += ((this.head.meta.charset == 0)?'    <meta charset="utf-8">':'    <meta charset="iso-8859-1">')+'\n';
+		metaText += (($.trim(this.head.meta.author).length === 0)?'':'    <meta author="'+$.trim(this.head.meta.author)+'">\n');
+		metaText += (($.trim(this.head.meta.description).length === 0)?'':'    <meta description="'+$.trim(this.head.meta.description)+'">\n');
+		metaText += (this.comments?'    <!-- End of Metadata -->\n':'');
+		return metaText;
+	}
+};
 
 /*
 $(document).ready(function(){

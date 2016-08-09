@@ -5,7 +5,7 @@ $(function(){
 		this.name = name;
 		this.version = version;
 		if(type!='mixed'){
-			this.html = '  <'+(type=='script'?'script src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>':'">');
+			this.html = '    <'+(type=='script'?'script src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>':'">');
 			this.raw = url;
 		}
 		if(requirements != null){
@@ -16,13 +16,13 @@ $(function(){
 		this.addScript = function addScript(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
 			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'  <script src="'+url+'"></script>';
+			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'    <script src="'+url+'"></script>';
 			scripts+=1;
 		};
 		this.addCSS = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
 			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'  <link rel="stylesheet" href="'+url+'"/>';
+			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'    <link rel="stylesheet" href="'+url+'"/>';
 			csses+=1;
 		};
 	}
