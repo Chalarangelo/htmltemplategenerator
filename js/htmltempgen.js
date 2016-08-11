@@ -2,6 +2,131 @@ $(function(){
 	var debug = true;	// Debub flag
 	// Version name and setup, always use this and update accordingly
 	var versionName = 'v1.0.0_pre11 (cuttlefish_production'+((debug)?'::debug_true':'')+')';
+	// Prototype for the templates
+	var templateProto = function(){
+		this.comments = false;
+		this.doctype = '<!DOCTYPE html>';
+		this.html = {	start:'<html>', end:'</html>', 
+			head: {	start:'  <head>', end:'  </head>' }, 
+			body: {	start:'  <body>', end:'  </body>'}
+		};
+		this.head = {	title: '',
+			meta: {	charset: 0, author: '', description: '', keywords: '', gentag: true, viewport: true, favicon: false, oldwarn: false}, 
+			lib: ['jQuery-3-1-0'], scripts: '', styles: ''
+		};
+		this.body = {	classes: '', before: true, userBody: '', templateBase: 'page-template',templateId: 'page-template-min'	};
+		this.toText = function(){
+			var textRes = this.doctype + '\n' + this.html.start +'\n' + this.headToText() + this.bodyToText() + this.html.end;
+			return textRes;
+		};
+		this.headToText = function(){
+			var headText = '';
+			headText += this.html.head.start +'\n';
+			headText += (($.trim(this.head.title).length === 0)?'    <title>HTML5 sample page</title>\n':'    <title>'+$.trim(this.head.title)+'</title>\n');
+			headText += this.metaToText();
+			headText += this.librariesToText();
+			headText += this.resourcesToText();
+			// TODO: ADD this.boilerplatesToText()
+			headText += this.html.head.end +'\n';
+			return headText;
+		}
+		this.metaToText = function(){
+			var metaText = '';
+			metaText += (this.comments?'    <!-- Start of metadata -->\n':'');
+			metaText += ((this.head.meta.charset == 0)?'    <meta charset="utf-8">':'    <meta charset="iso-8859-1">')+'\n';
+			metaText += ((this.head.meta.viewport)?'    <meta name="viewport" content="width=device-width, initial-scale=1">\n':'');
+			metaText += (($.trim(this.head.meta.description).length === 0)?'':'    <meta name="description" content="'+$.trim(this.head.meta.description)+'">\n');
+			metaText += (($.trim(this.head.meta.keywords).length === 0)?'':'    <meta name="keywords" content="'+$.trim(this.head.meta.keywords)+'">\n');
+			metaText += (($.trim(this.head.meta.author).length === 0)?'':'    <meta name="author" content="'+$.trim(this.head.meta.author)+'">\n');
+			metaText += ((this.head.meta.gentag)?'    <meta name="generator" content="http://chalarangelo.github.io/htmltemplategenerator/">\n':'');
+			metaText += ((this.head.meta.favicon)?'    <link rel="icon" type="image/x-icon" href="./favicon.ico">\n':'');
+			metaText += ((this.head.meta.oldwarn)?'    <!--[if lt IE 8]>\n      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>\n    <![endif]-->\n':'');
+			metaText += (this.comments?'    <!-- End of metadata -->\n':'');
+			return metaText;
+		}
+		this.librariesToText = function(){
+			var libText = '';
+			libText += (this.comments?'    <!-- Start of libraries -->\n':'');
+			if(this.head.lib.length > 0)
+				for(var i = 0; i <this.head.lib.length; i ++)
+					libText+=findLibraryPacakgeFromId(this.head.lib[i]).html;
+			// TODO: Add libraries' boilerplates here!
+			libText += (this.comments?'    <!-- End of libraries -->\n':'');
+			return libText;
+		}
+		this.resourcesToText = function(){
+			var resText ='';
+			resText += (this.comments?'    <!-- Start of resources -->\n':'');
+			var resJSLines = this.head.scripts.match(/[^\r\n]+/g);
+			if(resJSLines !== null)
+				for(var i = 0; i <resJSLines.length; i ++)
+					resText+='    <script type="text/javascript" src="'+resJSLines[i]+'"></script>\n';
+			var resCSSLines = this.head.styles.match(/[^\r\n]+/g);
+			if(resCSSLines !== null)
+				for(var i = 0; i <resCSSLines.length; i ++)
+					resText+='    <link rel="stylesheet" href="'+resCSSLines[i]+'">\n';
+			resText += (this.comments?'    <!-- End of resources -->\n':'');
+			return resText;
+		}
+		this.bodyToText = function(){
+			var bodyText = '';
+			bodyText += (($.trim(this.body.classes).length === 0)?(this.html.body.start+'\n'):[this.html.body.start.slice(0, 7), ' classes="'+$.trim(this.body.classes)+'"',this.html.body.start.slice(7)].join('')+'\n');
+			bodyText += ((this.body.before)?(this.userBodyToText()+this.templateBodyToText()):(this.templateBodyToText()+this.userBodyToText()));
+			bodyText += this.html.body.end + '\n';		
+			return bodyText;
+		}
+		this.userBodyToText = function(){
+			var bodyUserText = '';
+			bodyUserText += (this.comments?'    <!-- Start of user-defined body -->\n':'');
+			var bodyUserLines = this.body.userBody.match(/[^\r\n]+/g);
+			if(bodyUserLines !== null)
+				for(var i = 0; i <bodyUserLines.length; i ++)
+					bodyUserText+='    '+bodyUserLines[i]+'\n';
+			bodyUserText += (this.comments?'    <!-- End of user-defined body -->\n':'');
+			return bodyUserText;
+		}
+		this.templateBodyToText = function(){
+			var bodyTemplateText = '';
+			bodyTemplateText += (this.comments?'    <!-- Start of generated template -->\n':'');
+			switch(this.body.templateBase){
+				case 'page-template':
+					switch(this.body.templateId.replace('page-template-','')){
+						case 'empty':
+							break;
+						case 'min':
+							bodyTemplateText += '    <h1>'+(($.trim(this.head.title).length === 0)?'HTML5 sample page':$.trim(this.head.title))+'</h1>\n';
+							bodyTemplateText += '    <p>This is an empty page generated by <a href="https://chalarangelo.github.io/htmltemplategenerator/">HTML5 Template Generator</a>.</p>\n';
+							break;
+						case 'sample':
+							bodyTemplateText += '    <h1>Heading 1</h1>\n    <h2>Heading 2</h2><br>\n';
+							bodyTemplateText += '    <p><strong>Paragraph</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent est mi, commodo vitae mauris at, sagittis vehicula sem. Quisque malesuada dui at justo maximus, vel placerat nibh blandit. Phasellus quis ipsum aliquam, fringilla ante sit amet, sagittis magna. In at dignissim eros, id vulputate tellus. Quisque orci urna, pretium in porttitor et, rhoncus in nulla. Aenean viverra ante in velit tincidunt, sit amet tincidunt ante suscipit. In malesuada consectetur molestie.</p>\n';
+							bodyTemplateText += '    <br>\n    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">\n    <br>\n    <hr>\n    <br>\n    <ul>\n';
+							bodyTemplateText += '      <li>Suspendisse convallis ac metus non efficitur.</li>\n      <li>Donec consectetur eu nisi luctus bibendum.</li>\n';
+							bodyTemplateText += '      <li>Nam tempor facilisis sem vitae mattis.</li>\n      <li>Fusce feugiat rhoncus eros, id auctor mauris facilisis quis.</li>\n';
+							bodyTemplateText += '    </ul>\n    <br>\n';
+							bodyTemplateText += '    <div>Etiam maximus, ante vitae porttitor tincidunt, sem erat pharetra turpis, a ornare tortor purus <a href="https://www.google.com">ut justo</a>.\n';
+							bodyTemplateText += '    </div>\n    <br>\n    <button type="button">Sample button</button>\n';
+							break;
+					}
+					break;
+				case 'form-template':
+					switch(this.body.templateId){
+
+					}
+					break;
+				case 'error-template':
+					switch(this.body.templateId){
+
+					}
+					break;
+				default:
+					bodyTemplateText += '    <!-- Error in template generation! Please report your issue! -->\n';
+					break;
+			}
+			bodyTemplateText += (this.comments?'    <!-- End of generated template -->\n':'');
+			return bodyTemplateText;
+		}
+	};
 	// Create the templateGen for use in the rest of the application
 	var result = new templateProto();
 	$('.versionNumbering').text(versionName);
@@ -11,7 +136,7 @@ $(function(){
 	var libraryPackage = function (name, version, type, url, requirements){
 		this.name = name;	this.version = version;
 		if(type!='mixed'){
-			this.html = '    <'+(type=='script'?'script type="text/javascript" src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>':'">');
+			this.html = '    <'+(type=='script'?'script type="text/javascript" src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>\n':'">\n');
 			this.raw = url;
 		}
 		if(requirements != null){	this.requirements = requirements;	}
@@ -19,13 +144,13 @@ $(function(){
 		this.addScript = function addScript(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
 			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'    <script type="text/javascript" src="'+url+'"></script>';
+			this.html+='    <script type="text/javascript" src="'+url+'"></script>\n';
 			scripts+=1;
 		};
 		this.addCSS = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
 			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'    <link rel="stylesheet" href="'+url+'">';
+			this.html+='    <link rel="stylesheet" href="'+url+'">\n';
 			csses+=1;
 		};
 	}	
@@ -112,6 +237,7 @@ $(function(){
 	if(!html.endsWith('</tr>'))html+='</tr>';
 	html+='</table></div>';
 	$('#lib-loader').html(html);
+	// Library searchers
 	var findLibraryPacakgeFromId = function(id){
 		for(var llS=0; llS<libList.length; llS++)	if((libList[llS].name+'-'+libList[llS].version).replace(/\./g,'-') == id)	return libList[llS];
 		return null;
@@ -132,7 +258,7 @@ $(function(){
 		$('.nav-tabs li').removeClass('active');	$(this).addClass('active');
 		$('.activeRow').removeClass('activeRow').addClass('hidden');
 		$('#'+$(this).attr('id').substr(0, $(this).attr('id').indexOf('-'))).removeClass('hidden').addClass('activeRow');
-		if($(this).attr('id')=='result-tab'){ editor.setValue(result.toText(), -1); }			
+		if($(this).attr('id')=='result-tab'){ editor.setValue(result.toText(), -1); }		
 	});
 	// Content tab events
 	$('#content-title').change(function(){	result.head.title = $('#content-title').val();	});
@@ -153,6 +279,8 @@ $(function(){
 			if( library.name == libList[llI].name && library.version != libList[llI].version)
 				$('#'+findIdFromLibraryPackage(libList[llI])).prop('checked',false);
 		$('#libraries-badge').text($('#lib-loader input:checkbox:checked').length);
+		result.head.lib = [];
+		$('#lib-loader input:checkbox:checked').each(function(index, element){result.head.lib.push($(this).attr('id'));});
 	});
 	// Metadata tab events
 	$('select[name="meta-charset"]').change(function(){
@@ -175,156 +303,6 @@ $(function(){
 	    $temp.remove();
 	});
 });
-// Prototype for the templates
-var templateProto = function(){
-	this.comments = false;
-	this.doctype = '<!DOCTYPE html>';
-	this.html = {
-		start:'<html>', 
-		end:'</html>', 
-		head: {
-			start:'  <head>', 
-			end:'  </head>'
-		}, 
-		body: {
-			start:'  <body>', // TODO: this might cause problems with body classes, change the tagging accordingly to something like start p1, start p2 for classes or overhaul using classes, just work it!
-			end:'  </body>'
-		}
-	};
-	this.head = {
-		title: '',
-		meta: {
-			charset:0, 
-			author: '', 
-			description: '', 
-			keywords: '', 
-			gentag: true, 
-			viewport: true, 
-			favicon: false, 
-			oldwarn: false
-		}, 
-		lib: [], 
-		scripts: '', 
-		styles: ''
-	};
-	this.body = {
-		classes: '', 
-		before: true, 
-		userBody: '', 
-		templateBase: 'page-template',
-		templateId: 'page-template-min'
-	};
-	this.toText = function(){
-		var textRes = this.doctype + '\n' + this.html.start +'\n'
-		+ this.headToText()
-		+ this.bodyToText()
-		+ this.html.end;
-		return textRes;
-	};
-	this.headToText = function(){
-		var headText = '';
-		headText += this.html.head.start +'\n';
-		headText += (($.trim(this.head.title).length === 0)?'    <title>HTML5 sample page</title>\n':'    <title>'+$.trim(this.head.title)+'</title>\n');
-		headText += this.metaToText();
-		headText += this.librariesToText();
-		headText += this.resourcesToText();
-		headText += this.html.head.end +'\n';
-		return headText;
-	}
-	this.metaToText = function(){
-		var metaText = '';
-		metaText += (this.comments?'    <!-- Start of metadata -->\n':'');
-		metaText += ((this.head.meta.charset == 0)?'    <meta charset="utf-8">':'    <meta charset="iso-8859-1">')+'\n';
-		metaText += ((this.head.meta.viewport)?'    <meta name="viewport" content="width=device-width, initial-scale=1">\n':'');
-		metaText += (($.trim(this.head.meta.description).length === 0)?'':'    <meta name="description" content="'+$.trim(this.head.meta.description)+'">\n');
-		metaText += (($.trim(this.head.meta.keywords).length === 0)?'':'    <meta name="keywords" content="'+$.trim(this.head.meta.keywords)+'">\n');
-		metaText += (($.trim(this.head.meta.author).length === 0)?'':'    <meta name="author" content="'+$.trim(this.head.meta.author)+'">\n');
-		metaText += ((this.head.meta.gentag)?'    <meta name="generator" content="http://chalarangelo.github.io/htmltemplategenerator/">\n':'');
-		metaText += ((this.head.meta.favicon)?'    <link rel="icon" type="image/x-icon" href="./favicon.ico">\n':'');
-		metaText += ((this.head.meta.oldwarn)?'    <!--[if lt IE 8]>\n      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>\n    <![endif]-->\n':'');
-		metaText += (this.comments?'    <!-- End of metadata -->\n':'');
-		return metaText;
-	}
-	this.librariesToText = function(){
-		var libText = '';
-		libText += (this.comments?'    <!-- Start of libraries -->\n':'');
-		// TODO: Add libraries code here!
-		libText += (this.comments?'    <!-- End of libraries -->\n':'');
-		return libText;
-	}
-	this.resourcesToText = function(){
-		var resText ='';
-		resText += (this.comments?'    <!-- Start of resources -->\n':'');
-		var resJSLines = this.head.scripts.match(/[^\r\n]+/g);
-		if(resJSLines !== null)
-			for(var i = 0; i <resJSLines.length; i ++)
-				resText+='    <script type="text/javascript" src="'+resJSLines[i]+'"></script>\n';
-		var resCSSLines = this.head.styles.match(/[^\r\n]+/g);
-		if(resCSSLines !== null)
-			for(var i = 0; i <resCSSLines.length; i ++)
-				resText+='    <link rel="stylesheet" href="'+resCSSLines[i]+'">\n';
-		resText += (this.comments?'    <!-- End of resources -->\n':'');
-		return resText;
-	}
-	this.bodyToText = function(){
-		var bodyText = '';
-		bodyText += (($.trim(this.body.classes).length === 0)?(this.html.body.start+'\n'):[this.html.body.start.slice(0, 7), ' classes="'+$.trim(this.body.classes)+'"',this.html.body.start.slice(7)].join('')+'\n');
-		bodyText += ((this.body.before)?(this.userBodyToText()+this.templateBodyToText()):(this.templateBodyToText()+this.userBodyToText()));
-		bodyText += this.html.body.end + '\n';		
-		return bodyText;
-	}
-	this.userBodyToText = function(){
-		var bodyUserText = '';
-		bodyUserText += (this.comments?'    <!-- Start of user-defined body -->\n':'');
-		var bodyUserLines = this.body.userBody.match(/[^\r\n]+/g);
-		if(bodyUserLines !== null)
-			for(var i = 0; i <bodyUserLines.length; i ++)
-				bodyUserText+='    '+bodyUserLines[i]+'\n';
-		bodyUserText += (this.comments?'    <!-- End of user-defined body -->\n':'');
-		return bodyUserText;
-	}
-	this.templateBodyToText = function(){
-		var bodyTemplateText = '';
-		bodyTemplateText += (this.comments?'    <!-- Start of generated template -->\n':'');
-		switch(this.body.templateBase){
-			case 'page-template':
-				switch(this.body.templateId.replace('page-template-','')){
-					case 'empty':
-						break;
-					case 'min':
-						bodyTemplateText += '    <h1>'+(($.trim(this.head.title).length === 0)?'HTML5 sample page':$.trim(this.head.title))+'</h1>\n';
-						bodyTemplateText += '    <p>This is an empty page generated by <a href="https://chalarangelo.github.io/htmltemplategenerator/">HTML5 Template Generator</a>.</p>\n';
-						break;
-					case 'sample':
-						bodyTemplateText += '    <h1>Heading 1</h1>\n    <h2>Heading 2</h2><br>\n';
-						bodyTemplateText += '    <p><strong>Paragraph</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent est mi, commodo vitae mauris at, sagittis vehicula sem. Quisque malesuada dui at justo maximus, vel placerat nibh blandit. Phasellus quis ipsum aliquam, fringilla ante sit amet, sagittis magna. In at dignissim eros, id vulputate tellus. Quisque orci urna, pretium in porttitor et, rhoncus in nulla. Aenean viverra ante in velit tincidunt, sit amet tincidunt ante suscipit. In malesuada consectetur molestie.</p>\n';
-						bodyTemplateText += '    <br>\n    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">\n    <br>\n    <hr>\n    <br>\n    <ul>\n';
-						bodyTemplateText += '      <li>Suspendisse convallis ac metus non efficitur.</li>\n      <li>Donec consectetur eu nisi luctus bibendum.</li>\n';
-						bodyTemplateText += '      <li>Nam tempor facilisis sem vitae mattis.</li>\n      <li>Fusce feugiat rhoncus eros, id auctor mauris facilisis quis.</li>\n';
-						bodyTemplateText += '    </ul>\n    <br>\n';
-						bodyTemplateText += '    <div>Etiam maximus, ante vitae porttitor tincidunt, sem erat pharetra turpis, a ornare tortor purus <a href="https://www.google.com">ut justo</a>.\n';
-						bodyTemplateText += '    </div>\n    <br>\n    <button type="button">Sample button</button>\n';
-						break;
-				}
-				break;
-			case 'form-template':
-				switch(this.body.templateId){
-
-				}
-				break;
-			case 'error-template':
-				switch(this.body.templateId){
-
-				}
-				break;
-			default:
-				bodyTemplateText += '    <!-- Error in template generation! Please report your issue! -->\n';
-				break;
-		}
-		bodyTemplateText += (this.comments?'    <!-- End of generated template -->\n':'');
-		return bodyTemplateText;
-	}
-};
 /*===============OLD CODE====================================================
 // Generate JSFiddle with the specific template.
 $('.fa-jsfiddle').click(function(){
