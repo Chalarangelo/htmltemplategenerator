@@ -21,12 +21,12 @@
  <body>
  	<div class="container-fluid">
  		<div class="row">
- 			<div class="col-md-10 col-md-offserror-template1 col-sm-12 col-xs-12">
+ 			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
  				<h1>HTML<i class="fa fa-html5 fa-lg" aria-hidden="true"></i> Template Generator <small class="versionNumbering"></small></h1><br>
  			</div>
  		</div>
   		<div class="row">
-	  		<div class="col-md-10 col-md-offserror-template1 col-sm-12 col-xs-12">
+	  		<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 	  			<ul class="nav nav-tabs">
 	  				<li role="presentation" class="active" id="content-tab"><a href="javascript:void(0);" title="Content"><h5><i class="fa fa-code fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Content</span></h5></a></li>
 	  				<li role="presentation" id="libraries-tab"><a href="javascript:void(0);" title="Libraries"><h5><i class="fa fa-archive fa-fw" aria-hidden="true"></i><span class="tab-title">&nbsp;Libraries&nbsp;<span class="badge" id="libraries-badge">1</span></span></h5></a></li>
@@ -38,37 +38,37 @@
 			</div>
   		</div>
   		<div class="row activeRow" id="content">
-  			<div class="col-md-10 col-md-offserror-template1 col-sm-12 col-xs-12">
+  			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Define base content for your page</h2>
           <p>Specify the basic information for your template page, such as title, body classes and/or body content. You can use the <em>Simple pages</em> template base and write your own HTML to customize it, pick a pre-define template and alter its variables to suit your specific needs or, if you so desire, do both. <strong>The custom HTML body you input will always be part of the resulting page</strong>, you can change its position (before or after the template's generated content) by flipping the corresponding switch below.</p><br>		
           <form class="form-horizontal" autocomplete="off">
               <div class="form-group">
-                <label for="content-title" class="col-sm-offserror-template0 col-sm-2 control-label">Title</label>
+                <label for="content-title" class="col-sm-offset-0 col-sm-2 control-label">Title</label>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                   <input type="text" class="form-control" id="content-title" placeholder="Title">
                 </div>
               </div>
               <div class="form-group">
-                <label for="content-classes" class="col-sm-offserror-template0 col-sm-2 control-label">Body classes</label>
+                <label for="content-classes" class="col-sm-offset-0 col-sm-2 control-label">Body classes</label>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                   <input type="text" class="form-control" id="content-classes" placeholder="Body classes (space separated)">
                 </div>
               </div>
               <div class="form-group">
-                <label for="content-body" class="col-sm-offserror-template0 col-sm-2 control-label">Body</label>
+                <label for="content-body" class="col-sm-offset-0 col-sm-2 control-label">Body</label>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                   <textarea class="form-control" rows="3" id="content-body" placeholder="Body (HTML)"></textarea>
                 </div>
               </div>
               <div class="form-group">
-              <label for="content-pos-selector" class="col-sm-offserror-template0 col-sm-2 control-label">Add custom body before or after generated body</label>
+              <label for="content-pos-selector" class="col-sm-offset-0 col-sm-2 control-label">Add custom body before or after generated body</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                  <input type="radio" class="rdbtn rdbtn-info" id="con-before" name="content-pos-selector" checked><label for="con-before">Before</label>&nbsp;&nbsp;
                 <input type="radio" class="rdbtn rdbtn-info" id="con-after" name="content-pos-selector"><label for="con-after">After</label>
               </div>
             </div>
               <div class="form-group">
-                <label for="content-templates" class="col-sm-offserror-template0 col-sm-2 control-label">Choose a template base (customize below)</label>
+                <label for="content-templates" class="col-sm-offset-0 col-sm-2 control-label">Choose a template base (customize below)</label>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                   <select name="content-templates" class="slct">
                     <option value="page-template" selected>Simple pages</option>
@@ -78,7 +78,7 @@
                 </div>
               </div>
               <div class="form-group">
-              <label for="commenter" class="col-sm-offserror-template0 col-sm-2 control-label">Add comments to generated code</label>
+              <label for="commenter" class="col-sm-offset-0 col-sm-2 control-label">Add comments to generated code</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                  <input id="commenter" class="switch switch-rect-info switch-on-off" type="checkbox"> <label for="commenter"></label>
               </div>
@@ -89,7 +89,7 @@
           <p>Customize variables specific to your chosen template base below. <strong>If you change your template base, some of the below changes might be lost.</strong></p><br> 
           <form class="form-horizontal templates-customizer" id="content-page-template-customize" autocomplete="off">
             <div class="form-group">
-              <label for="content-page-template-selector" class="col-sm-offserror-template0 col-sm-2 control-label">Choose a template</label>
+              <label for="content-page-template-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <input type="radio" class="rdbtn rdbtn-primary" id="page-template-empty" name="content-page-template-selector" checked><label for="page-template-empty">Empty page</label><br>
                 <input type="radio" class="rdbtn rdbtn-primary" id="page-template-sample" name="content-page-template-selector"><label for="page-template-sample">Page with sample content</label><br>
@@ -101,7 +101,7 @@
 
           <form class="form-horizontal hidden templates-customizer" id="content-form-template-customize" autocomplete="off">
             <div class="form-group">
-              <label for="content-form-template-selector" class="col-sm-offserror-template0 col-sm-2 control-label">Choose a template</label>
+              <label for="content-form-template-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <input type="radio" class="rdbtn rdbtn-success" id="form-template-empty" name="content-form-template-selector"><label for="form-template-empty">Empty form</label><br>
                 <input type="radio" class="rdbtn rdbtn-success" id="form-template-login" name="content-form-template-selector" checked><label for="form-template-login">Login form</label><br>
@@ -113,7 +113,7 @@
 
           <form class="form-horizontal hidden templates-customizer" id="content-error-template-customize" autocomplete="off">
             <div class="form-group">
-              <label for="content-error-selector" class="col-sm-offserror-template0 col-sm-2 control-label">Choose a template</label>
+              <label for="content-error-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <input type="radio" class="rdbtn rdbtn-danger" id="error-template-400" name="content-error-template-selector"><label for="error-template-400">400: Bad Request</label><br>
                 <input type="radio" class="rdbtn rdbtn-danger" id="error-template-401" name="content-error-template-selector"><label for="error-template-401">401: Authorization Required</label><br>
@@ -131,20 +131,20 @@
         </div>
   		</div>
   		<div class="row hidden" id="libraries">
-  			<div class="col-md-10 col-md-offserror-template1 col-sm-12 col-xs-12">
+  			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Load hosted libraries</h2>
   				<p>Choose as many libraries you want to include in your template. We strongly recommend including <a href="http://jquery.com/">jQuery</a> to enhance your Javascript.</p><br>
   				<span id="lib-loader"></span>
   			</div>
   		</div>
   		<div class="row hidden" id="metadata">
-  			<div class="col-md-10 col-md-offserror-template1 col-sm-12 col-xs-12">
+  			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Define metadata tags</h2>
           <p>Choose metadata tags for your HTML document. Leave a field blank if you don't want to include that specific tag. We strongly recommend setting a <em>description</em> for your page, so that search engines can pick it up when indexing your page and show it along with the results of searches.</p><br>
 
           <form class="form-horizontal" autocomplete="off">
             <div class="form-group">
-              <label for="meta-charset" class="col-sm-offserror-template0 col-sm-2 control-label">Character encoding</label>
+              <label for="meta-charset" class="col-sm-offset-0 col-sm-2 control-label">Character encoding</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <select name="meta-charset" class="slct">
                   <option value="UTF-8" selected>UTF-8</option>
@@ -153,43 +153,43 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="meta-author" class="col-sm-offserror-template0 col-sm-2 control-label">Author</label>
+              <label for="meta-author" class="col-sm-offset-0 col-sm-2 control-label">Author</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <input type="text" class="form-control" id="meta-author" placeholder="Author">
               </div>
             </div>
             <div class="form-group">
-              <label for="meta-desc" class="col-sm-offserror-template0 col-sm-2 control-label">Description</label>
+              <label for="meta-desc" class="col-sm-offset-0 col-sm-2 control-label">Description</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <textarea class="form-control" rows="3" id="meta-desc" placeholder="Description"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label for="meta-keys" class="col-sm-offserror-template0 col-sm-2 control-label">Keywords</label>
+              <label for="meta-keys" class="col-sm-offset-0 col-sm-2 control-label">Keywords</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                  <input type="text" class="form-control" rows="3" id="meta-keys" placeholder="Keywords (comma-separated)">
               </div>
             </div>
             <div class="form-group">
-              <label for="meta-gen" class="col-sm-offserror-template0 col-sm-2 control-label">Include generator tag</label>
+              <label for="meta-gen" class="col-sm-offset-0 col-sm-2 control-label">Include generator tag</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                  <input id="meta-gen" class="switch switch-rect-success switch-yes-no" type="checkbox" checked> <label for="meta-gen"></label>
               </div>
             </div>
             <div class="form-group">
-              <label for="meta-vp" class="col-sm-offserror-template0 col-sm-2 control-label">Include viewport tag</label>
+              <label for="meta-vp" class="col-sm-offset-0 col-sm-2 control-label">Include viewport tag</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                  <input id="meta-vp" class="switch switch-rect-info switch-yes-no" type="checkbox" checked> <label for="meta-vp"></label>
               </div>
             </div>
             <div class="form-group">
-              <label for="meta-fav" class="col-sm-offserror-template0 col-sm-2 control-label">Decare favicon</label>
+              <label for="meta-fav" class="col-sm-offset-0 col-sm-2 control-label">Decare favicon</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                  <input id="meta-fav" class="switch switch-rect-primary switch-yes-no" type="checkbox"> <label for="meta-fav"></label>
               </div>
             </div>
             <div class="form-group">
-              <label for="meta-old" class="col-sm-offserror-template0 col-sm-2 control-label">Old browser warning</label>
+              <label for="meta-old" class="col-sm-offset-0 col-sm-2 control-label">Old browser warning</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                  <input id="meta-old" class="switch switch-rect-warning switch-yes-no" type="checkbox"> <label for="meta-old"></label>
               </div>
@@ -198,18 +198,18 @@
   			</div>
   		</div>
   		<div class="row hidden" id="resources">
-  			<div class="col-md-10 col-md-offserror-template1 col-sm-12 col-xs-12">
+  			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Add external resource links</h2>
           <p>Add relative links to local resources or absolute links to external, online resources. <strong>Please only write one link per line of the corresponding input areas</strong>, otherwise there might be errors with the generated template page.</p><br>
           <form class="form-horizontal" autocomplete="off">
             <div class="form-group">
-              <label for="res-js" class="col-sm-offserror-template0 col-sm-2 control-label">Javascript resources</label>
+              <label for="res-js" class="col-sm-offset-0 col-sm-2 control-label">Javascript resources</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <textarea class="form-control" rows="5" id="res-js" placeholder="Javascript resources (one per line)"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label for="res-css" class="col-sm-offserror-template0 col-sm-2 control-label">CSS resources</label>
+              <label for="res-css" class="col-sm-offset-0 col-sm-2 control-label">CSS resources</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <textarea class="form-control" rows="5" id="res-css" placeholder="CSS resources (one per line)"></textarea>
               </div>
@@ -218,7 +218,7 @@
   			</div>
   		</div>
   		<div class="row hidden" id="result">
-  			<div class="col-md-10 col-md-offserror-template1 col-sm-12 col-xs-12">
+  			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Get your generated template</h2>
           <p>The following is the template page generated based on your choices in the other tabs; use the buttons below to export it wherever you want. If you are not satisfied with the results, you can always tweak the specified settings in the other tabs to better suit your needs.</p><br>
           <div class="btn-group btn-group-justified" role="group" aria-label="result-button-group">
@@ -253,7 +253,7 @@
   			</div>
   		</div>
       <div class="row hidden" id="help">
-        <div class="col-md-10 col-md-offserror-template1 col-sm-12 col-xs-12">
+        <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
           <h2>How to use this generator</h2>
           <p>Specify your HTML page's content, libraries, metadata and resources using the corrresponding tabs. When you are ready to get your template, click on the <em>Result</em> tab to preview your generated template page. You can copy your template to the clipboard or export it into a JSFiddle or Codepen.</p>
           <hr>
