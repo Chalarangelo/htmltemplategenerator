@@ -11,7 +11,7 @@ $(function(){
 	var libraryPackage = function (name, version, type, url, requirements){
 		this.name = name;	this.version = version;
 		if(type!='mixed'){
-			this.html = '    <'+(type=='script'?'script src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>':'">');
+			this.html = '    <'+(type=='script'?'script type="text/javascript" src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>':'">');
 			this.raw = url;
 		}
 		if(requirements != null){	this.requirements = requirements;	}
@@ -19,13 +19,13 @@ $(function(){
 		this.addScript = function addScript(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
 			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'    <script src="'+url+'"></script>';
+			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'    <script type="text/javascript" src="'+url+'"></script>';
 			scripts+=1;
 		};
 		this.addCSS = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
 			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'    <link rel="stylesheet" href="'+url+'"/>';
+			this.html+=((csses != 0 || scripts != 0)?'\n':'')+'    <link rel="stylesheet" href="'+url+'">';
 			csses+=1;
 		};
 	}	
@@ -119,6 +119,14 @@ $(function(){
 	var findIdFromLibraryPackage = function(package){
 		return (package.name+'-'+package.version).replace(/\./g,'-');
 	}
+	// Library boilerplates
+	var boilerplates = {
+		'jQuery' : '      $(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });',
+		'jQuery-noConflict' :'      jQuery.noConflict();\n      jQuery(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });',
+		'AngularJS' : '      var app=angular.module(\'myApp\',[]);\n      app.controller(\'myController\',[\n        \'$scope\',function($scope){\n          $scope.demoText=\'AngularJS: This is some demo text!\';\n      }]);',
+		'Dojo' : '      require([\'dojo/dom\',\'dojo/domReady!\'],function(dom){\n        console.log(\'Dojo: Page loading complete!\');\n      });',
+		'MooTools' : '      window.addEvent(\'domready\',function(){\n        console.log(\'MooTools: Page loading complete!\');\n      });'
+	}
 	// Navigation and tabs handling
 	$(document).on('click','.nav-tabs li', function(){
 		$('.nav-tabs li').removeClass('active');	$(this).addClass('active');
@@ -158,7 +166,8 @@ $(function(){
 	$('#meta-fav').change(function(){	result.head.meta.favicon = $('#meta-fav:checked').length>0;	});
 	$('#meta-old').change(function(){	result.head.meta.oldwarn = $('#meta-old:checked').length>0;	});
 	// Resources tab events
-
+	$('#res-js').change(function(){	result.head.scripts = $('#res-js').val();	});
+	$('#res-css').change(function(){	result.head.styles = $('#res-css').val();	});
 	// Results tab events
 	$('#clipboard').on('click',function(){
 		var $temp = $("<textarea>");			$("body").append($temp);
@@ -195,8 +204,8 @@ var templateProto = function(){
 			oldwarn: false
 		}, 
 		lib: [], 
-		scripts: [], 
-		styles: [] 
+		scripts: '', 
+		styles: ''
 	};
 	this.body = {
 		classes: '', 
@@ -246,7 +255,14 @@ var templateProto = function(){
 	this.resourcesToText = function(){
 		var resText ='';
 		resText += (this.comments?'    <!-- Start of resources -->\n':'');
-		// TODO: Add resources code here!
+		var resJSLines = this.head.scripts.match(/[^\r\n]+/g);
+		if(resJSLines !== null)
+			for(var i = 0; i <resJSLines.length; i ++)
+				resText+='    <script type="text/javascript" src="'+resJSLines[i]+'"></script>\n';
+		var resCSSLines = this.head.styles.match(/[^\r\n]+/g);
+		if(resCSSLines !== null)
+			for(var i = 0; i <resCSSLines.length; i ++)
+				resText+='    <link rel="stylesheet" href="'+resCSSLines[i]+'">\n';
 		resText += (this.comments?'    <!-- End of resources -->\n':'');
 		return resText;
 	}
