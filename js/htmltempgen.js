@@ -133,97 +133,65 @@ $(function(){
 	// Title click (for now it will change tab to content, maybe make it reload page later?)
 	$(document).on('click','h1', function(){$('#content-tab').click();});
 	// Library package object constructor
-	var libraryPackage = function (name, version, type, url, requirements){
+	var libraryPackage = function (name, version, type, url, requirements, boilerplate, boilerplateHTML){
 		this.name = name;	this.version = version;
 		if(type!='mixed'){
 			this.html = '    <'+(type=='script'?'script type="text/javascript" src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>\n':'">\n');
 			this.raw = url;
 		}
 		if(requirements != null){	this.requirements = requirements;	}
+		if(boilerplate  != null){	this.boilerplate = boilerplate;		}
+		if(boilerplateHTML  != null){	this.boilerplateHTML = boilerplateHTML;		}
 		var scripts = 0;	var csses = 0;
-		this.addScript = function addScript(url){
+		this.addScript = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
 			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
 			this.html+='    <script type="text/javascript" src="'+url+'"></script>\n';
 			scripts+=1;
+			return this;
 		};
 		this.addCSS = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
 			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
 			this.html+='    <link rel="stylesheet" href="'+url+'">\n';
 			csses+=1;
+			return this;
 		};
 	}	
 	if(debug)	console.log('Loading libraries...');
-	// Get libraries from XML file
-	var libXML = $.parseXML('<document><library>'+
-		'<name>jQuery</name><type>script</type>'+
-		'<package><version>2.2.4</version><url>https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js</url></package>'+
-		'<package><version>3.1.0</version><url>https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js</url></package>'+
-	'</library><library>'+
-		'<name>AngularJS</name><type>script</type>'+
-		'<package><version>1.5.7</version><url>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js</url></package>'+
-	'</library><library>'+
-		'<name>Dojo</name><type>script</type>'+
-		'<package><version>1.10.4</version><url>https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js</url></package>'+
-	'</library><library>'+
-		'<name>Prototype</name><type>script</type>'+
-		'<package><version>1.7.3.0</version><url>https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js</url></package>'+
-	'</library><library>'+
-		'<name>MooTools</name><type>script</type>'+
-		'<package><version>1.6.0</version><url>https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js</url></package>'+
-	'</library><library>'+
-		'<name>three.js</name><type>script</type>'+
-		'<package><version>1.6.0</version><url>https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js</url></package>'+
-	'</library><library>'+
-		'<name>Font Awesome</name><type>css</type>'+
-		'<package><version>4.6.3</version><url>https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css</url></package>'+
-	'</library><library>'+
-		'<name>Bootstrap</name><type>mixed</type>'+
-		'<package><version>3.3.7</version><requires>jQuery</requires><requiresVersion>2.2.4</requiresVersion>'+
-			'<url>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css</url><url>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js</url>'+
-		'</package>'+
-		'<package><version>3.3.6</version><requires>jQuery</requires><requiresVersion>2.2.4</requiresVersion>'+
-			'<url>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css</url><url>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js</url>'+
-		'</package>'+
-	'</library><library>'+
-		'<name>Bootstrap-Extend</name><type>mixed</type>'+
-		'<package><version>1.1</version><requires>Bootstrap</requires><requiresVersion>3.3.6</requiresVersion>'+
-			'<url>https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/css/bootstrap-extend.min.css</url><url>https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js</url>'+
-		'</package>'+
-	'</library></document>');
-	var libList = [];
-	var libraries = libXML.getElementsByTagName('library');
-	for(var lC = 0; lC < libraries.length; lC++){
-		var type = libraries[lC].getElementsByTagName('type')[0].childNodes[0].nodeValue;
-		var packages = libraries[lC].getElementsByTagName('package');
-		for(var pC = 0; pC < packages.length; pC++){
-			var name = libraries[lC].getElementsByTagName('name')[0].childNodes[0].nodeValue;
-			var version = packages[pC].getElementsByTagName('version')[0].childNodes[0].nodeValue;
-			var requires = packages[pC].getElementsByTagName('requires');
-			var requiresVersion = packages[pC].getElementsByTagName('requiresVersion');
-			var requirements;
-			if(typeof requires[0] != 'undefined')
-				requirements = (requires[0].childNodes[0].nodeValue +'-'+ requiresVersion[0].childNodes[0].nodeValue).replace(/\./g,'-');
-			else
-				requirements = null;
-			if(type!='mixed'){	
-				var url = packages[pC].getElementsByTagName('url')[0].childNodes[0].nodeValue;
-				libList.push(new libraryPackage(name,version,type,url,requirements));
-			}
-			else{
-				var newLib = new libraryPackage(name,version,type,'',requirements);
-				var urls = packages[pC].getElementsByTagName('url');
-				for(var uC = 0; uC < urls.length; uC++){
-					if(urls[uC].childNodes[0].nodeValue.endsWith('.js'))
-						newLib.addScript(urls[uC].childNodes[0].nodeValue);
-					else
-						newLib.addCSS(urls[uC].childNodes[0].nodeValue);
-				}
-				libList.push(newLib);
-			}
+	// Library boilerplates
+	var boilerplates = {
+		'jQuery' : '      $(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });',
+		'jQuery-noConflict' :'      jQuery.noConflict();\n      jQuery(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });',
+		'AngularJS' : '      var app=angular.module(\'myApp\',[]);\n      app.controller(\'myController\',[\n        \'$scope\',function($scope){\n          $scope.demoText=\'AngularJS: This is some demo text!\';\n      }]);',
+		'Dojo' : '      require([\'dojo/dom\',\'dojo/domReady!\'],function(dom){\n        console.log(\'Dojo: Page loading complete!\');\n      });',
+		'MooTools' : '      window.addEvent(\'domready\',function(){\n        console.log(\'MooTools: Page loading complete!\');\n      });',
+		html : {
+			'AngularJS' : '    <div ng-app="myApp">\n      <div ng-controller="myController">\n        <p>{{ demoText }}</p>\n      </div>\n    </div>'
 		}
 	}
+	var libList = [];
+	libList.push(new libraryPackage('jQuery','2.2.4','script','https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',null, null, null));
+	libList.push(new libraryPackage('jQuery','3.1.0','script','https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js',null, null, null));
+	libList.push(new libraryPackage('AngularJS','1.5.7','script','https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js',null, boilerplates['AngularJS'], boilerplates.html['AngularJS'])); 
+	libList.push(new libraryPackage('Dojo','1.10.4','script','https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js',null, boilerplates['Dojo'], null)); 
+	libList.push(new libraryPackage('Prototype','1.7.3.0','script','https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js',null, null, null));
+	libList.push(new libraryPackage('MooTools','1.6.0','script','https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js',null, boilerplates['MooTools'], null));
+	libList.push(new libraryPackage('three.js','1.6.0','script','https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js',null, null, null));
+	libList.push(new libraryPackage('Font Awesome','4.6.3','css','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',null, null, null));
+	libList.push(new libraryPackage('Bootstrap','3.3.7','mixed', null, 'jQuery-2-2-4', null, null)
+		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		);
+	libList.push(new libraryPackage('Bootstrap','3.3.6','mixed', null,'jQuery-2-2-4', null, null)
+		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+		);
+	libList.push(new libraryPackage('Bootstrap-Extend','1.1','mixed', null,'Bootstrap-3-3-6', null, null)
+		.addCSS('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/css/bootstrap-extend.min.css')
+		.addScript('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js')
+		);
+	// Initialize libraries table
 	var html='<div class="table-responsive"><table class="table table-bordered">';	
 	for(var llC = 0; llC < libList.length; llC++){
 		if(debug)	console.log(libList[llC]);
@@ -237,6 +205,7 @@ $(function(){
 	if(!html.endsWith('</tr>'))html+='</tr>';
 	html+='</table></div>';
 	$('#lib-loader').html(html);
+	// TODO: Add boilerplate loading and form handler here
 	// Library searchers
 	var findLibraryPacakgeFromId = function(id){
 		for(var llS=0; llS<libList.length; llS++)	if((libList[llS].name+'-'+libList[llS].version).replace(/\./g,'-') == id)	return libList[llS];
@@ -245,17 +214,7 @@ $(function(){
 	var findIdFromLibraryPackage = function(package){
 		return (package.name+'-'+package.version).replace(/\./g,'-');
 	}
-	// Library boilerplates
-	var boilerplates = {
-		'jQuery' : '      $(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });',
-		'jQuery-noConflict' :'      jQuery.noConflict();\n      jQuery(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });',
-		'AngularJS' : '      var app=angular.module(\'myApp\',[]);\n      app.controller(\'myController\',[\n        \'$scope\',function($scope){\n          $scope.demoText=\'AngularJS: This is some demo text!\';\n      }]);',
-		'Dojo' : '      require([\'dojo/dom\',\'dojo/domReady!\'],function(dom){\n        console.log(\'Dojo: Page loading complete!\');\n      });',
-		'MooTools' : '      window.addEvent(\'domready\',function(){\n        console.log(\'MooTools: Page loading complete!\');\n      });',
-		html : {
-			'AngularJS' : '    <div ng-app="myApp">\n      <div ng-controller="myController">\n        <p>{{ demoText }}</p>\n      </div>\n    </div>'
-		}
-	}
+	
 	// Navigation and tabs handling
 	$(document).on('click','.nav-tabs li', function(){
 		$('.nav-tabs li').removeClass('active');	$(this).addClass('active');
