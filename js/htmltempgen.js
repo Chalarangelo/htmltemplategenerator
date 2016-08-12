@@ -1,7 +1,7 @@
 $(function(){
 	var debug = true;	// Debub flag
 	// Version name and setup, always use this and update accordingly
-	var versionName = 'v1.0.0_pre11 (cuttlefish_production'+((debug)?'::debug_true':'')+')';
+	var versionName = 'v1.0.0_pre12 (cuttlefish_production'+((debug)?'::debug_true':'')+')';
 	// Prototype for the templates
 	var templateProto = function(){
 		this.comments = false;
@@ -204,7 +204,7 @@ $(function(){
 			var requiresVersion = packages[pC].getElementsByTagName('requiresVersion');
 			var requirements;
 			if(typeof requires[0] != 'undefined')
-				requirements = requires[0].childNodes[0].nodeValue + requiresVersion[0].childNodes[0].nodeValue;
+				requirements = (requires[0].childNodes[0].nodeValue +'-'+ requiresVersion[0].childNodes[0].nodeValue).replace(/\./g,'-');
 			else
 				requirements = null;
 			if(type!='mixed'){	

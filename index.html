@@ -133,8 +133,49 @@
   		<div class="row hidden" id="libraries">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Load hosted libraries</h2>
-  				<p>Choose as many libraries you want to include in your template. We strongly recommend including <a href="http://jquery.com/">jQuery</a> to enhance your Javascript.</p><br>
+  				<p>Choose as many libraries you want to include in your template. We strongly recommend including <a href="http://jquery.com/">jQuery</a> to enhance your Javascript. After you choose the libraries you want, you can customize some of them in the section below, so that you don't need to write any boilerplate code for them.</p><br>
   				<span id="lib-loader"></span>
+          <hr>
+          <h3>Customize loaded libraries</h3>
+          <p>Customize your included libraries below. We recommend enabling boilerplate code for your preferred library to help get you started. <strong>If you change your loaded libraries, some of the below changes might be lost.</strong></p><br> 
+          <form class="form-horizontal" autocomplete="off" id="boilerplate-form-jQuery">
+            <div class="form-group">
+              <label for="boilerplate-jQuery-selector" class="col-sm-offset-0 col-sm-2 control-label">Boilerplate code for jQuery</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <input type="radio" class="rdbtn rdbtn-primary" id="boilerplate-jQuery-no" name="boilerplate-jQuery-selector"><label for="boilerplate-jQuery-no">No boilerplate code</label><br>
+                 <input type="radio" class="rdbtn rdbtn-primary" id="boilerplate-jQuery-yes" name="boilerplate-jQuery-selector" checked><label for="boilerplate-jQuery-yes">Boilerplate code for document ready</label><br>
+                <input type="radio" class="rdbtn rdbtn-primary" id="boilerplate-jQuery-noConflict" name="boilerplate-jQuery-selector"><label for="boilerplate-jQuery-noConflict">Boilerplate code for document ready (no conflict)</label><br>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal" autocomplete="off" id="boilerplate-form-AngularJS">
+            <div class="form-group">
+              <label for="boilerplate-AngularJS" class="col-sm-offset-0 col-sm-2 control-label">Boilerplate code for AngularJS</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input id="boilerplate-AngularJS" class="switch switch-rect-primary switch-yes-no" type="checkbox"> <label for="boilerplate-AngularJS"></label>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal" autocomplete="off" id="boilerplate-form-Dojo">
+            <div class="form-group">
+              <label for="boilerplate-Dojo" class="col-sm-offset-0 col-sm-2 control-label">Boilerplate code for Dojo</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input id="boilerplate-Dojo" class="switch switch-rect-primary switch-yes-no" type="checkbox"> <label for="boilerplate-Dojo"></label>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal" autocomplete="off" id="boilerplate-form-MooTools">
+            <div class="form-group">
+              <label for="boilerplate-MooTools" class="col-sm-offset-0 col-sm-2 control-label">Boilerplate code for MooTools</label>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                 <input id="boilerplate-MooTools" class="switch switch-rect-primary switch-yes-no" type="checkbox"> <label for="boilerplate-MooTools"></label>
+              </div>
+            </div>
+          </form>
+
   			</div>
   		</div>
   		<div class="row hidden" id="metadata">
