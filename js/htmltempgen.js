@@ -20,19 +20,14 @@ $(function(){
 			return textRes;
 		};
 		this.headToText = function(){
-			var headText = '';
-			headText += this.html.head.start +'\n';
+			var headText = this.html.head.start +'\n';
 			headText += (($.trim(this.head.title).length === 0)?'    <title>HTML5 sample page</title>\n':'    <title>'+$.trim(this.head.title)+'</title>\n');
-			headText += this.metaToText();
-			headText += this.librariesToText();
-			headText += this.resourcesToText();
-			// TODO: ADD this.boilerplatesToText()
+			headText += this.metaToText() + this.librariesToText() + this.resourcesToText();
 			headText += this.html.head.end +'\n';
 			return headText;
 		}
 		this.metaToText = function(){
-			var metaText = '';
-			metaText += (this.comments?'    <!-- Start of metadata -->\n':'');
+			var metaText = (this.comments?'    <!-- Start of metadata -->\n':'');
 			metaText += ((this.head.meta.charset == 0)?'    <meta charset="utf-8">':'    <meta charset="iso-8859-1">')+'\n';
 			metaText += ((this.head.meta.viewport)?'    <meta name="viewport" content="width=device-width, initial-scale=1">\n':'');
 			metaText += (($.trim(this.head.meta.description).length === 0)?'':'    <meta name="description" content="'+$.trim(this.head.meta.description)+'">\n');
@@ -45,18 +40,34 @@ $(function(){
 			return metaText;
 		}
 		this.librariesToText = function(){
-			var libText = '';
-			libText += (this.comments?'    <!-- Start of libraries -->\n':'');
+			var libText = (this.comments?'    <!-- Start of libraries -->\n':'');
 			if(this.head.lib.length > 0)
-				for(var i = 0; i <this.head.lib.length; i ++)
-					libText+=findLibraryPacakgeFromId(this.head.lib[i]).html;
-			// TODO: Add libraries' boilerplates here!
+				for(var i = 0; i <this.head.lib.length; i ++){
+					var lib = findLibraryPackageFromId(this.head.lib[i]);
+					libText += lib.html;
+					if(lib.boilerplate != null && isLibBoilerplateSelected(lib.name)){
+						libText += (this.comments?'    <!-- Start of '+lib.name+' boilerplate code -->\n':'');
+						libText += '    <script type="text/javascript">\n' + lib.boilerplate + '    </script>\n';
+						libText += (this.comments?'    <!-- End of '+lib.name+' boilerplate code -->\n':'');
+					}
+					if(lib.name == 'jQuery'){
+						if(isLibBoilerplateSelected('jQuery-yes')){
+							libText += (this.comments?'    <!-- Start of jQuery boilerplate code -->\n':'');
+							libText += '    <script type="text/javascript">\n' + boilerplates['jQuery'] + '    </script>\n';
+							libText += (this.comments?'    <!-- End of jQuery boilerplate code -->\n':'');
+						}
+						else if(isLibBoilerplateSelected('jQuery-noConflict')){
+							libText += (this.comments?'    <!-- Start of jQuery (noConflict) boilerplate code -->\n':'');
+							libText += '    <script type="text/javascript">\n' + boilerplates['jQuery-noConflict'] + '    </script>\n';		
+							libText += (this.comments?'    <!-- End of jQuery (noConflict) boilerplate code -->\n':'');
+						}
+					}
+				}
 			libText += (this.comments?'    <!-- End of libraries -->\n':'');
 			return libText;
 		}
 		this.resourcesToText = function(){
-			var resText ='';
-			resText += (this.comments?'    <!-- Start of resources -->\n':'');
+			var resText = (this.comments?'    <!-- Start of resources -->\n':'');
 			var resJSLines = this.head.scripts.match(/[^\r\n]+/g);
 			if(resJSLines !== null)
 				for(var i = 0; i <resJSLines.length; i ++)
@@ -69,15 +80,13 @@ $(function(){
 			return resText;
 		}
 		this.bodyToText = function(){
-			var bodyText = '';
-			bodyText += (($.trim(this.body.classes).length === 0)?(this.html.body.start+'\n'):[this.html.body.start.slice(0, 7), ' classes="'+$.trim(this.body.classes)+'"',this.html.body.start.slice(7)].join('')+'\n');
+			var bodyText = (($.trim(this.body.classes).length === 0)?(this.html.body.start+'\n'):[this.html.body.start.slice(0, 7), ' classes="'+$.trim(this.body.classes)+'"',this.html.body.start.slice(7)].join('')+'\n');
 			bodyText += ((this.body.before)?(this.userBodyToText()+this.templateBodyToText()):(this.templateBodyToText()+this.userBodyToText()));
 			bodyText += this.html.body.end + '\n';		
 			return bodyText;
 		}
 		this.userBodyToText = function(){
-			var bodyUserText = '';
-			bodyUserText += (this.comments?'    <!-- Start of user-defined body -->\n':'');
+			var bodyUserText = (this.comments?'    <!-- Start of user-defined body -->\n':'');
 			var bodyUserLines = this.body.userBody.match(/[^\r\n]+/g);
 			if(bodyUserLines !== null)
 				for(var i = 0; i <bodyUserLines.length; i ++)
@@ -87,6 +96,15 @@ $(function(){
 		}
 		this.templateBodyToText = function(){
 			var bodyTemplateText = '';
+			if(this.head.lib.length > 0)
+				for(var i = 0; i <this.head.lib.length; i ++){
+					var lib = findLibraryPackageFromId(this.head.lib[i]);
+					if(lib.boilerplateHTML != null && isLibBoilerplateSelected(lib.name)){
+						bodyTemplateText += (this.comments?'    <!-- Start of '+lib.name+' HTML boilerplate code -->\n':'');
+						bodyTemplateText += lib.boilerplateHTML;
+						bodyTemplateText += (this.comments?'    <!-- End of '+lib.name+' HTML boilerplate code -->\n':'');
+					}
+				}
 			bodyTemplateText += (this.comments?'    <!-- Start of generated template -->\n':'');
 			switch(this.body.templateBase){
 				case 'page-template':
@@ -139,9 +157,9 @@ $(function(){
 			this.html = '    <'+(type=='script'?'script type="text/javascript" src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>\n':'">\n');
 			this.raw = url;
 		}
-		if(requirements != null){	this.requirements = requirements;	}
-		if(boilerplate  != null){	this.boilerplate = boilerplate;		}
-		if(boilerplateHTML  != null){	this.boilerplateHTML = boilerplateHTML;		}
+		this.requirements = requirements;
+		this.boilerplate = boilerplate;		
+		this.boilerplateHTML = boilerplateHTML;
 		var scripts = 0;	var csses = 0;
 		this.addScript = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
@@ -161,13 +179,13 @@ $(function(){
 	if(debug)	console.log('Loading libraries...');
 	// Library boilerplates
 	var boilerplates = {
-		'jQuery' : '      $(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });',
-		'jQuery-noConflict' :'      jQuery.noConflict();\n      jQuery(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });',
-		'AngularJS' : '      var app=angular.module(\'myApp\',[]);\n      app.controller(\'myController\',[\n        \'$scope\',function($scope){\n          $scope.demoText=\'AngularJS: This is some demo text!\';\n      }]);',
-		'Dojo' : '      require([\'dojo/dom\',\'dojo/domReady!\'],function(dom){\n        console.log(\'Dojo: Page loading complete!\');\n      });',
-		'MooTools' : '      window.addEvent(\'domready\',function(){\n        console.log(\'MooTools: Page loading complete!\');\n      });',
+		'jQuery' : '      $(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });\n',
+		'jQuery-noConflict' :'      jQuery.noConflict();\n      jQuery(function(){\n        console.log(\'jQuery(noConflict): Page loading complete!\');\n      });\n',
+		'AngularJS' : '      var app=angular.module(\'myApp\',[]);\n      app.controller(\'myController\',[\n        \'$scope\',function($scope){\n          $scope.demoText=\'AngularJS: This is some demo text!\';\n      }]);\n',
+		'Dojo' : '      require([\'dojo/dom\',\'dojo/domReady!\'],function(dom){\n        console.log(\'Dojo: Page loading complete!\');\n      });\n',
+		'MooTools' : '      window.addEvent(\'domready\',function(){\n        console.log(\'MooTools: Page loading complete!\');\n      });\n',
 		html : {
-			'AngularJS' : '    <div ng-app="myApp">\n      <div ng-controller="myController">\n        <p>{{ demoText }}</p>\n      </div>\n    </div>'
+			'AngularJS' : '    <div ng-app="myApp">\n      <div ng-controller="myController">\n        <p>{{ demoText }}</p>\n      </div>\n    </div>\n'
 		}
 	}
 	var libList = [];
@@ -205,16 +223,29 @@ $(function(){
 	if(!html.endsWith('</tr>'))html+='</tr>';
 	html+='</table></div>';
 	$('#lib-loader').html(html);
-	// TODO: Add boilerplate loading and form handler here
+	// Initialize libraries boilerplate forms
+	var html2 ='';
+	for(var llC = 0; llC < libList.length; llC++){
+		if(libList[llC].boilerplate != null || libList[llC].boilerplateHTML != null){
+			html2+='<form class="form-horizontal hidden" autocomplete="off" id="boilerplate-form-'+libList[llC].name+'"><div class="form-group">';
+            html2+='<label for="boilerplate-'+libList[llC].name+'" class="col-sm-offset-0 col-sm-2 control-label">Boilerplate code for '+libList[llC].name+'</label>';
+            html2+='<div class="col-lg-4 col-md-4 col-sm-6">';
+            html2+='<input id="boilerplate-'+libList[llC].name+'" class="switch switch-rect-primary switch-yes-no" type="checkbox"> <label for="boilerplate-'+libList[llC].name+'"></label>';
+            html2+='</div></div></form>';
+		}
+	}
+	$('#lib-loader-customizers').html(html2);
 	// Library searchers
-	var findLibraryPacakgeFromId = function(id){
+	var findLibraryPackageFromId = function(id){
 		for(var llS=0; llS<libList.length; llS++)	if((libList[llS].name+'-'+libList[llS].version).replace(/\./g,'-') == id)	return libList[llS];
 		return null;
 	}
 	var findIdFromLibraryPackage = function(package){
 		return (package.name+'-'+package.version).replace(/\./g,'-');
+	}	
+	var isLibBoilerplateSelected = function(name){
+		return ($('#boilerplate-'+name+':checked').length > 0);
 	}
-	
 	// Navigation and tabs handling
 	$(document).on('click','.nav-tabs li', function(){
 		$('.nav-tabs li').removeClass('active');	$(this).addClass('active');
@@ -236,13 +267,14 @@ $(function(){
 	$('input[name^="content-"][name$="-template-selector"]').change(function(){ result.body.templateId = $(this).attr('id'); });
 	// Libraries tab events
 	$('#lib-loader input:checkbox').change(function(){
-		var library = findLibraryPacakgeFromId($(this).attr('id'));
+		var library = findLibraryPackageFromId($(this).attr('id'));
 		for(var llI=0; llI<libList.length;llI++)
 			if( library.name == libList[llI].name && library.version != libList[llI].version)
 				$('#'+findIdFromLibraryPackage(libList[llI])).prop('checked',false);
 		$('#libraries-badge').text($('#lib-loader input:checkbox:checked').length);
 		result.head.lib = [];
 		$('#lib-loader input:checkbox:checked').each(function(index, element){result.head.lib.push($(this).attr('id'));});
+		if($('#boilerplate-form-' + library.name).length > 0) 	$('#boilerplate-form-' + library.name).toggleClass('hidden');
 	});
 	// Metadata tab events
 	$('select[name="meta-charset"]').change(function(){
