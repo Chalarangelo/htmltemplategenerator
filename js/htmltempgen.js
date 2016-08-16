@@ -174,15 +174,47 @@ $(function(){
 						case 'login':
 							bodyTemplateText += (isBootstrapStyled?'      <div class="form-group">\n':'');
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="login-username">Username</label>\n';
-							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="name"'+(isBootstrapStyled?' class="form-control"':'')+' id="login-username" placeholder="username">\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="text"'+(isBootstrapStyled?' class="form-control"':'')+' id="login-username" placeholder="username">\n';
 							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="login-password">Password</label>\n';
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="password"'+(isBootstrapStyled?' class="form-control"':'')+' id="login-password" placeholder="password">\n';
 							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'');
+							bodyTemplateText += '      <input type="submit" value="Log in"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
 							break;
 						case 'register':
+							bodyTemplateText += (isBootstrapStyled?'      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="register-email">Email</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="email"'+(isBootstrapStyled?' class="form-control"':'')+' id="register-email" placeholder="email">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="register-username">Username</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="text"'+(isBootstrapStyled?' class="form-control"':'')+' id="register-username" placeholder="username">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="register-password">Password</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="password"'+(isBootstrapStyled?' class="form-control"':'')+' id="register-password" placeholder="password">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="register-password-confirm">Confirm password</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="password"'+(isBootstrapStyled?' class="form-control"':'')+' id="register-password-confirm" placeholder="password">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'');
+							bodyTemplateText += '      <input type="submit" value="Register"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
 							break;
 						case 'payment':
+							bodyTemplateText += (isBootstrapStyled?'      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="payment-name">First and last name</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="text"'+(isBootstrapStyled?' class="form-control"':'')+' id="payment-name" placeholder="First and last name">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="payment-email">Email</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="email"'+(isBootstrapStyled?' class="form-control"':'')+' id="payment-email" placeholder="email">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="payment-phone">Telephone</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="tel"'+(isBootstrapStyled?' class="form-control"':'')+' id="payment-phone" placeholder="telephone">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="payment-method">Payment method</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <select'+(isBootstrapStyled?' class="form-control"':'')+' id="payment-method">\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'        <option selected>Paypal</option>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'        <option>Credit Card</option>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      </select>\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'');
+							bodyTemplateText += '      <input type="submit" value="Submit"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
 							break;
 					}
 					bodyTemplateText += '    </form>\n';
