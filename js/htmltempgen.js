@@ -40,15 +40,15 @@ $(function(){
 		}
 		this.librariesToText = function(){
 			var libText = (this.comments?'    <!-- Libraries -->\n':'');
-			if(this.head.lib.length > 0)
-				for(var i = 0; i <this.head.lib.length; i ++){
-					var lib = findLibraryPackageFromId(this.head.lib[i]);
-					libText += lib.html;
-					if(lib.boilerplate != null && isLibBoilerplateSelected(lib.name)){
-						libText += (this.comments?'    <!-- '+lib.name+' boilerplate code -->\n':'');
-						libText += '    <script type="text/javascript">\n' + lib.boilerplate + '    </script>\n';
+			if(this.head.lib.length > 0){
+				var libMap = this.head.lib.map(findLibraryPackageFromId);
+				for(var i = 0; i <libMap.length; i++){
+					libText += libMap[i].html;
+					if(libMap[i].boilerplate != null && isLibBoilerplateSelected(libMap[i].name)){
+						libText += (this.comments?'    <!-- '+libMap[i].name+' boilerplate code -->\n':'');
+						libText += '    <script type="text/javascript">\n' + libMap[i].boilerplate + '    </script>\n';
 					}
-					if(lib.name == 'jQuery'){
+					if(libMap[i].name == 'jQuery'){
 						if(isLibBoilerplateSelected('jQuery-yes')){
 							libText += (this.comments?'    <!-- jQuery boilerplate code -->\n':'');
 							libText += '    <script type="text/javascript">\n' + boilerplates['jQuery'] + '    </script>\n';
@@ -59,6 +59,7 @@ $(function(){
 						}
 					}
 				}
+			}
 			return libText;
 		}
 		this.resourcesToText = function(){
@@ -79,9 +80,11 @@ $(function(){
 				case 'page-template':
 					switch(this.body.templateId.replace('page-template-','')){
 						case 'twocol':
-							headTemplateText += (this.comments?'    <!-- Generated template required styles -->\n':'');
-							headTemplateText +='    <style>\n      #left-col{\n        float: left;\n        margin-left: 2.5%;\n        width: 61.5%;\n        text-align: justify;\n      }\n';
-							headTemplateText +='      #right-col{\n        float: right;\n        margin-right: 2.5%;\n        width: 31.5%;\n        text-align: justify;\n      }\n    </style>\n';
+							if(!((this.head.lib.map(findLibraryPackageFromId).filter(function(e){return e.name == 'Bootstrap';}).length>0) && isLibBoilerplateSelected('Bootstrap'))){
+								headTemplateText += (this.comments?'    <!-- Generated template required styles -->\n':'');
+								headTemplateText +='    <style>\n      #left-col{\n        float: left;\n        margin-left: 2.5%;\n        width: 61.5%;\n        text-align: justify;\n      }\n';
+								headTemplateText +='      #right-col{\n        float: right;\n        margin-right: 2.5%;\n        width: 31.5%;\n        text-align: justify;\n      }\n    </style>\n';
+							}
 							break;
 					}
 					break;
@@ -103,15 +106,18 @@ $(function(){
 			return bodyUserText;
 		}
 		this.templateBodyToText = function(){
+			var isBootstrapStyled = (this.head.lib.map(findLibraryPackageFromId).filter(function(e){return e.name == 'Bootstrap';}).length>0) && isLibBoilerplateSelected('Bootstrap');
+			console.log(isBootstrapStyled);
 			var bodyTemplateText = '';
-			if(this.head.lib.length > 0)
-				for(var i = 0; i <this.head.lib.length; i ++){
-					var lib = findLibraryPackageFromId(this.head.lib[i]);
-					if(lib.boilerplateHTML != null && isLibBoilerplateSelected(lib.name)){
-						bodyTemplateText += (this.comments?'    <!-- '+lib.name+' HTML boilerplate code -->\n':'');
-						bodyTemplateText += lib.boilerplateHTML;
+			if(this.head.lib.length > 0){
+				var libMap = this.head.lib.map(findLibraryPackageFromId);
+				for(var i = 0; i <libMap.length; i ++){
+					if(libMap[i].boilerplateHTML != null && isLibBoilerplateSelected(libMap[i].name)){
+						bodyTemplateText += (this.comments?'    <!-- '+libMap[i].name+' HTML boilerplate code -->\n':'');
+						bodyTemplateText += libMap[i].boilerplateHTML;
 					}
 				}
+			}
 			bodyTemplateText += (this.comments?'    <!-- Generated template -->\n':'');
 			switch(this.body.templateBase){
 				case 'page-template':
@@ -130,7 +136,7 @@ $(function(){
 							bodyTemplateText += '      <li>Nam tempor facilisis sem vitae mattis.</li>\n      <li>Fusce feugiat rhoncus eros, id auctor mauris facilisis quis.</li>\n';
 							bodyTemplateText += '    </ul>\n    <br>\n';
 							bodyTemplateText += '    <div>Etiam maximus, ante vitae porttitor tincidunt, sem erat pharetra turpis, a ornare tortor purus <a href="https://www.google.com">ut justo</a>.\n';
-							bodyTemplateText += '    </div>\n    <br>\n    <button type="button">Sample button</button>\n';
+							bodyTemplateText += '    </div>\n    <br>\n    <button type="button"'+(isBootstrapStyled?' class="btn btn-primary"':'')+'>Sample button</button>\n';
 							break;
 						case 'showcase':
 							bodyTemplateText += '    <h1>Heading 1</h1>\n    <h2>Heading 2</h2><br>\n';
@@ -138,22 +144,22 @@ $(function(){
 							bodyTemplateText += '    <br>\n    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">\n    <br>\n    <hr>\n    <br>\n';
 							bodyTemplateText += '    <ol>\n      <li>List element</li>\n      <li>List element</li>\n      <li>List element</li>\n    </ol>\n';
 							bodyTemplateText += '    <code><pre>Ut sollicitudin arcu arcu, eget fermentum sem ullamcorper in.\nLorem ipsum dolor sit amet, consectetur adipiscing elit.\nPhasellus nec nisl nunc. Sed sit amet urna arcu.\nDonec non consequat tortor, id fermentum felis.\nQuisque elementum hendrerit egestas. In id rhoncus neque, eget mattis neque.\nSuspendisse varius turpis et dui viverra semper.</pre></code>\n';
-							bodyTemplateText += '    <hr>\n    <br>\n    <h3>Heading 3</h3>\n    <form method="post" action="demo_form.php">\n      First name: <input type="text" name="demo_form_name"><br>\n      Last name: <input type="text" name="demo_form_surname"><br>\n      <input type="submit" value="Submit form">\n    </form>\n';
-							bodyTemplateText += '    <h4>Heading 4</h4>\n    <table>\n      <tr>\n        <th>Month</th>\n        <th>Savings</th>\n      </tr>\n';
+							bodyTemplateText += '    <hr>\n    <br>\n    <h3>Heading 3</h3>\n    <form method="post" action="demo_form.php">\n      First name: <input type="text" name="demo_form_name"'+(isBootstrapStyled?' class="form-control"':'')+'><br>\n      Last name: <input type="text" name="demo_form_surname"'+(isBootstrapStyled?' class="form-control"':'')+'><br>\n      <input type="submit" value="Submit form"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n    </form>\n';
+							bodyTemplateText += '    <h4>Heading 4</h4>\n    <table'+(isBootstrapStyled?' class="table"':'')+'>\n      <tr>\n        <th>Month</th>\n        <th>Savings</th>\n      </tr>\n';
 							bodyTemplateText += '      <tr>\n        <td>January</td>\n        <td>$100</td>\n      </tr>\n    </table>\n';
 							bodyTemplateText += '    <h5>Heading 5</h5>\n    <textarea rows="4" cols="16">This is a textarea.</textarea>\n    <h6>Heading 6</h6>\n';
 							bodyTemplateText += '    <ul>\n      <li>Suspendisse convallis ac metus non efficitur.</li>\n      <li>Donec consectetur eu nisi luctus bibendum.</li>\n';
 							bodyTemplateText += '      <li>Nam tempor facilisis sem vitae mattis.</li>\n      <li>Fusce feugiat rhoncus eros, id auctor mauris facilisis quis.</li>\n    </ul>\n    <br>\n';
 							bodyTemplateText += '    <div>Etiam maximus, ante vitae porttitor tincidunt, sem erat pharetra turpis, a ornare tortor purus <a href="https://www.google.com">ut justo</a>.\n';
-							bodyTemplateText += '    </div>\n    <br>\n    <button type="button">Sample button</button>\n';
+							bodyTemplateText += '    </div>\n    <br>\n    <button type="button"'+(isBootstrapStyled?' class="btn btn-primary"':'')+'>Sample button</button>\n';
 							bodyTemplateText += '    <blockquote cite="https://www.google.com">Nam non diam ante. Curabitur non enim vitae eros luctus porta.</blockquote>\n';
 							break;
 						case 'twocol':
-							bodyTemplateText += '    <div id="left-col">\n';
+							bodyTemplateText += '    <div id="left-col"'+(isBootstrapStyled?' class="col-xs-12 col-md-7"':'')+'>\n';
 							bodyTemplateText += '      <h1>'+(($.trim(this.head.title).length === 0)?'HTML5 sample page':$.trim(this.head.title))+'</h1>\n';
 							bodyTemplateText += '      <p><strong>This is the main content</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent est mi, commodo vitae mauris at, sagittis vehicula sem. Quisque malesuada dui at justo maximus, vel placerat nibh blandit. Phasellus quis ipsum aliquam, fringilla ante sit amet, sagittis magna. In at dignissim eros, id vulputate tellus. Quisque orci urna, pretium in porttitor et, rhoncus in nulla. Aenean viverra ante in velit tincidunt, sit amet tincidunt ante suscipit. In malesuada consectetur molestie.</p>\n';
 							bodyTemplateText += '    </div>\n';
-							bodyTemplateText += '    <div id="right-col">\n';
+							bodyTemplateText += '    <div id="right-col"'+(isBootstrapStyled?' class="col-xs-12 col-md-5"':'')+'>\n';
 							bodyTemplateText += '      <h2>Side column</h2>\n';
 							bodyTemplateText += '      <p><em>This is the side content</em>: In ut odio eu dui euismod faucibus sed vel justo. Donec dapibus mi purus, vitae venenatis quam elementum at. Aliquam erat volutpat. Quisque id egestas est. Ut sapien mi, viverra in justo sed, finibus lobortis ligula. Nunc ex nibh, ultrices eget fermentum nec, varius ac arcu.</p>\n';
 							bodyTemplateText += '    </div>\n';
@@ -315,6 +321,11 @@ $(function(){
 		result.head.lib = [];
 		$('#lib-loader input:checkbox:checked').each(function(index, element){result.head.lib.push($(this).attr('id'));});
 		if($('#boilerplate-form-' + library.name).length > 0) 	$('#boilerplate-form-' + library.name).toggleClass('hidden');
+		// Duct tape fixes for jQuery and Bootstrap (and everything else that supports more than one version)
+		if($('#jQuery-3-1-0').prop('checked') || $('#jQuery-2-2-4').prop('checked')) $('#boilerplate-form-jQuery').removeClass('hidden');
+		else $('#boilerplate-form-jQuery').addClass('hidden');
+		if($('#Bootstrap-3-3-7').prop('checked') || $('#Bootstrap-3-3-6').prop('checked')) $('#boilerplate-form-Bootstrap').removeClass('hidden');
+		else $('#boilerplate-form-Bootstrap').addClass('hidden');
 	});
 	// Metadata tab events
 	$('select[name="meta-charset"]').change(function(){
