@@ -29,7 +29,7 @@ $(function(){
 		this.metaToText = function(){
 			var metaText = (this.comments?'    <!-- Metadata -->\n':'');
 			metaText += ((this.head.meta.charset == 0)?'    <meta charset="utf-8">':'    <meta charset="iso-8859-1">')+'\n';
-			metaText += ((this.head.meta.viewport)?'    <meta name="viewport" content="width=device-width, initial-scale=1">\n':'');
+			metaText += ((this.head.meta.viewport)?'    <meta name="viewport" content="width=device-width, initial-scale=1'+(((this.head.lib.map(findLibraryPackageFromId).filter(function(e){return e.name == 'Bootstrap';}).length>0) && isLibBoilerplateSelected('Bootstrap-lockscale'))?', maximum-scale=1, user-scalable=no':'')+'">\n':'');
 			metaText += (($.trim(this.head.meta.description).length === 0)?'':'    <meta name="description" content="'+$.trim(this.head.meta.description)+'">\n');
 			metaText += (($.trim(this.head.meta.keywords).length === 0)?'':'    <meta name="keywords" content="'+$.trim(this.head.meta.keywords)+'">\n');
 			metaText += (($.trim(this.head.meta.author).length === 0)?'':'    <meta name="author" content="'+$.trim(this.head.meta.author)+'">\n');
@@ -167,16 +167,25 @@ $(function(){
 					}
 					break;
 				case 'form-template':
+					bodyTemplateText += '    <form autocomplete="off">\n';
 					switch(this.body.templateId.replace('form-template-','')){
 						case 'empty':
 							break;
 						case 'login':
+							bodyTemplateText += (isBootstrapStyled?'      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="login-username">Username</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="name"'+(isBootstrapStyled?' class="form-control"':'')+' id="login-username" placeholder="username">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="login-password">Password</label>\n';
+							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="password"'+(isBootstrapStyled?' class="form-control"':'')+' id="login-password" placeholder="password">\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'');
 							break;
 						case 'register':
 							break;
 						case 'payment':
 							break;
 					}
+					bodyTemplateText += '    </form>\n';
 					break;
 				case 'error-template':
 					switch(this.body.templateId.replace('error-template-','')){
@@ -327,6 +336,7 @@ $(function(){
 		if($('#Bootstrap-3-3-7').prop('checked') || $('#Bootstrap-3-3-6').prop('checked')) $('#boilerplate-form-Bootstrap').removeClass('hidden');
 		else $('#boilerplate-form-Bootstrap').addClass('hidden');
 	});
+	$('#boilerplate-Bootstrap-lockscale').change(function(){	$('#boilerplate-Bootstrap-lockscale-alert').toggleClass('hidden');	});
 	// Metadata tab events
 	$('select[name="meta-charset"]').change(function(){
 		if($('select[name="meta-charset"] option:selected' ).val()=='UTF-8') result.head.meta.charset = 0; else result.head.meta.charset = 1;
