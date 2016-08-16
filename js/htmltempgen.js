@@ -88,6 +88,11 @@ $(function(){
 							break;
 					}
 					break;
+				case 'error-template':
+					headTemplateText += (this.comments?'    <!-- Generated template required styles -->\n':'');
+					headTemplateText +='    <style>\n      html{\n        display: table;\n        height: 100%;\n        width: 100%;\n        text-align: center;\n      }\n';
+					headTemplateText +='      body{\n        display: table-cell;\n        vertical-align: middle;\n      }\n    </style>\n';						
+					break;
 			}
 			return headTemplateText;
 		}
@@ -222,6 +227,44 @@ $(function(){
 				case 'error-template':
 					switch(this.body.templateId.replace('error-template-','')){
 						case '400':
+							bodyTemplateText +='    <h1>400: Bad request</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but the page your were trying to view cannot be found.</p>\n';
+							break;
+						case '401':
+							bodyTemplateText +='    <h1>401: Authorization required</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but we could not verify that you are authorized to access the document requested.</p>\n';
+							break;
+						case '403':
+							bodyTemplateText +='    <h1>Error 403: Forbidden</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but you do not have permission to access the specified resource.</p>\n';
+							break;
+						case '404':
+							bodyTemplateText +='    <h1>Error 404: Page not found</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but the page you were trying to view does not exist.</p>\n';
+							break;
+						case '408':
+							bodyTemplateText +='    <h1>Error 408: Request timed out</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but your requested page took too long to load.</p>\n';
+							break;
+						case '410':
+							bodyTemplateText +='    <h1>Error 410: Page gone</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but the page you requested is no longer available.</p>\n';
+							break;
+						case '500':
+							bodyTemplateText +='    <h1>Error 500: Internal server error</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but the server has encountered an error while processing your request.</p>\n';
+							break;
+						case '502':
+							bodyTemplateText +='    <h1>Error 502: Bad gateway</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but the web server received an invalid response while contacting the content server.</p>\n';
+							break;
+						case '503':
+							bodyTemplateText +='    <h1>Error 503: Service temporarily unavailable</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but the server is temporarily unavailable (this might be due to scheduled maintenance).</p>\n';
+							break;
+						case '504':
+							bodyTemplateText +='    <h1>Error 504: Gateway timed out</h1>\n';
+							bodyTemplateText +='    <p>Sorry, but the server took too long to respond to your request.</p>\n';
 							break;
 					}
 					break;
