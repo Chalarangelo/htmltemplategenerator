@@ -1,7 +1,7 @@
 $(function(){
-	var debug = true;	// Debub flag
+	var debug = false;	// Debub flag
 	// Version name and setup, always use this and update accordingly
-	var versionName = 'v1.0.0_pre17 (cuttlefish_production'+((debug)?'::debug_true':'')+')';
+	var versionName = 'v1.0.0 (Cuttlefish'+((debug)?'::debug_true':'')+')';
 	// Prototype for the templates
 	var templateProto = function(){
 		this.comments = false;
@@ -98,7 +98,6 @@ $(function(){
 		}
 		this.templateBodyToText = function(){
 			var isBootstrapStyled = (this.head.lib.map(findLibraryPackageFromId).filter(function(e){return e.name == 'Bootstrap';}).length>0) && isLibBoilerplateSelected('Bootstrap');
-			console.log(isBootstrapStyled);
 			var bodyTemplateText = '';
 			if(this.head.lib.length > 0)
 				for(var i = 0, libMap = this.head.lib.map(findLibraryPackageFromId); i <libMap.length; i ++)
@@ -366,7 +365,13 @@ $(function(){
 		result.head.lib = [];
 		$('#lib-loader input:checkbox:checked').each(function(index, element){result.head.lib.push($(this).attr('id'));});
 		if($('#boilerplate-form-' + library.name).length > 0) 	$('#boilerplate-form-' + library.name).toggleClass('hidden');
-		// Duct tape fixes for jQuery and Bootstrap (and everything else that supports more than one version)
+		for(var lmC = 0, libMap = result.head.lib.map(findLibraryPackageFromId); lmC < libMap.length; lmC++){
+			var requiredPackage = findLibraryPackageFromId(libMap[lmC].requirements);
+			if(requiredPackage !=null)
+				if(!libMap.filter(function(e) { return ((e.name == requiredPackage.name) && (e.version >= requiredPackage.version)); }).length > 0)
+					result.head.lib.unshift(findIdFromLibraryPackage(requiredPackage));
+		}		
+		// Duct tape fixes for jQuery and Bootstrap boilerplates (and everything else that supports more than one version)
 		if($('#jQuery-3-1-0').prop('checked') || $('#jQuery-2-2-4').prop('checked')) $('#boilerplate-form-jQuery').removeClass('hidden');
 		else $('#boilerplate-form-jQuery').addClass('hidden');
 		if($('#Bootstrap-3-3-7').prop('checked') || $('#Bootstrap-3-3-6').prop('checked')) $('#boilerplate-form-Bootstrap').removeClass('hidden');
