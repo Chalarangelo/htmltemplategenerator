@@ -41,23 +41,15 @@ $(function(){
 		this.librariesToText = function(){
 			var libText = (this.comments?'    <!-- Libraries -->\n':'');
 			if(this.head.lib.length > 0){
-				var libMap = this.head.lib.map(findLibraryPackageFromId);
-				for(var i = 0; i <libMap.length; i++){
+				for(var i = 0, libMap = this.head.lib.map(findLibraryPackageFromId); i <libMap.length; i++){
 					libText += libMap[i].html;
-					if(libMap[i].boilerplate != null && isLibBoilerplateSelected(libMap[i].name)){
-						libText += (this.comments?'    <!-- '+libMap[i].name+' boilerplate code -->\n':'');
-						libText += '    <script type="text/javascript">\n' + libMap[i].boilerplate + '    </script>\n';
-					}
-					if(libMap[i].name == 'jQuery'){
-						if(isLibBoilerplateSelected('jQuery-yes')){
-							libText += (this.comments?'    <!-- jQuery boilerplate code -->\n':'');
-							libText += '    <script type="text/javascript">\n' + boilerplates['jQuery'] + '    </script>\n';
-						}
-						else if(isLibBoilerplateSelected('jQuery-noConflict')){
-							libText += (this.comments?'    <!-- jQuery (noConflict) boilerplate code -->\n':'');
-							libText += '    <script type="text/javascript">\n' + boilerplates['jQuery-noConflict'] + '    </script>\n';		
-						}
-					}
+					if(libMap[i].boilerplate != null && isLibBoilerplateSelected(libMap[i].name))
+						libText += (this.comments?'    <!-- '+libMap[i].name+' boilerplate code -->\n':'')+'    <script type="text/javascript">\n' + libMap[i].boilerplate + '    </script>\n';
+					if(libMap[i].name == 'jQuery')
+						if(isLibBoilerplateSelected('jQuery-yes'))
+							libText += (this.comments?'    <!-- jQuery boilerplate code -->\n':'')+'    <script type="text/javascript">\n' + boilerplates['jQuery'] + '    </script>\n';
+						else if(isLibBoilerplateSelected('jQuery-noConflict'))
+							libText += (this.comments?'    <!-- jQuery (noConflict) boilerplate code -->\n':'')+'    <script type="text/javascript">\n' + boilerplates['jQuery-noConflict'] + '    </script>\n';
 				}
 			}
 			return libText;
@@ -65,13 +57,9 @@ $(function(){
 		this.resourcesToText = function(){
 			var resText = (this.comments?'    <!-- External resources -->\n':'');
 			var resJSLines = this.head.scripts.match(/[^\r\n]+/g);
-			if(resJSLines !== null)
-				for(var i = 0; i <resJSLines.length; i ++)
-					resText+='    <script type="text/javascript" src="'+resJSLines[i]+'"></script>\n';
+			if(resJSLines !== null)	for(var i = 0; i <resJSLines.length; i ++)	resText+='    <script type="text/javascript" src="'+resJSLines[i]+'"></script>\n';
 			var resCSSLines = this.head.styles.match(/[^\r\n]+/g);
-			if(resCSSLines !== null)
-				for(var i = 0; i <resCSSLines.length; i ++)
-					resText+='    <link rel="stylesheet" href="'+resCSSLines[i]+'">\n';
+			if(resCSSLines !== null)for(var i = 0; i <resCSSLines.length; i ++)	resText+='    <link rel="stylesheet" href="'+resCSSLines[i]+'">\n';
 			return resText;
 		}
 		this.templateHeadToText = function(){
@@ -105,24 +93,17 @@ $(function(){
 		this.userBodyToText = function(){
 			var bodyUserText = (this.comments?'    <!-- User-defined body -->\n':'');
 			var bodyUserLines = this.body.userBody.match(/[^\r\n]+/g);
-			if(bodyUserLines !== null)
-				for(var i = 0; i <bodyUserLines.length; i ++)
-					bodyUserText+='    '+bodyUserLines[i]+'\n';
+			if(bodyUserLines !== null)	for(var i = 0; i <bodyUserLines.length; i ++)	bodyUserText+='    '+bodyUserLines[i]+'\n';
 			return bodyUserText;
 		}
 		this.templateBodyToText = function(){
 			var isBootstrapStyled = (this.head.lib.map(findLibraryPackageFromId).filter(function(e){return e.name == 'Bootstrap';}).length>0) && isLibBoilerplateSelected('Bootstrap');
 			console.log(isBootstrapStyled);
 			var bodyTemplateText = '';
-			if(this.head.lib.length > 0){
-				var libMap = this.head.lib.map(findLibraryPackageFromId);
-				for(var i = 0; i <libMap.length; i ++){
-					if(libMap[i].boilerplateHTML != null && isLibBoilerplateSelected(libMap[i].name)){
-						bodyTemplateText += (this.comments?'    <!-- '+libMap[i].name+' HTML boilerplate code -->\n':'');
-						bodyTemplateText += libMap[i].boilerplateHTML;
-					}
-				}
-			}
+			if(this.head.lib.length > 0)
+				for(var i = 0, libMap = this.head.lib.map(findLibraryPackageFromId); i <libMap.length; i ++)
+					if(libMap[i].boilerplateHTML != null && isLibBoilerplateSelected(libMap[i].name))
+						bodyTemplateText += (this.comments?'    <!-- '+libMap[i].name+' HTML boilerplate code -->\n':'')+libMap[i].boilerplateHTML;
 			bodyTemplateText += (this.comments?'    <!-- Generated template -->\n':'');
 			switch(this.body.templateBase){
 				case 'page-template':
@@ -227,49 +208,36 @@ $(function(){
 				case 'error-template':
 					switch(this.body.templateId.replace('error-template-','')){
 						case '400':
-							bodyTemplateText +='    <h1>400: Bad request</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but the page your were trying to view cannot be found.</p>\n';
+							bodyTemplateText +='    <h1>400: Bad request</h1>\n    <p>Sorry, but the page your were trying to view cannot be found.</p>\n';
 							break;
 						case '401':
-							bodyTemplateText +='    <h1>401: Authorization required</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but we could not verify that you are authorized to access the document requested.</p>\n';
+							bodyTemplateText +='    <h1>401: Authorization required</h1>\n    <p>Sorry, but we could not verify that you are authorized to access the document requested.</p>\n';
 							break;
 						case '403':
-							bodyTemplateText +='    <h1>Error 403: Forbidden</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but you do not have permission to access the specified resource.</p>\n';
+							bodyTemplateText +='    <h1>Error 403: Forbidden</h1>\n    <p>Sorry, but you do not have permission to access the specified resource.</p>\n';
 							break;
 						case '404':
-							bodyTemplateText +='    <h1>Error 404: Page not found</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but the page you were trying to view does not exist.</p>\n';
+							bodyTemplateText +='    <h1>Error 404: Page not found</h1>\n    <p>Sorry, but the page you were trying to view does not exist.</p>\n';
 							break;
 						case '408':
-							bodyTemplateText +='    <h1>Error 408: Request timed out</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but your requested page took too long to load.</p>\n';
+							bodyTemplateText +='    <h1>Error 408: Request timed out</h1>\n    <p>Sorry, but your requested page took too long to load.</p>\n';
 							break;
 						case '410':
-							bodyTemplateText +='    <h1>Error 410: Page gone</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but the page you requested is no longer available.</p>\n';
+							bodyTemplateText +='    <h1>Error 410: Page gone</h1>\n    <p>Sorry, but the page you requested is no longer available.</p>\n';
 							break;
 						case '500':
-							bodyTemplateText +='    <h1>Error 500: Internal server error</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but the server has encountered an error while processing your request.</p>\n';
+							bodyTemplateText +='    <h1>Error 500: Internal server error</h1>\n    <p>Sorry, but the server has encountered an error while processing your request.</p>\n';
 							break;
 						case '502':
-							bodyTemplateText +='    <h1>Error 502: Bad gateway</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but the web server received an invalid response while contacting the content server.</p>\n';
+							bodyTemplateText +='    <h1>Error 502: Bad gateway</h1>\n    <p>Sorry, but the web server received an invalid response while contacting the content server.</p>\n';
 							break;
 						case '503':
-							bodyTemplateText +='    <h1>Error 503: Service temporarily unavailable</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but the server is temporarily unavailable (this might be due to scheduled maintenance).</p>\n';
+							bodyTemplateText +='    <h1>Error 503: Service temporarily unavailable</h1>\n    <p>Sorry, but the server is temporarily unavailable (this might be due to scheduled maintenance).</p>\n';
 							break;
 						case '504':
-							bodyTemplateText +='    <h1>Error 504: Gateway timed out</h1>\n';
-							bodyTemplateText +='    <p>Sorry, but the server took too long to respond to your request.</p>\n';
+							bodyTemplateText +='    <h1>Error 504: Gateway timed out</h1>\n    <p>Sorry, but the server took too long to respond to your request.</p>\n';
 							break;
 					}
-					break;
-				default:
-					bodyTemplateText += '    <!-- Error in template generation! Please report your issue! -->\n';
 					break;
 			}
 			return bodyTemplateText;
@@ -293,17 +261,13 @@ $(function(){
 		var scripts = 0;	var csses = 0;
 		this.addScript = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
-			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+='    <script type="text/javascript" src="'+url+'"></script>\n';
-			scripts+=1;
-			return this;
+			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;	this.html+='    <script type="text/javascript" src="'+url+'"></script>\n';
+			scripts+=1;		return this;
 		};
 		this.addCSS = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
-			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;
-			this.html+='    <link rel="stylesheet" href="'+url+'">\n';
-			csses+=1;
-			return this;
+			this.raw+=((csses != 0 || scripts != 0)?',':'')+url;	this.html+='    <link rel="stylesheet" href="'+url+'">\n';
+			csses+=1;		return this;
 		};
 	}	
 	if(debug)	console.log('Loading libraries...');
@@ -370,12 +334,8 @@ $(function(){
 		for(var llS=0; llS<libList.length; llS++)	if((libList[llS].name+'-'+libList[llS].version).replace(/\./g,'-') == id)	return libList[llS];
 		return null;
 	}
-	var findIdFromLibraryPackage = function(package){
-		return (package.name+'-'+package.version).replace(/\./g,'-');
-	}	
-	var isLibBoilerplateSelected = function(name){
-		return ($('#boilerplate-'+name+':checked').length > 0);
-	}
+	var findIdFromLibraryPackage = function(package){	return (package.name+'-'+package.version).replace(/\./g,'-');	}	
+	var isLibBoilerplateSelected = function(name){	return ($('#boilerplate-'+name+':checked').length > 0);	}
 	// Navigation and tabs handling
 	$(document).on('click','.nav-tabs li', function(){
 		$('.nav-tabs li').removeClass('active');	$(this).addClass('active');
@@ -428,9 +388,8 @@ $(function(){
 	$('#res-css').change(function(){	result.head.styles = $('#res-css').val();	});
 	// Results tab events
 	$('#clipboard').on('click',function(){
-		var $temp = $("<textarea>");			$("body").append($temp);
-	    $temp.val(editor.getValue()).select();	document.execCommand("copy");
-	    $temp.remove();
+		var $temp = $("<textarea>");			$("body").append($temp);	$temp.val(editor.getValue()).select();	
+		document.execCommand("copy");	$temp.remove();
 	});
 });
 /*===============OLD CODE====================================================
