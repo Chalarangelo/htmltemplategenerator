@@ -346,7 +346,14 @@ $(function(){
 	// Content tab events
 	$('#content-title').change(function(){	result.head.title = $('#content-title').val();	});
 	$('#content-classes').change(function(){	result.body.classes = $('#content-classes').val();	});
-	$('#content-body').change(function(){	result.body.userBody = $('#content-body').val();	});
+	$('#content-body').change(function(){	
+		result.body.userBody = $('#content-body').val();
+		var tester = $('#content-body').val().toLowerCase();
+		if(tester.indexOf('<acronym>')>=0 || tester.indexOf('<applet>')>=0  || tester.indexOf('<basefont>')>=0  || tester.indexOf('<big>')>=0  || tester.indexOf('<center>')>=0 || tester.indexOf('<dir>')>=0 || tester.indexOf('<font>')>=0 || tester.indexOf('<frame>')>=0 || tester.indexOf('<frameset>')>=0 || tester.indexOf('<noframes>')>=0 || tester.indexOf('<strike>')>=0 || tester.indexOf('<tt>')>=0)
+			$('#content-body-alert').removeClass('hidden');
+		else
+			$('#content-body-alert').addClass('hidden');
+	});
 	$('input[name="content-pos-selector"]').change(function(){	result.body.before = $('#con-before:checked').length>0;	console.log(result.body.before);});
 	$('select[name="content-templates"]').change(function(){
 		var selected = $('select[name="content-templates"] option:selected' ).val();	result.body.templateBase = selected;
@@ -362,14 +369,22 @@ $(function(){
 			if( library.name == libList[llI].name && library.version != libList[llI].version)
 				$('#'+findIdFromLibraryPackage(libList[llI])).prop('checked',false);
 		$('#libraries-badge').text($('#lib-loader input:checkbox:checked').length);
-		result.head.lib = [];
+		result.head.lib = [];	var llreqText = '';
 		$('#lib-loader input:checkbox:checked').each(function(index, element){result.head.lib.push($(this).attr('id'));});
 		if($('#boilerplate-form-' + library.name).length > 0) 	$('#boilerplate-form-' + library.name).toggleClass('hidden');
 		for(var lmC = 0, libMap = result.head.lib.map(findLibraryPackageFromId); lmC < libMap.length; lmC++){
 			if(libMap[lmC].requirements != null)
 				for(var rpC = 0, reqMap = libMap[lmC].requirements.map(findLibraryPackageFromId); rpC < reqMap.length; rpC++)
-					if(!libMap.filter(function(e) { return ((e.name == reqMap[rpC].name) && (e.version >= reqMap[rpC].version)); }).length > 0)
+					if(!libMap.filter(function(e) { return ((e.name == reqMap[rpC].name) && (e.version >= reqMap[rpC].version)); }).length > 0){
 						result.head.lib.unshift(findIdFromLibraryPackage(reqMap[rpC]));
+						llreqText+= libMap[lmC].name+' ('+libMap[lmC].version+') requires '+reqMap[rpC].name +' ('+reqMap[rpC].version+') or newer to work properly.\n';
+					}
+		if(llreqText!=''){
+			llreqText += '<strong>Required packages will be loaded automatically.</strong>'
+			$('#lib-loader-reqs').html(llreqText);
+			$('#lib-loader-reqs-alert').removeClass('hidden');
+		}
+		else	$('#lib-loader-reqs-alert').addClass('hidden');
 		}		
 		// Duct tape fixes for jQuery and Bootstrap boilerplates (and everything else that supports more than one version)
 		if($('#jQuery-3-1-0').prop('checked') || $('#jQuery-2-2-4').prop('checked')) $('#boilerplate-form-jQuery').removeClass('hidden');
@@ -390,8 +405,18 @@ $(function(){
 	$('#meta-fav').change(function(){	result.head.meta.favicon = $('#meta-fav:checked').length>0;	});
 	$('#meta-old').change(function(){	result.head.meta.oldwarn = $('#meta-old:checked').length>0;	});
 	// Resources tab events
-	$('#res-js').change(function(){	result.head.scripts = $('#res-js').val();	});
-	$('#res-css').change(function(){	result.head.styles = $('#res-css').val();	});
+	$('#res-js').change(function(){	
+		result.head.scripts = $('#res-js').val();	
+		var tester = $('#res-js').val().toLowerCase();
+		if(tester.indexOf(',')>=0 || tester.indexOf(' ')>=0)	$('#res-js-alert').removeClass('hidden');
+		else	$('#res-js-alert').addClass('hidden');
+	});
+	$('#res-css').change(function(){
+		result.head.styles = $('#res-css').val();	
+		var tester = $('#res-css').val().toLowerCase();
+		if(tester.indexOf(',')>=0 || tester.indexOf(' ')>=0)	$('#res-css-alert').removeClass('hidden');
+		else	$('#res-css-alert').addClass('hidden');
+	});
 	// Results tab events
 	$('#clipboard').on('click',function(){
 		var $temp = $("<textarea>");			$("body").append($temp);	$temp.val(editor.getValue()).select();	

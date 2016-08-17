@@ -58,6 +58,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                   <textarea class="form-control" rows="3" id="content-body" placeholder="Body (HTML)"></textarea>
                 </div>
+                <div class="alert alert-warning hidden col-lg-5 col-md-5 col-sm-3" id="content-body-alert" role="alert">You are using tags that are deprecated in HTML5. <strong>Your template will still be generated</strong>, however we suggest you refer to the <a href="https://www.w3.org/TR/html5/obsolete.html" class="alert-link">HTML5 specification</a> to fix this.</div>
               </div>
               <div class="form-group">
               <label for="content-pos-selector" class="col-sm-offset-0 col-sm-2 control-label">Add custom body before or after generated body</label>
@@ -135,9 +136,10 @@
   				<h2>Load hosted libraries</h2>
   				<p>Choose as many libraries you want to include in your template. We strongly recommend including <a href="http://jquery.com/">jQuery</a> to enhance your Javascript. After you choose the libraries you want, you can customize some of them in the section below, so that you don't need to write any boilerplate code for them.</p><br>
   				<span id="lib-loader"></span>
+          <div class="alert alert-info hidden" id="lib-loader-reqs-alert" role="alert" style="white-space:pre-wrap;"><span id="lib-loader-reqs"></span></div>
           <hr>
           <h3>Customize loaded libraries</h3>
-          <p>Customize your included libraries below. We recommend enabling boilerplate code for your preferred library to help get you started. <strong>If you change your loaded libraries, some of the below changes might be lost.</strong></p><br> 
+          <p>Customize your included libraries below. We recommend enabling boilerplate code for your preferred library to help get you started. <strong>If you change your loaded libraries, some of the below changes might be lost.</strong></p><br>
           <form class="form-horizontal" autocomplete="off" id="boilerplate-form-jQuery">
             <div class="form-group">
               <label for="boilerplate-jQuery-selector" class="col-sm-offset-0 col-sm-2 control-label">Boilerplate code for jQuery</label>
@@ -160,7 +162,7 @@
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <input id="boilerplate-Bootstrap-lockscale" class="switch switch-rect-primary switch-yes-no" type="checkbox"> <label for="boilerplate-Bootstrap-lockscale"></label>
               </div>
-              <div class="alert alert-warning hidden col-lg-5 col-md-5 col-sm-3" id="boilerplate-Bootstrap-lockscale-alert" role="alert">Disabling zoom will only apply if the metadata <em>Include viewport tag</em> option is enabled.</div>
+              <div class="alert alert-info hidden col-lg-5 col-md-5 col-sm-3" id="boilerplate-Bootstrap-lockscale-alert" role="alert">Disabling zoom will only apply if the metadata <em>Include viewport tag</em> option is enabled.</div>
             </div>
           </form>
           <span id="lib-loader-customizers"></span>
@@ -236,12 +238,14 @@
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <textarea class="form-control" rows="5" id="res-js" placeholder="Javascript resources (one per line)"></textarea>
               </div>
+              <div class="alert alert-warning hidden col-lg-5 col-md-5 col-sm-3" id="res-js-alert" role="alert">There seem to be commas or spaces in your javascript resources. Please specify every file's location in its own line. <strong>Your template will still be generated</strong>, however it might not work properly.</div>
             </div>
             <div class="form-group">
               <label for="res-css" class="col-sm-offset-0 col-sm-2 control-label">CSS resources</label>
               <div class="col-lg-4 col-md-4 col-sm-6">
                 <textarea class="form-control" rows="5" id="res-css" placeholder="CSS resources (one per line)"></textarea>
               </div>
+              <div class="alert alert-warning hidden col-lg-5 col-md-5 col-sm-3" id="res-css-alert" role="alert">There seem to be commas or spaces in your javascript resources. Please specify every file's location in its own line. <strong>Your template will still be generated</strong>, however it might not work properly.</div>
             </div>
           </form>
   			</div>
