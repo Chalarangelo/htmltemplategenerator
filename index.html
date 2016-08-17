@@ -25,7 +25,7 @@
  				<h1>HTML<i class="fa fa-html5 fa-lg" aria-hidden="true"></i> Template Generator <small class="versionNumbering"></small></h1><br>
  			</div>
  		</div>
-
+<!-- Modal dialog for reset -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-
+<!-- Navigation -->
   		<div class="row">
 	  		<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 	  			<ul class="nav nav-tabs">
@@ -57,6 +57,7 @@
 				  </ul>
 			</div>
   		</div>
+<!-- Content tab -->
   		<div class="row activeRow" id="content">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Define base content for your page</h2>
@@ -120,7 +121,6 @@
               </div>
             </div>
           </form>
-
           <form class="form-horizontal hidden templates-customizer" id="content-form-template-customize" autocomplete="off">
             <div class="form-group">
               <label for="content-form-template-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
@@ -132,7 +132,6 @@
               </div>
             </div>
           </form>
-
           <form class="form-horizontal hidden templates-customizer" id="content-error-template-customize" autocomplete="off">
             <div class="form-group">
               <label for="content-error-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
@@ -152,6 +151,7 @@
           </form>
         </div>
   		</div>
+<!-- Libraries tab -->
   		<div class="row hidden" id="libraries">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Load hosted libraries</h2>
@@ -193,7 +193,6 @@
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Define metadata tags</h2>
           <p>Choose metadata tags for your HTML document. Leave a field blank if you don't want to include that specific tag. We strongly recommend setting a <strong>Description</strong> for your page, so that search engines can pick it up when indexing your page and show it along with search results.</p><br>
-
           <form class="form-horizontal" autocomplete="off">
             <div class="form-group">
               <label for="meta-charset" class="col-sm-offset-0 col-sm-2 control-label">Character encoding</label>
@@ -249,6 +248,7 @@
           </form>
   			</div>
   		</div>
+<!-- Resources tab -->
   		<div class="row hidden" id="resources">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Add external resource links</h2>
@@ -271,6 +271,7 @@
           </form>
   			</div>
   		</div>
+<!-- Result tab -->
   		<div class="row hidden" id="result">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Get your generated template</h2>
@@ -280,29 +281,23 @@
               <button type="button" class="btn btn-success" id="clipboard"><i class="fa fa-clipboard fa-fw" aria-hidden="true"></i><span class="res-button">
               &nbsp;Copy to clipboard</span></button>
             </div><div class="btn-group" role="group">
-              <button type="button" class="btn btn-success" id="fiddle"><i class="fa fa-jsfiddle fa-fw" aria-hidden="true"></i><span class="res-button">
-              &nbsp;Open in JSFiddle</span></button>
-            </div><div class="btn-group" role="group">
               <button type="button" class="btn btn-success" id="codepen"><i class="fa fa-codepen fa-fw" aria-hidden="true"></i><span class="res-button">
-              &nbsp;Open in Codepen</span></button>
+              &nbsp;Edit in Codepen</span></button>
+            </div><div class="btn-group" role="group">
+              <button type="button" class="btn btn-success" id="fiddle"><i class="fa fa-jsfiddle fa-fw" aria-hidden="true"></i><span class="res-button">
+              &nbsp;Edit in JSFiddle</span></button>       
             </div>
           </div><br>
-            <div id="result-box">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;/html&gt;</div>
+            <div id="result-box">&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;!-- You shouldn't be seeing this, there has been an error!--&gt;&lt;/html&gt;</div>
             <script src="https://cdn.rawgit.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
             <script>
-                var path = "js/modules/ace/build/src";
-                ace.config.set("workerPath", path);
-                var editor = ace.edit("result-box");
-                editor.getSession().setMode("ace/mode/html");
-                editor.setReadOnly(true); 
-                editor.setShowPrintMargin(false);
-                editor.getSession().setUseWrapMode(true);
-                editor.$blockScrolling = Infinity;
+                var path = "js/modules/ace/build/src";  ace.config.set("workerPath", path); var editor = ace.edit("result-box");
+                editor.getSession().setMode("ace/mode/html"); editor.setReadOnly(true);   editor.setShowPrintMargin(false);        
+                editor.getSession().setUseWrapMode(true); editor.$blockScrolling = Infinity;
             </script>
   			</div>
   		</div>
+<!-- Info and Help tab -->
       <div class="row hidden" id="help">
         <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
           <h2>How to use</h2>
@@ -418,6 +413,7 @@
           </div>
         </div>
       </div>
+<!-- Empty row to fill in the gap -->
       <div class="row">
         <br><br><br>
       </div>

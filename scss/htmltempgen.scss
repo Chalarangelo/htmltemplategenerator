@@ -1,14 +1,6 @@
-// Variables
-$shadeWhite:      #fff;     $shadeLightGray:  #eee;   
-$shadeDarkGray:   #ccc;     $shadeBlackGray:  #555;
-$shadeBlue:       #337ab7;  $shadeDarkBlue:   #2e6da4;
-$shadeGreen:      #5cb85c;  $shadeDarkGreen:  #4cae4c;
-$shadeCyan:       #5bc0de;  $shadeDarkCyan:   #46b8da;
-$shadeOrange:     #f0ad4e;  $shadeDarkOrange: #eea236;
-$shadeRed:        #d9534f;  $shadeDarkRed:    #d43f3a;
-$shadePurple:     #9783b9;  $shadeDarkPurple: #6f5499;
-$shadeHTML5Orange:                            #f36518;
-// Navigation
+$shadeWhite:      #fff;     $shadeLightGray:  #eee;   $shadeDarkGray:   #ccc;     $shadeBlackGray:  #555;   $shadeBlue:       #337ab7;  $shadeDarkBlue:   #2e6da4;
+$shadeGreen:      #5cb85c;  $shadeDarkGreen:  #4cae4c;$shadeCyan:       #5bc0de;  $shadeDarkCyan:   #46b8da;$shadeOrange:     #f0ad4e;  $shadeDarkOrange: #eea236;
+$shadeRed:        #d9534f;  $shadeDarkRed:    #d43f3a;$shadePurple:     #9783b9;  $shadeDarkPurple: #6f5499;$shadeHTML5Orange:                            #f36518;
 .nav-tabs{
   & li{
     margin-bottom: -2px !important;
@@ -53,6 +45,3 @@ h1{
   border-radius: 4px; 
   border: 1px solid $shadeDarkGray;
 }
-
-
-// TODO: Probably integrate github.buttons.

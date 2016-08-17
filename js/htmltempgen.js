@@ -1,29 +1,21 @@
 $(function(){
-	var debug = false;	// Debub flag
-	// Version name and setup, always use this and update accordingly
-	var versionName = 'v1.0.0 (Cuttlefish'+((debug)?'::debug_true':'')+')';
+	var debug = false;	// Debub flag (set to false when releasing)
+	var versionName = 'v1.0.0 (Cuttlefish'+((debug)?'::debug_true':'')+')';		// Version name and setup, always use this and update accordingly!
 	// Prototype for the templates
 	var templateProto = function(){
 		this.comments = false;
 		this.doctype = '<!DOCTYPE html>';
-		this.html = {	start:'<html>', end:'</html>', 
-			head: {	start:'  <head>', end:'  </head>' }, 
-			body: {	start:'  <body>', end:'  </body>'}
-		};
+		this.html = {	start:'<html>', end:'</html>', 	head: {	start:'  <head>', end:'  </head>' }, 	body: {	start:'  <body>', end:'  </body>'}	};
 		this.head = {	title: '',
 			meta: {	charset: 0, author: '', description: '', keywords: '', gentag: true, viewport: true, favicon: false, oldwarn: false}, 
 			lib: ['jQuery-3-1-0'], scripts: '', styles: ''
 		};
 		this.body = {	classes: '', before: true, userBody: '', templateBase: 'page-template',templateId: 'page-template-min'	};
-		this.toText = function(){
-			var textRes = this.doctype + '\n' + this.html.start +'\n' + this.headToText() + this.bodyToText() + this.html.end;
-			return textRes;
-		};
+		this.toText = function(){	return this.doctype+'\n'+this.html.start+'\n'+this.headToText()+this.bodyToText()+this.html.end;	};
 		this.headToText = function(){
 			var headText = this.html.head.start +'\n';
 			headText += (($.trim(this.head.title).length === 0)?'    <title>HTML5 sample page</title>\n':'    <title>'+$.trim(this.head.title)+'</title>\n');
-			headText += this.metaToText() + this.librariesToText() + this.resourcesToText() + this.templateHeadToText();
-			headText += this.html.head.end +'\n';
+			headText += this.metaToText() + this.librariesToText() + this.resourcesToText() + this.templateHeadToText() + this.html.head.end +'\n';
 			return headText;
 		}
 		this.metaToText = function(){
@@ -40,7 +32,7 @@ $(function(){
 		}
 		this.librariesToText = function(){
 			var libText = (this.comments?'    <!-- Libraries -->\n':'');
-			if(this.head.lib.length > 0){
+			if(this.head.lib.length > 0)
 				for(var i = 0, libMap = this.head.lib.map(findLibraryPackageFromId); i <libMap.length; i++){
 					libText += libMap[i].html;
 					if(libMap[i].boilerplate != null && isLibBoilerplateSelected(libMap[i].name))
@@ -51,14 +43,12 @@ $(function(){
 						else if(isLibBoilerplateSelected('jQuery-noConflict'))
 							libText += (this.comments?'    <!-- jQuery (noConflict) boilerplate code -->\n':'')+'    <script type="text/javascript">\n' + boilerplates['jQuery-noConflict'] + '    </script>\n';
 				}
-			}
 			return libText;
 		}
 		this.resourcesToText = function(){
 			var resText = (this.comments?'    <!-- External resources -->\n':'');
-			var resJSLines = this.head.scripts.match(/[^\r\n]+/g);
-			if(resJSLines !== null)	for(var i = 0; i <resJSLines.length; i ++)	resText+='    <script type="text/javascript" src="'+resJSLines[i]+'"></script>\n';
-			var resCSSLines = this.head.styles.match(/[^\r\n]+/g);
+			var resJSLines = this.head.scripts.match(/[^\r\n]+/g);	var resCSSLines = this.head.styles.match(/[^\r\n]+/g);
+			if(resJSLines !== null)	for(var i = 0; i <resJSLines.length; i ++)	resText+='    <script type="text/javascript" src="'+resJSLines[i]+'"></script>\n';		
 			if(resCSSLines !== null)for(var i = 0; i <resCSSLines.length; i ++)	resText+='    <link rel="stylesheet" href="'+resCSSLines[i]+'">\n';
 			return resText;
 		}
@@ -163,8 +153,7 @@ $(function(){
 							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="login-password">Password</label>\n';
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="password"'+(isBootstrapStyled?' class="form-control"':'')+' id="login-password" placeholder="password">\n';
-							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'');
-							bodyTemplateText += '      <input type="submit" value="Log in"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'')+'      <input type="submit" value="Log in"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
 							break;
 						case 'register':
 							bodyTemplateText += (isBootstrapStyled?'      <div class="form-group">\n':'');
@@ -179,8 +168,7 @@ $(function(){
 							bodyTemplateText += (isBootstrapStyled?'      </div>\n      <div class="form-group">\n':'');
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <label for="register-password-confirm">Confirm password</label>\n';
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      <input type="password"'+(isBootstrapStyled?' class="form-control"':'')+' id="register-password-confirm" placeholder="password">\n';
-							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'');
-							bodyTemplateText += '      <input type="submit" value="Register"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'')+'      <input type="submit" value="Register"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
 							break;
 						case 'payment':
 							bodyTemplateText += (isBootstrapStyled?'      <div class="form-group">\n':'');
@@ -198,8 +186,7 @@ $(function(){
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'        <option selected>Paypal</option>\n';
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'        <option>Credit Card</option>\n';
 							bodyTemplateText += (isBootstrapStyled?'  ':'')+'      </select>\n';
-							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'');
-							bodyTemplateText += '      <input type="submit" value="Submit"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
+							bodyTemplateText += (isBootstrapStyled?'      </div>\n':'')+'      <input type="submit" value="Submit"'+(isBootstrapStyled?' class="btn btn-default"':'')+'>\n';
 							break;
 					}
 					bodyTemplateText += '    </form>\n';
@@ -326,20 +313,15 @@ $(function(){
 				html: this.bodyToText().substring(this.bodyToText().indexOf(">") + 1, this.bodyToText().lastIndexOf("</")).replace(/    <!--(.*?)-->\n/g,''), 
 				html_classes: this.body.classes,
 				css: this.templateHeadToText().replace(/    <!--(.*?)-->\n/g,'').replace(/    <style>\n/g,'').replace(/    <\/style>\n/g,''), 
-				js: codepenScript, 
-				head: codepenHead, 
-				css_external: codepenExt.css, 
-				js_external: codepenExt.js
+				js: codepenScript, 	head: codepenHead, 	css_external: codepenExt.css, 	js_external: codepenExt.js
 			};
-			$codepenInput.attr('value',JSON.stringify(codepenData));
-			$codepenForm.append($codepenInput);
+			$codepenInput.attr('value',JSON.stringify(codepenData));	$codepenForm.append($codepenInput);
 			return $codepenForm;
 		}
 	};	
 	var result = new templateProto();	// Create the templateGen for use in the rest of the application
-	$('.versionNumbering').text(versionName);
-	// Title click, change tab to content
-	$(document).on('click','h1', function(){$('#content-tab').click();});
+	$('.versionNumbering').text(versionName);	
+	$(document).on('click','h1', function(){$('#content-tab').click();});	// Title click, change tab to content
 	// Library package object constructor
 	var libraryPackage = function (name, version, type, url, requirements, boilerplate, boilerplateHTML){
 		this.name = name;	this.version = version;
@@ -347,9 +329,7 @@ $(function(){
 			this.html = '    <'+(type=='script'?'script type="text/javascript" src="':'link rel="stylesheet" href="')+url+(type=='script'?'"></script>\n':'">\n');
 			this.raw = url;
 		}
-		this.requirements = requirements;
-		this.boilerplate = boilerplate;		
-		this.boilerplateHTML = boilerplateHTML;
+		this.requirements = requirements;	this.boilerplate = boilerplate;		this.boilerplateHTML = boilerplateHTML;
 		var scripts = 0;	var csses = 0;
 		this.addScript = function(url){
 			if(scripts == 0 && csses == 0) {this.raw = ''; this.html= '';}
@@ -362,7 +342,6 @@ $(function(){
 			csses+=1;		return this;
 		};
 	}	
-	if(debug)	console.log('Loading libraries...');
 	// Library boilerplates
 	var boilerplates = {
 		'jQuery' : '      $(function(){\n        console.log(\'jQuery: Page loading complete!\');\n      });\n',
@@ -374,18 +353,16 @@ $(function(){
 			'AngularJS' : '    <div ng-app="myApp">\n      <div ng-controller="myController">\n        <p>{{ demoText }}</p>\n      </div>\n    </div>\n'
 		}
 	}
-	var libList = [];
+	var libList = [];	if(debug)	console.log('Loading libraries...');
 	libList.push(new libraryPackage('jQuery','2.2.4','script','https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',null, null, null));
 	libList.push(new libraryPackage('jQuery','3.1.0','script','https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js',null, null, null));
 	libList.push(new libraryPackage('AngularJS','1.5.7','script','https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js',null, boilerplates['AngularJS'], boilerplates.html['AngularJS'])); 
 	libList.push(new libraryPackage('Bootstrap','3.3.7','mixed', null, ['jQuery-2-2-4'], null, null)
 		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-		);
+		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')	);
 	libList.push(new libraryPackage('Bootstrap','3.3.6','mixed', null,['jQuery-2-2-4'], null, null)
 		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
-		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
-		);
+		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')	);
 	libList.push(new libraryPackage('Font Awesome','4.6.3','css','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',null, null, null));
 	libList.push(new libraryPackage('normalize.css','4.2.0','css','https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css',null, null, null));
 	libList.push(new libraryPackage('MooTools','1.6.0','script','https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js',null, boilerplates['MooTools'], null));
@@ -394,8 +371,7 @@ $(function(){
 	libList.push(new libraryPackage('three.js','1.6.0','script','https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js',null, null, null));
 	libList.push(new libraryPackage('Bootstrap-Extend','1.1','mixed', null,['Bootstrap-3-3-6','jQuery-2-2-4'], null, null)
 		.addCSS('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/css/bootstrap-extend.min.css')
-		.addScript('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js')
-		);
+		.addScript('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js')	);
 	// Initialize libraries table
 	var html='<div class="table-responsive"><table class="table table-bordered">';	
 	for(var llC = 0; llC < libList.length; llC++){
@@ -422,14 +398,14 @@ $(function(){
 		}
 	}
 	$('#lib-loader-customizers').html(html2);
-	// Library searchers
+	// Library and package searchers
 	var findLibraryPackageFromId = function(id){
 		for(var llS=0; llS<libList.length; llS++)	if((libList[llS].name+'-'+libList[llS].version).replace(/\./g,'-') == id)	return libList[llS];
 		return null;
 	}
 	var findIdFromLibraryPackage = function(package){	return (package.name+'-'+package.version).replace(/\./g,'-');	}	
 	var isLibBoilerplateSelected = function(name){	return ($('#boilerplate-'+name+':checked').length > 0);	}
-	// Navigation and tabs handling
+	// Navigation events
 	$(document).on('click','.nav-tabs li', function(){
 		if($(this).attr('id')=='reset-li') return;
 		$('.nav-tabs li').removeClass('active');	$(this).addClass('active');
@@ -473,11 +449,11 @@ $(function(){
 						result.head.lib.unshift(findIdFromLibraryPackage(reqMap[rpC]));
 						llreqText+= libMap[lmC].name+' ('+libMap[lmC].version+') requires '+reqMap[rpC].name +' ('+reqMap[rpC].version+') or newer to work properly.\n';
 					}
-		if(llreqText!=''){
-			llreqText += '<strong>Required packages will be loaded automatically.</strong>'
-			$('#lib-loader-reqs').html(llreqText);	$('#lib-loader-reqs-alert').removeClass('hidden');
-		}
-		else	$('#lib-loader-reqs-alert').addClass('hidden');
+			if(llreqText!=''){
+				llreqText += '<strong>Required packages will be loaded automatically.</strong>'
+				$('#lib-loader-reqs').html(llreqText);	$('#lib-loader-reqs-alert').removeClass('hidden');
+			}
+			else	$('#lib-loader-reqs-alert').addClass('hidden');
 		}		
 		// Duct tape fixes for jQuery and Bootstrap boilerplates (and everything else that supports more than one version)
 		if($('#jQuery-3-1-0').prop('checked') || $('#jQuery-2-2-4').prop('checked')) $('#boilerplate-form-jQuery').removeClass('hidden');
