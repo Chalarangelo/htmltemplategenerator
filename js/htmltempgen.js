@@ -338,11 +338,13 @@ $(function(){
 	var isLibBoilerplateSelected = function(name){	return ($('#boilerplate-'+name+':checked').length > 0);	}
 	// Navigation and tabs handling
 	$(document).on('click','.nav-tabs li', function(){
+		if($(this).attr('id')=='reset-li') return;
 		$('.nav-tabs li').removeClass('active');	$(this).addClass('active');
 		$('.activeRow').removeClass('activeRow').addClass('hidden');
 		$('#'+$(this).attr('id').substr(0, $(this).attr('id').indexOf('-'))).removeClass('hidden').addClass('activeRow');
-		if($(this).attr('id')=='result-tab'){ editor.setValue(result.toText(), -1); }		
+		if($(this).attr('id')=='result-tab') editor.setValue(result.toText(), -1); 	
 	});
+	$(document).on('click','#reset-confirm', function(){	location.reload();	});
 	// Content tab events
 	$('#content-title').change(function(){	result.head.title = $('#content-title').val();	});
 	$('#content-classes').change(function(){	result.body.classes = $('#content-classes').val();	});
@@ -351,8 +353,7 @@ $(function(){
 		var tester = $('#content-body').val().toLowerCase();
 		if(tester.indexOf('<acronym>')>=0 || tester.indexOf('<applet>')>=0  || tester.indexOf('<basefont>')>=0  || tester.indexOf('<big>')>=0  || tester.indexOf('<center>')>=0 || tester.indexOf('<dir>')>=0 || tester.indexOf('<font>')>=0 || tester.indexOf('<frame>')>=0 || tester.indexOf('<frameset>')>=0 || tester.indexOf('<noframes>')>=0 || tester.indexOf('<strike>')>=0 || tester.indexOf('<tt>')>=0)
 			$('#content-body-alert').removeClass('hidden');
-		else
-			$('#content-body-alert').addClass('hidden');
+		else	$('#content-body-alert').addClass('hidden');
 	});
 	$('input[name="content-pos-selector"]').change(function(){	result.body.before = $('#con-before:checked').length>0;	console.log(result.body.before);});
 	$('select[name="content-templates"]').change(function(){
@@ -381,8 +382,7 @@ $(function(){
 					}
 		if(llreqText!=''){
 			llreqText += '<strong>Required packages will be loaded automatically.</strong>'
-			$('#lib-loader-reqs').html(llreqText);
-			$('#lib-loader-reqs-alert').removeClass('hidden');
+			$('#lib-loader-reqs').html(llreqText);	$('#lib-loader-reqs-alert').removeClass('hidden');
 		}
 		else	$('#lib-loader-reqs-alert').addClass('hidden');
 		}		
