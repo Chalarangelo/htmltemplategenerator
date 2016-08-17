@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<script type="text/javascript" src="https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/css/bootstrap-extend.min.css"/>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
   <title>HTML5 Template Generator</title>
   <link rel="icon" type="image/png" href="favicon.png">
  </head>
@@ -59,7 +60,7 @@
   		<div class="row activeRow" id="content">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Define base content for your page</h2>
-          <p>Specify the basic information for your template page, such as title, body classes and/or body content. You can use the <em>Simple pages</em> template base and write your own HTML to customize it, pick a pre-define template and alter its variables to suit your specific needs or, if you so desire, do both. <strong>The custom HTML body you input will always be part of the resulting page</strong>, you can change its position (before or after the template's generated content) by flipping the corresponding switch below.</p><br>		
+          <p>Specify the basic information for your template page, such as title, body classes and/or body content. You can use the <strong>Simple pages</strong> template base and write your own HTML to customize it, pick a pre-defined template and alter its variables to suit your specific needs or do both if you want. <span class="text-info"><strong>The custom HTML body you input will always be part of the resulting page</strong></span>, you can change its position (before or after the template's generated content) by flipping the corresponding switch below.</p><br>		
           <form class="form-horizontal" autocomplete="off">
               <div class="form-group">
                 <label for="content-title" class="col-sm-offset-0 col-sm-2 control-label">Title</label>
@@ -106,7 +107,7 @@
           </form>
           <hr>
           <h3>Customize your template base</h3>
-          <p>Customize variables specific to your chosen template base below. <strong>If you change your template base, some of the below changes might be lost.</strong></p><br> 
+          <p>You can customize variables specific to your chosen template base below. <span class="text-warning"><strong>If you change your template base, some of the below changes might be lost.</strong></span></p><br> 
           <form class="form-horizontal templates-customizer" id="content-page-template-customize" autocomplete="off">
             <div class="form-group">
               <label for="content-page-template-selector" class="col-sm-offset-0 col-sm-2 control-label">Choose a template</label>
@@ -154,12 +155,12 @@
   		<div class="row hidden" id="libraries">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Load hosted libraries</h2>
-  				<p>Choose as many libraries you want to include in your template. We strongly recommend including <a href="http://jquery.com/">jQuery</a> to enhance your Javascript. After you choose the libraries you want, you can customize some of them in the section below, so that you don't need to write any boilerplate code for them.</p><br>
+  				<p>Choose the libraries you want to include in your template. We strongly recommend including <a href="http://jquery.com/"><strong>jQuery</strong></a> to help you write Javascript more efficiently. After you choose the libraries you want, you can customize some of them in the section below, so that you don't need to write any boilerplate code for them.</p><br>
   				<span id="lib-loader"></span>
           <div class="alert alert-info hidden" id="lib-loader-reqs-alert" role="alert" style="white-space:pre-wrap;"><span id="lib-loader-reqs"></span></div>
           <hr>
           <h3>Customize loaded libraries</h3>
-          <p>Customize your included libraries below. We recommend enabling boilerplate code for your preferred library to help get you started. <strong>If you change your loaded libraries, some of the below changes might be lost.</strong></p><br>
+          <p>You can customize your included libraries below. We recommend enabling boilerplate code for your preferred library to help get you started. <span class="text-warning"><strong>If you change your loaded libraries, some of the below changes might be lost.</strong></span></p><br>
           <form class="form-horizontal" autocomplete="off" id="boilerplate-form-jQuery">
             <div class="form-group">
               <label for="boilerplate-jQuery-selector" class="col-sm-offset-0 col-sm-2 control-label">Boilerplate code for jQuery</label>
@@ -191,7 +192,7 @@
   		<div class="row hidden" id="metadata">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Define metadata tags</h2>
-          <p>Choose metadata tags for your HTML document. Leave a field blank if you don't want to include that specific tag. We strongly recommend setting a <em>description</em> for your page, so that search engines can pick it up when indexing your page and show it along with the results of searches.</p><br>
+          <p>Choose metadata tags for your HTML document. Leave a field blank if you don't want to include that specific tag. We strongly recommend setting a <strong>Description</strong> for your page, so that search engines can pick it up when indexing your page and show it along with search results.</p><br>
 
           <form class="form-horizontal" autocomplete="off">
             <div class="form-group">
@@ -251,7 +252,7 @@
   		<div class="row hidden" id="resources">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Add external resource links</h2>
-          <p>Add relative links to local resources or absolute links to external, online resources. <strong>Please only write one link per line of the corresponding input areas</strong>, otherwise there might be errors with the generated template page.</p><br>
+          <p>Add relative links to local resources or absolute links to external, online resources. <span class="text-warning"><strong>Please only write one link per line of the corresponding input areas</strong></span>, otherwise there might be errors with the generated template page.</p><br>
           <form class="form-horizontal" autocomplete="off">
             <div class="form-group">
               <label for="res-js" class="col-sm-offset-0 col-sm-2 control-label">Javascript resources</label>
@@ -273,7 +274,7 @@
   		<div class="row hidden" id="result">
   			<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
   				<h2>Get your generated template</h2>
-          <p>The following is the template page generated based on your choices in the other tabs; use the buttons below to export it wherever you want. If you are not satisfied with the results, you can always tweak the specified settings in the other tabs to better suit your needs.</p><br>
+          <p>The following is the template page generated based on your choices in the other tabs; use the buttons below to copy it to clipboard or export it wherever you want. If you are not satisfied with the results, you can always tweak the specified settings in the other tabs to better suit your needs.</p><br>
           <div class="btn-group btn-group-justified" role="group" aria-label="result-button-group">
             <div class="btn-group" role="group">
               <button type="button" class="btn btn-success" id="clipboard"><i class="fa fa-clipboard fa-fw" aria-hidden="true"></i><span class="res-button">
@@ -307,13 +308,117 @@
   		</div>
       <div class="row hidden" id="help">
         <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-          <h2>How to use this generator</h2>
-          <p>Specify your HTML page's content, libraries, metadata and resources using the corrresponding tabs. When you are ready to get your template, click on the <em>Result</em> tab to preview your generated template page. You can copy your template to the clipboard or export it into a JSFiddle or Codepen.</p>
+          <h2>How to use</h2>
+          <h4>Quick start guide <small>Simple as 1, 2, 3</small></h4>
+          <ol>
+            <li>Use each of the tabs at the top to specify your HTML page's content, libraries, metadata and resources. All changes are applied immediately to your generated template.</li>
+            <li>View your generated template under the <span class="bg-info">Result</span> tab.</li>
+            <li>When satisfied with the results, copy it to your clipboard or export it to JSFiddle or Codepen using the buttons at the very top of the <span class="bg-info">Result</span> tab.</li>
+          </ol><br>
+          <h4>Extended guide <small>For the demanding user</small></h4>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><h4 class="panel-title">Content tab</h4></a>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  <ul>
+                  <li>The <span class="bg-info">Content</span> tab allows you to specify your page's content and customize your template. You can define a title for your page's <code>&lt;head&gt;</code>, classes for the  <code>&lt;body&gt;</code>, as well as your own customized content for the <code>&lt;body&gt;</code> element. Your user-defined content can be placed before or after the generated template.</li>
+                  <li>We offer a variety of simple templates, ranging from simple empty pages, showcases and clean layouts to basic form templates and error pages for all your needs. Most template bases can be customized in the second section of the <span class="bg-info">Content</span> tab. </li>
+                  <li>Finally, you can enable the automated comments, so that you know what is what in the final results.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTwo">       
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><h4 class="panel-title">Libraries</h4></a>              
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                  <ul>
+                  <li>The <span class="bg-info">Libraries</span> tab offers a wide variety of popular Javascript and CSS libraries from which to choose for your template. By default, your template will have <strong>jQuery 3.1.0</strong> included, along with a minimal boilerplate code snippet in the page's <code>&lt;head&gt;</code> to help get you started.</li>
+                  <li>You can enable as few or as many libraries as you like. The counter at the top of the <span class="bg-info">Libraries</span> tab will keep track of the amount of loaded libraries. Be careful not to add too many libraries, otherwise your page might be slow.</li>
+                  <li>Dependencies will be resolved automatically, although you will be notified which libraries will be included based on your selection. If two or more libraries are mutually exclusive (i.e. different versions of the same library), they last one selected will automatically cause the others to deselect.</li>
+                  <li>Some libraries allow you to include a snippet of boilerplate code in the page's <code>&lt;head&gt;</code> to help get you started. You can choose if you want this enabled for each library you include, using the second section of the <span class="bg-info">Libraries</span> tab.</li>
+                  <li>Some other libraries will offer different options, such as the different versions of <strong>Bootstrap</strong>, which allow you to style your generated template using some of their styles.</li> 
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingThree">         
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><h4 class="panel-title">Metadata</h4></a>               
+              </div>
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                  <ul>
+                  <li>The <span class="bg-info">Metadata</span> tab allows you to specify your page's metadata tags, such as character encoding, author, description, keywords, generator, as well as some other properties for your page's <code>&lt;head&gt;</code>, such as viewport, favicon and warning for older browsers. </li>
+                  <li>Some options are selected by default (such the inclusion of <strong>generator</strong> and <strong>viewport</strong> tags), but you can turn them off if you do not want them.</li>
+                  <li>The different versions of <strong>Bootstrap</strong> require the <strong>viewport</strong> tag to be included to work properly, so remember to toggle it on if you include any of them.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFour">         
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><h4 class="panel-title">Resources</h4></a>               
+              </div>
+              <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                <div class="panel-body">
+                  <ul>
+                  <li>The <span class="bg-info">Resources</span> tab lets you specify your page's external Javascript and CSS resources, using either relative or absolute paths.</li>
+                  <li>For each of the two types of resource, use the corresponding textarea and specify one resource's location per line.</li>
+                  <li>If any commas or spaces are found in your input, you will be notified, however the generated template will include those resources, even if they do not work properly.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFive">         
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive"><h4 class="panel-title">Result</h4></a>               
+              </div>
+              <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                <div class="panel-body">
+                  <ul>
+                  <li>The <span class="bg-info">Result</span> tab allows you to view your generated page. It updates instantly after you make any changes in the other tabs to reflect them. The code itself, however, cannot be edited.</li>
+                  <li>You can use the buttons at the very top of the panel to copy the resulting template page to your clipboard or export the template page to JSFiddle or Codepen.</li>
+                  <li>If you export to JSFiddle or Codepen, some changes like resources with relative paths might be omitted.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingSix">         
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix"><h4 class="panel-title">Miscellaneous</h4></a>               
+              </div>
+              <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                <div class="panel-body">
+                  <ul>
+                  <li>Clicking the <span class="bg-info">Reset</span> button will present you with a dialog, asking if you are sure you want to reset the generator. All changes will be lost and you will have to start over.</li>
+                  <li>The <span class="bg-info">Help &amp; Info</span> tab shows you the page's quick start and extended guides, as well as the <strong>About</strong> section, which includes information about the project itself. If you find this tool useful, please Star it on Github.</li>
+                  <li>For any errors encountered or feature requests, use the <strong>Issue</strong> button in the <strong>About</strong> section of the <span class="bg-info">Help &amp; Info</span> tab.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
           <hr>
           <h3>About</h3>
-          <p><strong>Current version: </strong><span class="versionNumbering"></span>&nbsp;-&nbsp;
-          <strong>Last updated: </strong>August, 18, 2016</p>
-          <p><strong>Disclaimer: </strong>Designed and built by <a href="https://github.com/Chalarangelo">@chalarangelo</a>, licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+          <div class="col-md-6 col-md-offset-0 col-sm-12 col-xs-12" style="margin-left: -15px;">
+            <p><strong>Current version: </strong><span class="versionNumbering"></span>&nbsp;-&nbsp;
+            <strong>Last updated: </strong>August, 18, 2016</p>
+            <p><strong>Disclaimer: </strong>Designed and built by <a href="https://github.com/Chalarangelo">@chalarangelo</a>, licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+          </div>
+          <div class="col-md-6 col-md-offset-0 col-sm-12 col-xs-12" style="margin-left: -15px;">
+            <p>If you like this tool, you can <strong>show your support</strong> on Github!</p>
+            <a aria-label="Watch chalarangelo/htmltemplategenerator on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/chalarangelo/htmltemplategenerator#subscribers_count" data-count-href="/chalarangelo/htmltemplategenerator/watchers" data-style="mega" data-icon="octicon-eye" href="https://github.com/chalarangelo/htmltemplategenerator" class="github-button">Watch</a>
+            <a aria-label="Star chalarangelo/htmltemplategenerator on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/chalarangelo/htmltemplategenerator#stargazers_count" data-count-href="/chalarangelo/htmltemplategenerator/stargazers" data-style="mega" data-icon="octicon-star" href="https://github.com/chalarangelo/htmltemplategenerator" class="github-button">Star</a>
+            <a aria-label="Fork chalarangelo/htmltemplategenerator on GitHub" data-count-aria-label="# forks on GitHub" data-count-api="/repos/chalarangelo/htmltemplategenerator#forks_count" data-count-href="/chalarangelo/htmltemplategenerator/network" data-style="mega" data-icon="octicon-repo-forked" href="https://github.com/chalarangelo/htmltemplategenerator/fork" class="github-button">Fork</a>
+            <p>If you encounter any bugs or have suggestions for features, please <strong>open an  
+            <a aria-label="Issue chalarangelo/htmltemplategenerator on GitHub" data-icon="octicon-issue-opened" href="https://github.com/chalarangelo/htmltemplategenerator/issues" class="github-button">Issue</a></strong>.</p>
+          </div>
         </div>
       </div>
       <div class="row">
