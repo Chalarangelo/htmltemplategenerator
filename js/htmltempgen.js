@@ -285,11 +285,11 @@ $(function(){
 	libList.push(new libraryPackage('jQuery','2.2.4','script','https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',null, null, null));
 	libList.push(new libraryPackage('jQuery','3.1.0','script','https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js',null, null, null));
 	libList.push(new libraryPackage('AngularJS','1.5.7','script','https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js',null, boilerplates['AngularJS'], boilerplates.html['AngularJS'])); 
-	libList.push(new libraryPackage('Bootstrap','3.3.7','mixed', null, 'jQuery-2-2-4', null, null)
+	libList.push(new libraryPackage('Bootstrap','3.3.7','mixed', null, ['jQuery-2-2-4'], null, null)
 		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
 		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
 		);
-	libList.push(new libraryPackage('Bootstrap','3.3.6','mixed', null,'jQuery-2-2-4', null, null)
+	libList.push(new libraryPackage('Bootstrap','3.3.6','mixed', null,['jQuery-2-2-4'], null, null)
 		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
 		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
 		);
@@ -299,7 +299,7 @@ $(function(){
 	libList.push(new libraryPackage('Dojo','1.10.4','script','https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js',null, boilerplates['Dojo'], null)); 
 	libList.push(new libraryPackage('Prototype','1.7.3.0','script','https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js',null, null, null));	
 	libList.push(new libraryPackage('three.js','1.6.0','script','https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js',null, null, null));
-	libList.push(new libraryPackage('Bootstrap-Extend','1.1','mixed', null,'Bootstrap-3-3-6', null, null)
+	libList.push(new libraryPackage('Bootstrap-Extend','1.1','mixed', null,['Bootstrap-3-3-6','jQuery-2-2-4'], null, null)
 		.addCSS('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/css/bootstrap-extend.min.css')
 		.addScript('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js')
 		);
@@ -366,10 +366,10 @@ $(function(){
 		$('#lib-loader input:checkbox:checked').each(function(index, element){result.head.lib.push($(this).attr('id'));});
 		if($('#boilerplate-form-' + library.name).length > 0) 	$('#boilerplate-form-' + library.name).toggleClass('hidden');
 		for(var lmC = 0, libMap = result.head.lib.map(findLibraryPackageFromId); lmC < libMap.length; lmC++){
-			var requiredPackage = findLibraryPackageFromId(libMap[lmC].requirements);
-			if(requiredPackage !=null)
-				if(!libMap.filter(function(e) { return ((e.name == requiredPackage.name) && (e.version >= requiredPackage.version)); }).length > 0)
-					result.head.lib.unshift(findIdFromLibraryPackage(requiredPackage));
+			if(libMap[lmC].requirements != null)
+				for(var rpC = 0, reqMap = libMap[lmC].requirements.map(findLibraryPackageFromId); rpC < reqMap.length; rpC++)
+					if(!libMap.filter(function(e) { return ((e.name == reqMap[rpC].name) && (e.version >= reqMap[rpC].version)); }).length > 0)
+						result.head.lib.unshift(findIdFromLibraryPackage(reqMap[rpC]));
 		}		
 		// Duct tape fixes for jQuery and Bootstrap boilerplates (and everything else that supports more than one version)
 		if($('#jQuery-3-1-0').prop('checked') || $('#jQuery-2-2-4').prop('checked')) $('#boilerplate-form-jQuery').removeClass('hidden');
