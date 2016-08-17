@@ -1,6 +1,6 @@
 # HTML5 Template Page Generator
 
-**Latest release: **  v1.0.0 (Cuttlefish), Aug, 17th, 2016
+**Latest release:**  v1.0.0 (Cuttlefish), Aug, 17th, 2016
 
 Check the live version [here](https://chalarangelo.github.io/htmltemplategenerator/).
 
