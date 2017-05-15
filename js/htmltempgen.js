@@ -360,9 +360,9 @@ $(function(){
 	libList.push(new libraryPackage('Bootstrap','3.3.7','mixed', null, ['jQuery-2-2-4'], null, null)
 		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
 		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')	);
-	libList.push(new libraryPackage('Bootstrap','3.3.6','mixed', null,['jQuery-2-2-4'], null, null)
-		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
-		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')	);
+	libList.push(new libraryPackage('Bootstrap','3.3.7','mixed', null,['jQuery-2-2-4'], null, null)
+		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')	);
 	libList.push(new libraryPackage('Font Awesome','4.7.0','css','https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',null, null, null));
 	libList.push(new libraryPackage('normalize.css','7.0.0','css','https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css',null, null, null));
 	libList.push(new libraryPackage('MooTools','1.6.0','script','https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js',null, boilerplates['MooTools'], null));
