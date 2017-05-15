@@ -363,14 +363,14 @@ $(function(){
 	libList.push(new libraryPackage('Bootstrap','3.3.6','mixed', null,['jQuery-2-2-4'], null, null)
 		.addCSS('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
 		.addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')	);
-	libList.push(new libraryPackage('Font Awesome','4.6.3','css','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',null, null, null));
-	libList.push(new libraryPackage('normalize.css','4.2.0','css','https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css',null, null, null));
+	libList.push(new libraryPackage('Font Awesome','4.7.0','css','https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',null, null, null));
+	libList.push(new libraryPackage('normalize.css','7.0.0','css','https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css',null, null, null));
 	libList.push(new libraryPackage('MooTools','1.6.0','script','https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js',null, boilerplates['MooTools'], null));
 	libList.push(new libraryPackage('Dojo','1.10.4','script','https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js',null, boilerplates['Dojo'], null)); 
 	libList.push(new libraryPackage('Prototype','1.7.3.0','script','https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js',null, null, null));	
-	libList.push(new libraryPackage('Pure.CSS','0.6.0','css','http://yui.yahooapis.com/pure/0.6.0/pure-min.css',null, null, null));
+	libList.push(new libraryPackage('Pure.CSS','0.6.2','css','http://yui.yahooapis.com/pure/0.6.2/pure-min.css',null, null, null));
 	libList.push(new libraryPackage('three.js','1.6.0','script','https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js',null, null, null));
-	libList.push(new libraryPackage('Bootstrap-Extend','1.1','mixed', null,['Bootstrap-3-3-6','jQuery-2-2-4'], null, null)
+	libList.push(new libraryPackage('Bootstrap-Extend','1.1','mixed', null,['Bootstrap-3-3-7','jQuery-2-2-4'], null, null)
 		.addCSS('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/css/bootstrap-extend.min.css')
 		.addScript('https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js')	);
 	// Initialize libraries table
